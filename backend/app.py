@@ -12,6 +12,7 @@ from flask_jwt_extended import get_jwt_identity
 from flask_jwt_extended import jwt_required
 from flask_jwt_extended import JWTManager
 import re
+from uuid import uuid4
 
 load_dotenv()
 
@@ -34,11 +35,14 @@ def test():
 def signup():
     body = json.loads(request.data)
 
-    existing_user = users_collection.find_one({'username': re.compile(body['username'], re.IGNORECASE)})
+    existing_user = users_collection.find_one({'email': re.compile(body['email'], re.IGNORECASE)})
     if existing_user:
         return "User already exists", 400
     
+    rand_token = uuid4()
+    
     body['password'] = generate_password_hash(body['password'])
+    body['token'] = str(rand_token)
     users_collection.insert_one(body)
     body.pop("_id")
     body.pop("password")
@@ -47,9 +51,9 @@ def signup():
 
 @app.route("/login", methods=["POST"])
 def login():
-    username = request.json.get('username', None)
+    email = request.json.get('email', None)
     password = request.json.get('password', None)
-    existing_user = users_collection.find_one({'username': re.compile(username, re.IGNORECASE)})
+    existing_user = users_collection.find_one({'email': re.compile(email, re.IGNORECASE)})
 
     if existing_user is None:
         return jsonify({"msg": "Invalid username or password"}), 401
@@ -57,7 +61,9 @@ def login():
         return jsonify({"msg": "Invalid username or password"}), 401
 
     response_data = {
-        # "token": existing_user['token']
+        "email": existing_user['email'],
+        "name": existing_user['name'],
+        "token": existing_user['token']
     }
     return jsonify(response_data)
 
