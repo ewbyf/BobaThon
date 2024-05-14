@@ -25,12 +25,6 @@ users_collection = db['users']
 app = Flask(__name__)
 CORS(app, origins=["http://localhost:3000", "https://bobathon.onrender.com"])
 
-@app.route("/test", methods=['GET'])
-def test():
-    users_collection.insert_one({"name": "hi"})
-
-
-
 @app.route("/signup", methods=['POST'])
 def signup():
     body = json.loads(request.data)
@@ -43,11 +37,19 @@ def signup():
     
     body['password'] = generate_password_hash(body['password'])
     body['token'] = str(rand_token)
-    users_collection.insert_one(body)
-    body.pop("_id")
-    body.pop("password")
+    body['preferences'] = []
+    body['matches'] = []
+    body['reviews'] = []
+    body['location'] = 10 # default 10 miles, can change
 
-    return jsonify(body)
+    users_collection.insert_one(body)
+
+    response_data = {
+        "email": body['email'],
+        "name": body['name'],
+        "token": body['token']
+    }
+    return jsonify(response_data)
 
 @app.route("/login", methods=["POST"])
 def login():
@@ -56,9 +58,9 @@ def login():
     existing_user = users_collection.find_one({'email': re.compile(email, re.IGNORECASE)})
 
     if existing_user is None:
-        return jsonify({"msg": "Invalid username or password"}), 401
+        return jsonify({"msg": "Invalid username or password"}), 400
     if not check_password_hash(existing_user['password'], password):
-        return jsonify({"msg": "Invalid username or password"}), 401
+        return jsonify({"msg": "Invalid username or password"}), 400
 
     response_data = {
         "email": existing_user['email'],
@@ -67,8 +69,42 @@ def login():
     }
     return jsonify(response_data)
 
+@app.route("/me", methods=["GET"])
+def me():
+    token = request.args.get('token')
+
+    existing_user = users_collection.find_one({'token': token})
+
+    if existing_user is None:
+        return jsonify({"msg": "Invalid token"}), 400
+
+    response_data = {
+        "name": existing_user['name'],
+        "email": existing_user['email'],
+        "preferences": existing_user['preferences'],
+        "reviews": existing_user['reviews'],
+        "location": existing_user['location'],
+        "matches": existing_user['matches'],
+    }
+    return jsonify(response_data)
+
+
+@app.route("/preferences", methods=["POST"]) 
+def set_preferences():
+    preferences = request.json.get('preferences', None)
+    token = request.json.get('token', None)
+
+    if preferences is None:
+        return jsonify({"msg": "Invalid preferences"}), 400
+
+    users_collection.update_one({'token': token}, {"$set": {'preferences': preferences}})
+
+    response_data = {
+        "preferences": preferences
+    }
+    return jsonify(response_data)
+
 
 
 if __name__ == "__main__":
-    
     app.run(debug=True)
