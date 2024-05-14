@@ -22,7 +22,7 @@ db = client['Cluster0']
 users_collection = db['users']
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["http://localhost:3000", "https://bobathon.onrender.com"])
 
 @app.route("/test", methods=['GET'])
 def test():
@@ -64,4 +64,5 @@ def login():
 
 
 if __name__ == "__main__":
+    
     app.run(debug=True)
