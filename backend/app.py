@@ -24,6 +24,10 @@ users_collection = db['users']
 app = Flask(__name__)
 CORS(app)
 
+@app.route("/test", methods=['GET'])
+def test():
+    users_collection.insert_one({"name": "hi"})
+
 
 
 @app.route("/signup", methods=['POST'])
@@ -41,7 +45,7 @@ def signup():
 
     return jsonify(body)
 
-@app.route("/sirac/login", methods=["POST"])
+@app.route("/login", methods=["POST"])
 def login():
     username = request.json.get('username', None)
     password = request.json.get('password', None)
