@@ -1,3 +1,7 @@
 Flask
-Gunicorn
 flask_cors
+Gunicorn
+pymongo[srv]
+Flask-PyMongo
+python-dotenv
+flask-jwt-extended
