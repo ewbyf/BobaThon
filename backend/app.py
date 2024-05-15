@@ -104,7 +104,37 @@ def set_preferences():
     }
     return jsonify(response_data)
 
+@app.route("/location", methods=["POST"]) 
+def set_location():
+    location = request.json.get('location', None)
+    token = request.json.get('token', None)
 
+    if location is None:
+        return jsonify({"msg": "Invalid location"}), 400
+
+    users_collection.update_one({'token': token}, {"$set": {'location': location}})
+
+    response_data = {
+        "location": location
+    }
+    return jsonify(response_data)
+
+@app.route("/reviews", methods=["POST"]) 
+def add_review():
+    review = request.json.get('review', None)
+    token = request.json.get('token', None)
+
+    if review is None:
+        return jsonify({"msg": "Invalid review"}), 400
+
+    users_collection.update_one({'token': token}, {"$push": {'reviews': review}})
+
+    response_data = {
+        "review": review
+    }
+    return jsonify(response_data)
+
+# TODO: check match, add match, get reviews
 
 if __name__ == "__main__":
     app.run(debug=True)
