@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { Redirect, router } from "expo-router";
 import CustomButton from "@/components/CustomButton";
+import FormField from "@/components/FormField";
 import api from "@/services/axiosConfig";
 
 function SignIn() {
@@ -35,27 +36,34 @@ function SignIn() {
   return (
     <SafeAreaView>
       <View style={styles.initial}>
-        <Text>Hello</Text>
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          onChangeText={setEmail}
+        <Text>Log in to (Insert App Name)</Text>
+
+        <FormField
+          label="Email"
           value={email}
+          setValue={setEmail}
+          isPassword={false}
         />
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry
-          onChangeText={setPassword}
+
+        <FormField
+          label="Password"
           value={password}
+          setValue={setPassword}
+          isPassword={true}
         />
-        <Text style={styles.signin}>Sign In</Text>
-        <CustomButton />
-        <Button title="Sign in" onPress={handleSignIn} />
-        <Button
-          title="Don't have an account?"
-          onPress={() => router.push("/signup")}
-        ></Button>
+
+        <View style={styles.signin}>
+          <CustomButton content="Sign in" pressFunction={handleSignIn} />
+        </View>
+        <Text style={styles.signup}>
+          Don't have an account?{" "}
+          <Text
+            style={styles.signupText}
+            onPress={() => router.push("/signup")}
+          >
+            Sign Up
+          </Text>
+        </Text>
       </View>
     </SafeAreaView>
   );
@@ -72,9 +80,16 @@ const styles = StyleSheet.create({
     textDecorationColor: "white",
   },
   signin: {
-    backgroundColor: "#F2D183",
-    justifyContent: "center",
-    alignItems: "center",
+    marginTop: 10,
+    marginBottom: 2,
+  },
+  signup: {
+    width: "100%",
+    textAlign: "center",
+    marginTop: 3,
+  },
+  signupText: {
+    color: "#F2D183",
   },
 });
 
