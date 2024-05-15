@@ -2,12 +2,11 @@ import { Image, StyleSheet, Platform, SafeAreaView } from 'react-native';
 import { Text, ScrollView, Button } from 'react-native';
 import { router } from "expo-router";
 
-export default function HomeScreen() {
+export default function TastePreferenceScreen() {
   return (
     <SafeAreaView style={styles.container}>
-        <Text>Hello</Text>
-        <Button title="Navigate" onPress={() => router.push('../(preferences)/tastepreference')}></Button>
-        <Text>hi</Text>
+        <Text>Taste preferences</Text>
+        <Button title="Navigate" onPress={() => router.push('/index')}></Button>
     </SafeAreaView>
   );
 }

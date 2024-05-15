@@ -1,13 +1,11 @@
 import { Image, StyleSheet, Platform, SafeAreaView } from 'react-native';
-import { Text, ScrollView, Button } from 'react-native';
-import { router } from "expo-router";
 
-export default function HomeScreen() {
+import { Text, ScrollView } from 'react-native';
+
+export default function MatchesScreen() {
   return (
     <SafeAreaView style={styles.container}>
         <Text>Hello</Text>
-        <Button title="Navigate" onPress={() => router.push('../(preferences)/tastepreference')}></Button>
-        <Text>hi</Text>
     </SafeAreaView>
   );
 }
