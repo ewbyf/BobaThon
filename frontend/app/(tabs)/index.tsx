@@ -4,12 +4,11 @@ import { Button, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-n
 export default function HomeScreen() {
 	return (
 		<SafeAreaView style={styles.container}>
-			<View style={styles.row}>
-				<Text>A</Text>
+			{/* <View style={styles.row}>
+			    <Button title='Navigate' onPress={() => router.push('../(preferences)/tastepreference')}></Button>
 				<Text>B</Text>
-			</View>
+			</View> */}
 			<TextInput placeholder='Search' style={styles.searchbar}></TextInput>
-			<Button title='Navigate' onPress={() => router.push('../(preferences)/tastepreference')}></Button>
 			<Text style={styles.title}>Latest matches</Text>
 			<Text style={styles.title}>Popular Reviews</Text>
 		</SafeAreaView>
@@ -23,8 +22,8 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		padding: 20,
 		marginHorizontal: 20,
-		marginTop: 60,
-		gap: 15
+		marginTop: 5,
+		gap: 15,
 	},
 	row: {
 		display: 'flex',
