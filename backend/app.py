@@ -119,6 +119,30 @@ def set_location():
     }
     return jsonify(response_data)
 
+@app.route("/matches", methods=["GET", "POST"]) 
+def add_match():
+    token = request.json.get('token', None)
+
+    if request.method == "POST":
+        match = request.json.get('match', None)
+
+        if match is None:
+            return jsonify({"msg": "Invalid match"}), 400
+
+        users_collection.update_one({'token': token}, {"$push": {'matches': match}})
+
+        response_data = {
+            "match": match
+        }
+        return jsonify(response_data)
+    else:
+        user = users_collection.find_one({'token': token})
+        
+        response_data = {
+            "matches": user['matches']
+        }
+        return jsonify(response_data)
+
 @app.route("/reviews", methods=["POST"]) 
 def add_review():
     review = request.json.get('review', None)
