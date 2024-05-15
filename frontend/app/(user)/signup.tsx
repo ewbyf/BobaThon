@@ -7,6 +7,8 @@ import {
   TextInput,
   Button,
 } from "react-native";
+import FormField from "@/components/FormField";
+import CustomButton from "@/components/CustomButton";
 import { Redirect, router } from "expo-router";
 import api from "@/services/axiosConfig";
 
@@ -39,48 +41,72 @@ function SignUp() {
   };
   return (
     <SafeAreaView>
-      <Text>Sign Up</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Name"
-        onChangeText={setName}
-        value={name}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="email"
-        onChangeText={setEmail}
-        value={email}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Password"
-        secureTextEntry
-        onChangeText={setPassword}
-        value={password}
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Confirm Password"
-        secureTextEntry
-        onChangeText={setConfirmPassword}
-        value={confirmPassword}
-      />
-      <Button title="Sign Up" onPress={handleSignUp} />
+      <View style={styles.initial}>
+        <Text>Sign Up to (Insert App name)</Text>
 
-      <Button
-        title="Already have an account?"
-        onPress={() => router.push("/signin")}
-      ></Button>
+        <FormField
+          label="Name"
+          value={name}
+          setValue={setName}
+          isPassword={false}
+        />
+        <FormField
+          label="Email"
+          value={email}
+          setValue={setEmail}
+          isPassword={false}
+        />
+        <FormField
+          label="Password"
+          value={password}
+          setValue={setPassword}
+          isPassword={true}
+        />
+        <FormField
+          label="Confirm Password"
+          value={confirmPassword}
+          setValue={setConfirmPassword}
+          isPassword={true}
+        />
+
+        <View style={styles.signup}>
+          <CustomButton content="Sign Up" pressFunction={handleSignUp} />
+        </View>
+
+        <Text style={styles.signin}>
+          Already have an account?{" "}
+          <Text
+            style={styles.signinText}
+            onPress={() => router.push("/signin")}
+          >
+            Sign In
+          </Text>
+        </Text>
+      </View>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  initial: {
+    margin: 8,
+  },
   input: {
     borderWidth: 1,
     backgroundColor: "lightblue",
     textDecorationColor: "white",
+  },
+  signup: {
+    marginTop: 10,
+    marginBottom: 2,
+  },
+  signin: {
+    width: "100%",
+    textAlign: "center",
+    marginTop: 3,
+  },
+  signinText: {
+    color: "#F2D183",
   },
 });
 
