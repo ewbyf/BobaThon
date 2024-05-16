@@ -36,34 +36,7 @@ function SignIn() {
   return (
     <SafeAreaView>
       <View style={styles.initial}>
-        <Text>Log in to (Insert App Name)</Text>
-
-        <FormField
-          label="Email"
-          value={email}
-          setValue={setEmail}
-          isPassword={false}
-        />
-
-        <FormField
-          label="Password"
-          value={password}
-          setValue={setPassword}
-          isPassword={true}
-        />
-
-        <View style={styles.signin}>
-          <CustomButton content="Sign in" pressFunction={handleSignIn} />
-        </View>
-        <Text style={styles.signup}>
-          Don't have an account?{" "}
-          <Text
-            style={styles.signupText}
-            onPress={() => router.push("/signup")}
-          >
-            Sign Up
-          </Text>
-        </Text>
+        <Button title="Login" onPress={() => router.push("/signin")} />
       </View>
     </SafeAreaView>
   );
