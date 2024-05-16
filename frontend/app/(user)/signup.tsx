@@ -36,7 +36,7 @@ function SignUp() {
 		setConfirmPassword('');
 	};
 	return (
-		<ImageBackground source={require('../../assets/images/SignUp2.png')} imageStyle={{ resizeMode: 'cover' }} style={{ height: '100%', width: '100%' }}>
+		<ImageBackground source={require('../../assets/images/signupbg.png')} imageStyle={{ resizeMode: 'cover' }} style={{ height: '100%', width: '100%' }}>
 			<SafeAreaView style={{ flex: 1 }}>
 				<View style={styles.header}>
 					<BackArrow></BackArrow>
