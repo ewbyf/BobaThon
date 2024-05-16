@@ -9,11 +9,15 @@ export default function TabLayout() {
 		<Tabs
 			screenOptions={{
 				tabBarStyle: {
+					position: 'absolute',
+					left: 16,
+					right: 16,
+					bottom: 16,
 					backgroundColor: '#FFFFFF',
 					elevation: 24,
 					height: 100,
-					borderRadius: 32,
-					padding: 20,
+					borderRadius: 45,
+					// padding: 10,
 					shadowOffset: {
 						width: 0,
 						height: 12,
