@@ -19,12 +19,16 @@ export default function TabLayout() {
 		<Tabs
 			screenOptions={{
 				tabBarStyle: {
+					paddingBottom: 0,
 					position: 'absolute',
 					left: 16,
 					right: 16,
 					bottom: 19,
 					backgroundColor: '#FFFFFF',
-					elevation: 24,
+					display: 'flex',
+
+					alignItems: 'center',
+					elevation: 20,
 					height: 100,
 					borderRadius: 45,
 					// padding: 10,
@@ -38,6 +42,7 @@ export default function TabLayout() {
 
 				tabBarActiveTintColor: Colors['light'].tint,
 				headerShown: false,
+				tabBarShowLabel: false,
 			}}
 		>
 			<Tabs.Screen
