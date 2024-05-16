@@ -26,12 +26,11 @@ export default function TabLayout() {
 					bottom: 19,
 					backgroundColor: '#FFFFFF',
 					display: 'flex',
-
 					alignItems: 'center',
 					elevation: 20,
-					height: 100,
-					borderRadius: 45,
-					// padding: 10,
+					height: 80,
+					borderRadius: 37.5,
+                    paddingHorizontal: 10,
 					shadowOffset: {
 						width: 0,
 						height: 12,
