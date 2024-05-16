@@ -1,16 +1,12 @@
-import BackArrow from "@/components/BackArrow";
-import CustomButton from "@/components/CustomButton";
-import FormField from "@/components/FormField";
-import api from "@/services/axiosConfig";
-import { router } from "expo-router";
-import { useState } from "react";
-import {
-  ImageBackground,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  View,
-} from "react-native";
+import BackArrow from '@/components/BackArrow';
+import CustomButton from '@/components/CustomButton';
+import FormField from '@/components/FormField';
+import api from '@/services/axiosConfig';
+import { router } from 'expo-router';
+import { useState } from 'react';
+import { ImageBackground, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 function SignUp() {
   const [name, setName] = useState("");
@@ -34,103 +30,73 @@ function SignUp() {
       console.log("ERROR");
       console.log(error);
     }
+		setName('');
+		setEmail('');
+		setPassword('');
+		setConfirmPassword('');
+	};
+	return (
+		<ImageBackground source={require('../../assets/images/SignUp2.png')} imageStyle={{ resizeMode: 'cover' }} style={{ height: '100%', width: '100%' }}>
+			<SafeAreaView style={{ flex: 1 }}>
+				<View style={styles.header}>
+					<BackArrow></BackArrow>
+				</View>
 
-    setName("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
-  };
-  return (
-    <ImageBackground
-      source={require("../../assets/images/SignUp2.png")}
-      imageStyle={{ resizeMode: "cover" }}
-      style={{ height: "100%", width: "100%" }}
-    >
-      <SafeAreaView>
-        <View style={styles.header}>
-          <BackArrow></BackArrow>
-        </View>
+				<KeyboardAwareScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flex: 1 }}>
+					<View style={styles.formInputs}>
+						<FormField label='Name' placeholder='Enter your name' value={name} setValue={setName} isPassword={false} />
+						<FormField label='Email' placeholder='Enter your email' value={email} setValue={setEmail} isPassword={false} />
+						<FormField label='Password' placeholder='Enter your password' value={password} setValue={setPassword} isPassword={true} />
+						<FormField label='Confirm Password' placeholder='Confirm your password' value={confirmPassword} setValue={setConfirmPassword} isPassword={true} />
+					</View>
 
-        <View style={styles.initial}>
-          <View style={styles.formInputs}>
-            <FormField
-              label="Name"
-              value={name}
-              setValue={setName}
-              isPassword={false}
-            />
-            <FormField
-              label="Email"
-              value={email}
-              setValue={setEmail}
-              isPassword={false}
-            />
-            <FormField
-              label="Password"
-              value={password}
-              setValue={setPassword}
-              isPassword={true}
-            />
-            <FormField
-              label="Confirm Password"
-              value={confirmPassword}
-              setValue={setConfirmPassword}
-              isPassword={true}
-            />
-          </View>
+					<Text style={styles.signin}>
+						Already have an account?{' '}
+						<Text style={styles.signinText} onPress={() => router.push('/signin')}>
+							Sign In
+						</Text>
+					</Text>
 
-          <Text style={styles.signin}>
-            Already have an account?{" "}
-            <Text
-              style={styles.signinText}
-              onPress={() => router.push("/signin")}
-            >
-              Sign In
-            </Text>
-          </Text>
-
-          <View style={styles.signup}>
-            <CustomButton pressFunction={handleSignUp} />
-          </View>
-        </View>
-      </SafeAreaView>
-    </ImageBackground>
-  );
+					<View style={styles.signup}>
+						<CustomButton pressFunction={handleSignUp} />
+					</View>
+				</KeyboardAwareScrollView>
+			</SafeAreaView>
+		</ImageBackground>
+	);
 }
 
 const styles = StyleSheet.create({
-  header: {
-    width: "100%",
-    height: 50,
-  },
-  initial: {
-    margin: 8,
-    marginTop: 50,
-  },
-  formInputs: {
-    display: "flex",
-    gap: 25,
-  },
-  input: {
-    borderWidth: 1,
-    height: 50,
-    backgroundColor: "lightblue",
-    textDecorationColor: "white",
-  },
-  signup: {
-    marginLeft: 270,
-    marginTop: 40,
-  },
-  signin: {
-    width: "100%",
-    textAlign: "center",
-    marginTop: 13,
-    color: "#6f5c63",
-  },
-  signinText: {
-    color: "#6f5c63",
-    fontWeight: "600",
-  },
+	header: {
+		width: '100%',
+		height: 50
+	},
+
+	formInputs: {
+		display: 'flex',
+		gap: 25,
+		marginTop: 'auto'
+	},
+	input: {
+		borderWidth: 1,
+		height: 50,
+		backgroundColor: 'lightblue',
+		textDecorationColor: 'white'
+	},
+	signup: {
+		marginLeft: 270,
+		marginTop: 40
+	},
+	signin: {
+		width: '100%',
+		textAlign: 'center',
+		marginTop: 13,
+		color: '#6f5c63'
+	},
+	signinText: {
+		color: '#6f5c63',
+		fontWeight: '600'
+	}
 });
 
 export default SignUp;
