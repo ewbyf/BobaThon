@@ -19,12 +19,12 @@ function SignIn() {
     >
       <SafeAreaView>
         <View style={styles.initial}>
-          <View style={styles.buttons}>
+          <View style={styles.signinButton}>
             <Text style={styles.text} onPress={() => router.push("/signin")}>
               Log In
             </Text>
           </View>
-          <View style={styles.buttons}>
+          <View style={styles.signupButton}>
             <Text style={styles.text} onPress={() => router.push("/signup")}>
               Register
             </Text>
@@ -38,6 +38,9 @@ function SignIn() {
 const styles = StyleSheet.create({
   initial: {
     margin: 8,
+    marginTop: 500,
+    display: "flex",
+    gap: 10,
   },
   input: {
     borderWidth: 1,
@@ -45,12 +48,10 @@ const styles = StyleSheet.create({
     backgroundColor: "lightblue",
     textDecorationColor: "white",
   },
-  buttons: {
-    shadowRadius: 0,
+  signinButton: {
     borderRadius: 30,
-    borderWidth: 1,
     height: 50,
-    backgroundColor: "#f9e5e4",
+    backgroundColor: "#ffffff",
     color: "#6f5c63",
     fontSize: 16,
     fontWeight: "500",
@@ -58,6 +59,28 @@ const styles = StyleSheet.create({
     marginLeft: 80,
     marginRight: 80,
     justifyContent: "center",
+    shadowColor: "rgba(0, 0, 0)",
+    shadowOpacity: 0.8,
+    elevation: 6,
+    shadowRadius: 2,
+    shadowOffset: { width: 0, height: 0 },
+  },
+  signupButton: {
+    borderRadius: 30,
+    height: 50,
+    backgroundColor: "#f8e5e3",
+    color: "#6f5c63",
+    fontSize: 16,
+    fontWeight: "500",
+    padding: 4,
+    marginLeft: 80,
+    marginRight: 80,
+    justifyContent: "center",
+    shadowColor: "rgba(0, 0, 0)",
+    shadowOpacity: 0.8,
+    elevation: 6,
+    shadowRadius: 3,
+    shadowOffset: { width: 0, height: 0 },
   },
   text: {
     width: "100%",
