@@ -263,13 +263,13 @@ export default function PreferenceScreen() {
 						{/* <View style={[styles.row, { justifyContent: 'center', gap: 15, marginTop: 30, flexWrap: 'wrap' }]}> */}
 						<View style={styles.column}>
 							<View style={styles.row}>
-								<TouchableOpacity onPress={() => setNutAllergy(!nutAllergy)} style={[styles.clickable, { height: 50, width: 180 }]}>
-									{nutAllergy && <CancelButton />}
+								<TouchableOpacity onPress={() => setGlutenFree(!glutenFree)} style={[styles.clickable, { height: 50, width: 180 }]}>
+									{glutenFree && <CancelButton />}
 									<LinearGradient
-										colors={nutAllergy ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+										colors={glutenFree ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
 										style={{
-											width: nutAllergy ? '100%' : '85%',
-											height: nutAllergy ? '100%' : '85%',
+											width: glutenFree ? '100%' : '85%',
+											height: glutenFree ? '100%' : '85%',
 											borderRadius: 15
 										}}
 									>
@@ -277,13 +277,13 @@ export default function PreferenceScreen() {
 											style={[
 												styles.clickableText,
 												{
-													color: nutAllergy ? 'white' : '#6F5C63',
-													fontFamily: nutAllergy ? 'OverpassBlack' : 'OverpassBold',
-													fontSize: nutAllergy ? 20 : 16
+													color: glutenFree ? 'white' : '#6F5C63',
+													fontFamily: glutenFree ? 'OverpassBlack' : 'OverpassBold',
+													fontSize: glutenFree ? 20 : 16
 												}
 											]}
 										>
-											Nut Allergy
+											Gluten-free
 										</Text>
 									</LinearGradient>
 								</TouchableOpacity>
@@ -312,8 +312,106 @@ export default function PreferenceScreen() {
 									</LinearGradient>
 								</TouchableOpacity>
 							</View>
-							{/* <View style={styles.row}></View>
-                            <View style={styles.row}></View> */}
+							<View style={styles.row}>
+								<TouchableOpacity onPress={() => setSoyAllergy(!soyAllergy)} style={[styles.clickable, { height: 50, width: 180 }]}>
+									{soyAllergy && <CancelButton />}
+									<LinearGradient
+										colors={soyAllergy ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+										style={{
+											width: soyAllergy ? '100%' : '85%',
+											height: soyAllergy ? '100%' : '85%',
+											borderRadius: 15
+										}}
+									>
+										<Text
+											style={[
+												styles.clickableText,
+												{
+													color: soyAllergy ? 'white' : '#6F5C63',
+													fontFamily: soyAllergy ? 'OverpassBlack' : 'OverpassBold',
+													fontSize: soyAllergy ? 20 : 16
+												}
+											]}
+										>
+											Soy Allergy
+										</Text>
+									</LinearGradient>
+								</TouchableOpacity>
+								<TouchableOpacity onPress={() => setNutAllergy(!nutAllergy)} style={[styles.clickable, { height: 50, width: 180 }]}>
+									{nutAllergy && <CancelButton />}
+									<LinearGradient
+										colors={nutAllergy ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+										style={{
+											width: nutAllergy ? '100%' : '85%',
+											height: nutAllergy ? '100%' : '85%',
+											borderRadius: 15
+										}}
+									>
+										<Text
+											style={[
+												styles.clickableText,
+												{
+													color: nutAllergy ? 'white' : '#6F5C63',
+													fontFamily: nutAllergy ? 'OverpassBlack' : 'OverpassBold',
+													fontSize: nutAllergy ? 20 : 16
+												}
+											]}
+										>
+											Nut Allergy
+										</Text>
+									</LinearGradient>
+								</TouchableOpacity>
+							</View>
+							<View style={styles.row}>
+								<TouchableOpacity onPress={() => setSugarFree(!sugarFree)} style={[styles.clickable, { height: 50, width: 180 }]}>
+									{sugarFree && <CancelButton />}
+									<LinearGradient
+										colors={sugarFree ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+										style={{
+											width: sugarFree ? '100%' : '85%',
+											height: sugarFree ? '100%' : '85%',
+											borderRadius: 15
+										}}
+									>
+										<Text
+											style={[
+												styles.clickableText,
+												{
+													color: sugarFree ? 'white' : '#6F5C63',
+													fontFamily: sugarFree ? 'OverpassBlack' : 'OverpassBold',
+													fontSize: sugarFree ? 20 : 16
+												}
+											]}
+										>
+											Sugar-free
+										</Text>
+									</LinearGradient>
+								</TouchableOpacity>
+								<TouchableOpacity onPress={() => setCaffeineFree(!caffeineFree)} style={[styles.clickable, { height: 50, width: 180 }]}>
+									{caffeineFree && <CancelButton />}
+									<LinearGradient
+										colors={caffeineFree ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+										style={{
+											width: caffeineFree ? '100%' : '85%',
+											height: caffeineFree ? '100%' : '85%',
+											borderRadius: 15
+										}}
+									>
+										<Text
+											style={[
+												styles.clickableText,
+												{
+													color: caffeineFree ? 'white' : '#6F5C63',
+													fontFamily: caffeineFree ? 'OverpassBlack' : 'OverpassBold',
+													fontSize: caffeineFree ? 20 : 16
+												}
+											]}
+										>
+											Caffeine-free
+										</Text>
+									</LinearGradient>
+								</TouchableOpacity>
+							</View>
 						</View>
 					</>
 				)}
