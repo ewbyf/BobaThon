@@ -6,6 +6,8 @@ export interface IBoba {
     cost: string;
     stars: number;
     reviews: IReview[];
+    popularToppings: string[];
+    description: string;
 }
 
 export interface IReview {
