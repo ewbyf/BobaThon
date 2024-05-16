@@ -1,6 +1,7 @@
+import Container from '@/components/Container';
 import Slider from '@react-native-community/slider';
 import { useState } from 'react';
-import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import MapView, { Circle, Marker } from 'react-native-maps';
 
 export default function PreferenceScreen() {
@@ -22,8 +23,8 @@ export default function PreferenceScreen() {
 	const [location, setLocation] = useState(5);
 
 	return (
-		<SafeAreaView style={styles.container}>
-			<Image source={require('../../assets/images/DrinkSelection.png')} style={{ height: 150 }} resizeMode='contain'></Image>
+		<Container>
+			<Image source={require('../../assets/images/brownsugarboba.png')} style={{ height: 150 }} resizeMode='contain'></Image>
 			<Text style={[styles.title, { textAlign: 'center' }]}>What are you feeling today?</Text>
 			<Text style={styles.description}>Customize your preference and let us find your perfect match!</Text>
 			{page == 1 && (
@@ -173,22 +174,15 @@ export default function PreferenceScreen() {
 					<Text>next</Text>
 				</TouchableOpacity>
 			</View>
-		</SafeAreaView>
+		</Container>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		display: 'flex',
-		alignItems: 'center',
-		gap: 10,
-		padding: 20,
-		marginHorizontal: 20
-	},
 	title: {
 		fontSize: 20,
-		fontWeight: 'bold',
+		fontFamily: 'OverpassBold',
+        color: '#6F5C63',
 		textAlign: 'left',
 		width: '100%'
 	},
@@ -196,15 +190,15 @@ const styles = StyleSheet.create({
 		backgroundColor: '#EAC9AF',
 		marginRight: 'auto',
 		paddingTop: 6,
-        paddingBottom: 3,
+		paddingBottom: 3,
 		paddingHorizontal: 18,
 		borderRadius: 12,
-        display: 'flex',
+		display: 'flex'
 	},
 	sectionTitleText: {
 		fontSize: 20,
 		color: 'white',
-        fontFamily: 'OverpassBlack',
+		fontFamily: 'OverpassBlack'
 	},
 	description: {
 		textAlign: 'center',

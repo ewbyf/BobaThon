@@ -1,7 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import Header from './Header';
-const Container = ({ children }: { children: JSX.Element[] | JSX.Element }) => {
+const Container = ({ children }: { children: any }) => {
 	return (
 		<LinearGradient
 			colors={['#EACBAD', '#E9B7B6']}

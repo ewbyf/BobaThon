@@ -41,7 +41,7 @@ export default function MatchingScreen() {
 
 	if (bobas.length == 0 || index == bobas.length) {
 		return (
-			<SafeAreaView style={styles.container}>
+			<Container>
 				<ScrollView
 					refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
 					showsVerticalScrollIndicator={false}
@@ -50,7 +50,7 @@ export default function MatchingScreen() {
 				>
 					<Text>No bobas left! Consider increasing your radius</Text>
 				</ScrollView>
-			</SafeAreaView>
+                </Container>
 		);
 	}
 
@@ -85,15 +85,6 @@ export default function MatchingScreen() {
 }
 
 const styles = StyleSheet.create({
-	container: {
-		display: 'flex',
-		flex: 1,
-		alignItems: 'center',
-		marginBottom: 20,
-		marginHorizontal: 20,
-		marginTop: 5,
-		gap: 15
-	},
 	scrollView: {
 		height: '100%',
 		width: '100%',
