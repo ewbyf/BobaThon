@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
 // import LinearGradient from "react-native-linear-gradient";
-import MaskedView from "@react-native-masked-view/masked-view";
+// import MaskedView from "@react-native-masked-view/masked-view";
 
 const size = 40;
 

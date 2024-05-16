@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { Redirect, router } from "expo-router";
 
-function SignIn() {
+function UserScreen() {
   return (
     <ImageBackground
       source={require("../../assets/images/SignUp.png")}
@@ -88,4 +88,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignIn;
+export default UserScreen;
