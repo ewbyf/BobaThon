@@ -30,7 +30,7 @@ export default function PreferenceScreen() {
 			source={require('../../assets/images/preferencebg.png')}
 			style={styles.imgBg}
 			imageStyle={{
-				resizeMode: 'stretch'
+				resizeMode: 'stretch',
 			}}
 		>
 			<Container background={false}>
@@ -55,7 +55,7 @@ export default function PreferenceScreen() {
 										style={{
 											width: sweet ? '100%' : '85%',
 											height: sweet ? '100%' : '85%',
-											borderRadius: 15
+											borderRadius: 15,
 										}}
 									>
 										<Text
@@ -64,8 +64,8 @@ export default function PreferenceScreen() {
 												{
 													color: sweet ? 'white' : '#6F5C63',
 													fontFamily: sweet ? 'OverpassBlack' : 'OverpassBold',
-													fontSize: sweet ? 20 : 16
-												}
+													fontSize: sweet ? 20 : 16,
+												},
 											]}
 										>
 											Sweet
@@ -79,7 +79,7 @@ export default function PreferenceScreen() {
 										style={{
 											width: refreshing ? '100%' : '85%',
 											height: refreshing ? '100%' : '85%',
-											borderRadius: 15
+											borderRadius: 15,
 										}}
 									>
 										<Text
@@ -88,8 +88,8 @@ export default function PreferenceScreen() {
 												{
 													color: refreshing ? 'white' : '#6F5C63',
 													fontFamily: refreshing ? 'OverpassBlack' : 'OverpassBold',
-													fontSize: refreshing ? 20 : 16
-												}
+													fontSize: refreshing ? 20 : 16,
+												},
 											]}
 										>
 											Refreshing
@@ -103,7 +103,7 @@ export default function PreferenceScreen() {
 										style={{
 											width: creamy ? '100%' : '85%',
 											height: creamy ? '100%' : '85%',
-											borderRadius: 15
+											borderRadius: 15,
 										}}
 									>
 										<Text
@@ -112,8 +112,8 @@ export default function PreferenceScreen() {
 												{
 													color: creamy ? 'white' : '#6F5C63',
 													fontFamily: creamy ? 'OverpassBlack' : 'OverpassBold',
-													fontSize: creamy ? 20 : 16
-												}
+													fontSize: creamy ? 20 : 16,
+												},
 											]}
 										>
 											Creamy
@@ -129,7 +129,7 @@ export default function PreferenceScreen() {
 										style={{
 											width: herbal ? '100%' : '85%',
 											height: herbal ? '100%' : '85%',
-											borderRadius: 15
+											borderRadius: 15,
 										}}
 									>
 										<Text
@@ -138,8 +138,8 @@ export default function PreferenceScreen() {
 												{
 													color: herbal ? 'white' : '#6F5C63',
 													fontFamily: herbal ? 'OverpassBlack' : 'OverpassBold',
-													fontSize: herbal ? 20 : 16
-												}
+													fontSize: herbal ? 20 : 16,
+												},
 											]}
 										>
 											Herbal
@@ -153,7 +153,7 @@ export default function PreferenceScreen() {
 										style={{
 											width: nutty ? '100%' : '85%',
 											height: nutty ? '100%' : '85%',
-											borderRadius: 15
+											borderRadius: 15,
 										}}
 									>
 										<Text
@@ -162,8 +162,8 @@ export default function PreferenceScreen() {
 												{
 													color: nutty ? 'white' : '#6F5C63',
 													fontFamily: nutty ? 'OverpassBlack' : 'OverpassBold',
-													fontSize: nutty ? 20 : 16
-												}
+													fontSize: nutty ? 20 : 16,
+												},
 											]}
 										>
 											Nutty
@@ -177,7 +177,7 @@ export default function PreferenceScreen() {
 										style={{
 											width: fruity ? '100%' : '85%',
 											height: fruity ? '100%' : '85%',
-											borderRadius: 15
+											borderRadius: 15,
 										}}
 									>
 										<Text
@@ -186,8 +186,8 @@ export default function PreferenceScreen() {
 												{
 													color: fruity ? 'white' : '#6F5C63',
 													fontFamily: fruity ? 'OverpassBlack' : 'OverpassBold',
-													fontSize: fruity ? 20 : 16
-												}
+													fontSize: fruity ? 20 : 16,
+												},
 											]}
 										>
 											Fruity
@@ -211,7 +211,7 @@ export default function PreferenceScreen() {
 									style={{
 										width: hot ? '100%' : '85%',
 										height: hot ? '100%' : '85%',
-										borderRadius: 15
+										borderRadius: 15,
 									}}
 								>
 									<Text
@@ -220,8 +220,8 @@ export default function PreferenceScreen() {
 											{
 												color: hot ? 'white' : '#6F5C63',
 												fontFamily: hot ? 'OverpassBlack' : 'OverpassBold',
-												fontSize: hot ? 20 : 16
-											}
+												fontSize: hot ? 20 : 16,
+											},
 										]}
 									>
 										Hot
@@ -235,7 +235,7 @@ export default function PreferenceScreen() {
 									style={{
 										width: cold ? '100%' : '85%',
 										height: cold ? '100%' : '85%',
-										borderRadius: 15
+										borderRadius: 15,
 									}}
 								>
 									<Text
@@ -244,8 +244,8 @@ export default function PreferenceScreen() {
 											{
 												color: cold ? 'white' : '#6F5C63',
 												fontFamily: cold ? 'OverpassBlack' : 'OverpassBold',
-												fontSize: cold ? 20 : 16
-											}
+												fontSize: cold ? 20 : 16,
+											},
 										]}
 									>
 										Cold
@@ -263,14 +263,14 @@ export default function PreferenceScreen() {
 						{/* <View style={[styles.row, { justifyContent: 'center', gap: 15, marginTop: 30, flexWrap: 'wrap' }]}> */}
 						<View style={styles.column}>
 							<View style={styles.row}>
-								<TouchableOpacity onPress={() => setNutAllergy(!nutAllergy)} style={[styles.clickable, { height: 50, width: 180 }]}>
+								<TouchableOpacity onPress={() => setNutAllergy(!nutAllergy)} style={[styles.clickable, { height: 50, width: 190 }]}>
 									{nutAllergy && <CancelButton />}
 									<LinearGradient
 										colors={nutAllergy ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
 										style={{
 											width: nutAllergy ? '100%' : '85%',
 											height: nutAllergy ? '100%' : '85%',
-											borderRadius: 15
+											borderRadius: 15,
 										}}
 									>
 										<Text
@@ -279,22 +279,22 @@ export default function PreferenceScreen() {
 												{
 													color: nutAllergy ? 'white' : '#6F5C63',
 													fontFamily: nutAllergy ? 'OverpassBlack' : 'OverpassBold',
-													fontSize: nutAllergy ? 20 : 16
-												}
+													fontSize: nutAllergy ? 20 : 16,
+												},
 											]}
 										>
 											Nut Allergy
 										</Text>
 									</LinearGradient>
 								</TouchableOpacity>
-								<TouchableOpacity onPress={() => setLactose(!lactose)} style={[styles.clickable, { height: 50, width: 180 }]}>
+								<TouchableOpacity onPress={() => setLactose(!lactose)} style={[styles.clickable, { height: 50, width: 190 }]}>
 									{lactose && <CancelButton />}
 									<LinearGradient
 										colors={lactose ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
 										style={{
 											width: lactose ? '100%' : '85%',
 											height: lactose ? '100%' : '85%',
-											borderRadius: 15
+											borderRadius: 15,
 										}}
 									>
 										<Text
@@ -303,11 +303,11 @@ export default function PreferenceScreen() {
 												{
 													color: lactose ? 'white' : '#6F5C63',
 													fontFamily: lactose ? 'OverpassBlack' : 'OverpassBold',
-													fontSize: lactose ? 20 : 16
-												}
+													fontSize: lactose ? 20 : 16,
+												},
 											]}
 										>
-											Lactose Intolerance
+											Lactose Intolerant
 										</Text>
 									</LinearGradient>
 								</TouchableOpacity>
@@ -319,60 +319,63 @@ export default function PreferenceScreen() {
 				)}
 				{page == 4 && (
 					<>
-						<View style={styles.sectionTitleContainer}>
+						
+
+						<View style={{width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <View style={styles.sectionTitleContainer}>
 							<Text style={styles.sectionTitleText}>LOCATION</Text>
 						</View>
-
-						{/* <Slider value={location} onSlidingComplete={(value) => setLocation(value)} minimumValue={5} maximumValue={50} step={5} /> */}
-						<Text>{location} miles</Text>
-						<Slider
-							style={{ width: '100%', height: 40 }}
-							minimumValue={5}
-							maximumValue={50}
-							minimumTrackTintColor='#E88985'
-							maximumTrackTintColor='#D7D7D7'
-							thumbTintColor='#6F5C63'
-							value={location}
-							onValueChange={(e) => {
-								setLocation(e);
-							}}
-							step={5}
-						/>
+							<Text style={styles.locationText}>{location} miles</Text>
+				
+						</View>
+                        <Slider
+								style={{ width: '100%', height: 40 }}
+								minimumValue={5}
+								maximumValue={50}
+								minimumTrackTintColor="#E88985"
+								maximumTrackTintColor="#D7D7D7"
+								thumbTintColor="#6F5C63"
+								value={location}
+								onValueChange={(e) => {
+									setLocation(e);
+								}}
+								step={5}
+							/>
 						<MapView
 							initialRegion={{
 								latitude: 47.6545887800112,
 								longitude: -122.30545611222443,
 								latitudeDelta: 0.0922,
-								longitudeDelta: 0.0421
+								longitudeDelta: 0.0421,
 							}}
 							style={styles.map}
 						>
 							<Circle
 								center={{ latitude: 47.6545887800112, longitude: -122.30545611222443 }}
 								radius={(location * 1609.34) / 2}
-								fillColor='rgba(136, 206, 240, .5)'
-								strokeColor='rgb(69, 156, 199)'
+								fillColor="rgba(136, 206, 240, .5)"
+								strokeColor="rgb(69, 156, 199)"
 							/>
 							<Marker
 								coordinate={{
 									latitude: 47.66737562827992,
-									longitude: -122.31148955694742
+									longitude: -122.31148955694742,
 								}}
-								titleVisibility='visible'
-								title='Yifang Taiwan Fruit Tea UW'
+								titleVisibility="visible"
+								title="Yifang Taiwan Fruit Tea UW"
 							/>
 							<Marker
 								coordinate={{
 									latitude: 47.613455536257206,
-									longitude: -122.31938328835254
+									longitude: -122.31938328835254,
 								}}
-								titleVisibility='visible'
-								title='Drip Tea'
+								titleVisibility="visible"
+								title="Drip Tea"
 							/>
 						</MapView>
 					</>
 				)}
-				<View style={[styles.row, { marginTop: 'auto', marginBottom: 40 }]}>
+				<View style={[styles.row, { marginTop: 'auto', marginBottom: 90 }]}>
 					{page > 1 && (
 						<TouchableOpacity onPress={() => setPage(page - 1)} style={[styles.button]}>
 							<Text>back</Text>
@@ -393,11 +396,11 @@ const styles = StyleSheet.create({
 		fontFamily: 'OverpassBold',
 		color: '#6F5C63',
 		textAlign: 'left',
-		width: '100%'
+		width: '100%',
 	},
 	imgBg: {
 		width: '100%',
-		height: '100%'
+		height: '100%',
 	},
 	sectionTitleContainer: {
 		backgroundColor: '#EAC9AF',
@@ -408,32 +411,34 @@ const styles = StyleSheet.create({
 		borderRadius: 12,
 		display: 'flex',
 		zIndex: 3,
-		position: 'relative'
+		position: 'relative',
 	},
 	sectionTitleText: {
 		fontSize: 20,
 		color: 'white',
 		fontFamily: 'OverpassBlack',
 		zIndex: 3,
-		position: 'relative'
+		position: 'relative',
 	},
 	description: {
 		textAlign: 'center',
 		maxWidth: '75%',
 		zIndex: 3,
-		position: 'relative'
+		position: 'relative',
+		fontFamily: 'Overpass',
+		color: '#6F5C63',
 	},
 	row: {
 		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-		width: '100%'
+		width: '100%',
 	},
 	column: {
 		display: 'flex',
 		gap: 20,
 		width: '100%',
-		marginTop: 5
+		marginTop: 5,
 	},
 	clickable: {
 		backgroundColor: 'transparent',
@@ -442,12 +447,12 @@ const styles = StyleSheet.create({
 		borderRadius: 15,
 		display: 'flex',
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 	clickableText: {
 		marginTop: 'auto',
 		marginHorizontal: 'auto',
-		marginBottom: 10
+		marginBottom: 10,
 	},
 	button: {
 		width: 100,
@@ -456,11 +461,12 @@ const styles = StyleSheet.create({
 		borderRadius: 20,
 		display: 'flex',
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 	map: {
 		width: 200,
-		height: 200
+		height: 200,
+        marginTop: -15,
 	},
 	cancel: {
 		position: 'absolute',
@@ -468,6 +474,11 @@ const styles = StyleSheet.create({
 		right: -10,
 		zIndex: 3,
 		height: 30,
-		width: 30
-	}
+		width: 30,
+	},
+    locationText: {
+        fontFamily: 'OverpassBold',
+        fontSize: 20,
+        color: '#6F5C63',
+    }
 });

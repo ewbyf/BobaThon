@@ -10,9 +10,9 @@ import Svg, {
 const BobaImage = (props: SvgProps) => (
   <Svg
  
-    viewBox="0 0 210 244"
+    viewBox="0 0 230 244"
     style={{
-        height: 210,
+        height: 230,
         width: 244
     }}
     fill="none"
