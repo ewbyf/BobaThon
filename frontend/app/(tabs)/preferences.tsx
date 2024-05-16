@@ -195,14 +195,16 @@ const styles = StyleSheet.create({
 	sectionTitleContainer: {
 		backgroundColor: '#EAC9AF',
 		marginRight: 'auto',
-		paddingVertical: 5,
-		paddingHorizontal: 15,
-		borderRadius: 10
+		paddingTop: 6,
+        paddingBottom: 3,
+		paddingHorizontal: 18,
+		borderRadius: 12,
+        display: 'flex',
 	},
 	sectionTitleText: {
 		fontSize: 20,
 		color: 'white',
-        fontFamily: 'OverpassBlack'
+        fontFamily: 'OverpassBlack',
 	},
 	description: {
 		textAlign: 'center',

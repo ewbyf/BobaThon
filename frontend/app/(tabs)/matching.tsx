@@ -1,3 +1,4 @@
+import Container from '@/components/Container';
 import { bobaList } from '@/data/bobaList';
 import { IBoba } from '@/interfaces/interfaces';
 import { shuffle } from '@/lib/shuffle';
@@ -9,17 +10,17 @@ export default function MatchingScreen() {
 	const [bobas, setBobas] = useState<IBoba[]>([]);
 	const [index, setIndex] = useState(0);
 	const [refreshing, setRefreshing] = useState(false);
-    // TODO: FIX BUG WITH SPACING ON TOP OF SCROLLVIEW
+	// TODO: FIX BUG WITH SPACING ON TOP OF SCROLLVIEW
 
-    const resetBobaList = () => {
+	const resetBobaList = () => {
 		setBobas(bobaList);
 		// remove previously matched bobas
 		shuffle(bobas);
-        setIndex(0);
-    }
+		setIndex(0);
+	};
 
 	useEffect(() => {
-        resetBobaList();
+		resetBobaList();
 	}, []);
 
 	const reject = () => {
@@ -33,7 +34,7 @@ export default function MatchingScreen() {
 	const onRefresh = useCallback(() => {
 		setRefreshing(true);
 		setTimeout(() => {
-            resetBobaList();
+			resetBobaList();
 			setRefreshing(false);
 		}, 2000);
 	}, []);
@@ -43,9 +44,9 @@ export default function MatchingScreen() {
 			<SafeAreaView style={styles.container}>
 				<ScrollView
 					refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-                    showsVerticalScrollIndicator={false}
+					showsVerticalScrollIndicator={false}
 					style={[styles.scrollView, { display: 'flex' }]}
-                    contentContainerStyle={{flex: 1, justifyContent: 'center', alignItems: 'center'}}
+					contentContainerStyle={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
 				>
 					<Text>No bobas left! Consider increasing your radius</Text>
 				</ScrollView>
@@ -54,7 +55,7 @@ export default function MatchingScreen() {
 	}
 
 	return (
-		<SafeAreaView style={styles.container}>
+		<Container>
 			<ScrollView
 				style={styles.scrollView}
 				snapToInterval={600}
@@ -62,7 +63,7 @@ export default function MatchingScreen() {
 				snapToAlignment='start'
 				decelerationRate={0.9}
 				disableIntervalMomentum={true}
-                contentContainerStyle={{justifyContent: 'flex-start'}}
+				contentContainerStyle={{ justifyContent: 'flex-start' }}
 			>
 				<View style={styles.card}>
 					<Image source={require('../../assets/images/DrinkSelection.png')} style={{ height: 450 }} resizeMode='contain'></Image>
@@ -75,11 +76,11 @@ export default function MatchingScreen() {
 				</View>
 				<View style={styles.aboutSection}>
 					<View style={styles.descriptionContainer}>
-                        <Text>{bobas[index].name}</Text>
-                    </View>
+						<Text>{bobas[index].name}</Text>
+					</View>
 				</View>
 			</ScrollView>
-		</SafeAreaView>
+		</Container>
 	);
 }
 
@@ -96,14 +97,14 @@ const styles = StyleSheet.create({
 	scrollView: {
 		height: '100%',
 		width: '100%',
-		display: 'flex',
+		display: 'flex'
 	},
 	card: {
 		backgroundColor: 'grey',
 		width: '100%',
 		display: 'flex',
 		borderRadius: 15,
-		marginBottom: 30,
+		marginBottom: 30
 	},
 	reject: {
 		height: 65,
