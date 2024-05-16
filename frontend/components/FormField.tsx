@@ -11,12 +11,14 @@ type FormFieldProps = {
 const FormField = (props: FormFieldProps) => {
   return (
     <View>
-      <Text>{props.label}</Text>
+      <Text style={styles.label}>{props.label}</Text>
       {!props.isPassword && (
         <TextInput
           style={styles.input}
           onChangeText={props.setValue}
           value={props.value}
+          placeholder={"Enter your " + props.label.toLowerCase()}
+          placeholderTextColor="#6f5c63"
         />
       )}
       {props.isPassword && (
@@ -24,6 +26,8 @@ const FormField = (props: FormFieldProps) => {
           style={styles.input}
           onChangeText={props.setValue}
           value={props.value}
+          placeholder={"Enter your " + props.label.toLowerCase()}
+          placeholderTextColor="#6f5c63"
           secureTextEntry
         />
       )}
@@ -32,14 +36,24 @@ const FormField = (props: FormFieldProps) => {
 };
 
 const styles = StyleSheet.create({
-  input: {
-    borderWidth: 1,
-    borderColor: "#CAD9A9",
-    borderRadius: 6,
-    height: 50,
-    backgroundColor: "white",
+  label: {
     fontSize: 16,
+    color: "#736067",
+    marginLeft: 40,
+    marginRight: 40,
+    marginBottom: 10,
+  },
+  input: {
+    borderRadius: 10,
+    height: 70,
+    backgroundColor: "#f9e5e4",
+    color: "#6f5c63",
+    fontSize: 16,
+    fontWeight: "300",
     padding: 4,
+    paddingLeft: 15,
+    marginLeft: 40,
+    marginRight: 40,
   },
 });
 

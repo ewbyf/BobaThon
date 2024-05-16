@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   Text,
+  ImageBackground,
   TextInput,
   Button,
 } from "react-native";
@@ -40,73 +41,87 @@ function SignUp() {
     setConfirmPassword("");
   };
   return (
-    <SafeAreaView>
-      <View style={styles.initial}>
-        <Text>Sign Up to (Insert App name)</Text>
+    <ImageBackground
+      source={require("../../assets/images/SignUp2.png")}
+      imageStyle={{ resizeMode: "cover" }}
+      style={{ height: "100%", width: "100%" }}
+    >
+      <SafeAreaView>
+        <View style={styles.initial}>
+          <View style={styles.formInputs}>
+            <FormField
+              label="Name"
+              value={name}
+              setValue={setName}
+              isPassword={false}
+            />
+            <FormField
+              label="Email"
+              value={email}
+              setValue={setEmail}
+              isPassword={false}
+            />
+            <FormField
+              label="Password"
+              value={password}
+              setValue={setPassword}
+              isPassword={true}
+            />
+            <FormField
+              label="Confirm Password"
+              value={confirmPassword}
+              setValue={setConfirmPassword}
+              isPassword={true}
+            />
+          </View>
 
-        <FormField
-          label="Name"
-          value={name}
-          setValue={setName}
-          isPassword={false}
-        />
-        <FormField
-          label="Email"
-          value={email}
-          setValue={setEmail}
-          isPassword={false}
-        />
-        <FormField
-          label="Password"
-          value={password}
-          setValue={setPassword}
-          isPassword={true}
-        />
-        <FormField
-          label="Confirm Password"
-          value={confirmPassword}
-          setValue={setConfirmPassword}
-          isPassword={true}
-        />
-
-        <View style={styles.signup}>
-          <CustomButton content="Sign Up" pressFunction={handleSignUp} />
-        </View>
-
-        <Text style={styles.signin}>
-          Already have an account?{" "}
-          <Text
-            style={styles.signinText}
-            onPress={() => router.push("/signin")}
-          >
-            Sign In
+          <Text style={styles.signin}>
+            Already have an account?{" "}
+            <Text
+              style={styles.signinText}
+              onPress={() => router.push("/signin")}
+            >
+              Sign In
+            </Text>
           </Text>
-        </Text>
-      </View>
-    </SafeAreaView>
+
+          <View style={styles.signup}>
+            <CustomButton pressFunction={handleSignUp} />
+          </View>
+        </View>
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   initial: {
     margin: 8,
+    marginTop: 50,
+  },
+  formInputs: {
+    display: "flex",
+    gap: 25,
   },
   input: {
     borderWidth: 1,
+    height: 50,
     backgroundColor: "lightblue",
     textDecorationColor: "white",
   },
   signup: {
-    marginTop: 10,
-    marginBottom: 2,
+    marginLeft: 270,
+    marginTop: 40,
   },
   signin: {
     width: "100%",
     textAlign: "center",
-    marginTop: 3,
+    marginTop: 13,
+    color: "#6f5c63",
   },
   signinText: {
-    color: "#F2D183",
+    color: "#6f5c63",
+    fontWeight: "600",
   },
 });
 

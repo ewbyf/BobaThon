@@ -1,9 +1,9 @@
-import { router } from 'expo-router';
-import { Button, SafeAreaView, StyleSheet, Text, TextInput, View } from 'react-native';
+import Container from '@/components/Container';
+import { StyleSheet, Text, TextInput } from 'react-native';
 
 export default function HomeScreen() {
 	return (
-		<SafeAreaView style={styles.container}>
+		<Container>
 			{/* <View style={styles.row}>
 			    <Button title='Navigate' onPress={() => router.push('../(preferences)/tastepreference')}></Button>
 				<Text>B</Text>
@@ -11,20 +11,11 @@ export default function HomeScreen() {
 			<TextInput placeholder='Search' style={styles.searchbar}></TextInput>
 			<Text style={styles.title}>Latest matches</Text>
 			<Text style={styles.title}>Popular Reviews</Text>
-		</SafeAreaView>
+		</Container>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		display: 'flex',
-		alignItems: 'center',
-		padding: 20,
-		marginHorizontal: 20,
-		marginTop: 5,
-		gap: 15,
-	},
 	row: {
 		display: 'flex',
 		flexDirection: 'row',
@@ -47,4 +38,3 @@ const styles = StyleSheet.create({
 		width: '100%'
 	}
 });
-
