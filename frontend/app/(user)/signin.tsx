@@ -1,41 +1,45 @@
 import BackArrow from '@/components/BackArrow';
 import CustomButton from '@/components/CustomButton';
 import FormField from '@/components/FormField';
+import SignInBackground from '@/components/SignInBackground';
 import api from '@/services/axiosConfig';
 import { router } from 'expo-router';
 import { useState } from 'react';
-import { ImageBackground, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 function SignIn() {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+	const [email, setEmail] = useState<string>('');
+	const [password, setPassword] = useState<string>('');
 
-  const handleSignIn = async () => {
-    try {
-      const response = await api.post("/login", {
-        email: email,
-        password: password,
-      });
+	const handleSignIn = async () => {
+		try {
+			const response = await api.post('/login', {
+				email: email,
+				password: password
+			});
 
-      //Do smth with token
-      console.log("SUCESS");
-      router.push("/home");
-      console.log("router should have pushed");
-    } catch (error) {
-      console.log("ERROR");
-      console.log(error);
-    }
+			//Do smth with token
+			console.log('SUCESS');
+			router.push('/home');
+			console.log('router should have pushed');
+		} catch (error) {
+			console.log('ERROR');
+			console.log(error);
+		}
 		setEmail('');
 		setPassword('');
 	};
 	return (
-		<ImageBackground source={require('../../assets/images/SignUp2.png')} imageStyle={{ resizeMode: 'cover' }} style={{ height: '100%', width: '100%' }}>
+		<>
+			<View style={{ position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
+				<SignInBackground></SignInBackground>
+			</View>
 			<SafeAreaView style={{ flex: 1 }}>
-				<View style={styles.header}>
-					<BackArrow></BackArrow>
-				</View>
 				<KeyboardAwareScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ flex: 1 }}>
+					<View style={styles.header}>
+						<BackArrow></BackArrow>
+					</View>
 					<View style={styles.formInputs}>
 						<FormField label='Email' placeholder='Enter your email' value={email} setValue={setEmail} isPassword={false} />
 
@@ -55,7 +59,7 @@ function SignIn() {
 
 				{/* </View> */}
 			</SafeAreaView>
-		</ImageBackground>
+		</>
 	);
 }
 

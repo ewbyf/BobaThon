@@ -4,7 +4,7 @@ import { ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacity, View
 function UserScreen() {
 	return (
 		<ImageBackground
-			source={require('../../assets/images/mainmenu.png')}
+			source={require('../../assets/images/backgrounds/mainmenu.png')}
 			imageStyle={{ resizeMode: 'cover' }}
 			style={{ height: '100%', width: '100%' }}
 		>
