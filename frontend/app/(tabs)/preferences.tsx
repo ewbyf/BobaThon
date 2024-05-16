@@ -1,11 +1,11 @@
+import BobaImage from '@/components/BobaImage';
 import CancelButton from '@/components/CancelButton';
 import Container from '@/components/Container';
 import Slider from '@react-native-community/slider';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
-import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import MapView, { Circle, Marker } from 'react-native-maps';
-import BobaImage from '@/components/BobaImage';
 
 export default function PreferenceScreen() {
 	const [page, setPage] = useState(1);
@@ -35,7 +35,7 @@ export default function PreferenceScreen() {
 		>
 			<Container background={false}>
 				{/* <Image source={require('../../assets/images/brownsugarboba.png')} style={{ height: 210 }} resizeMode='contain'></Image> */}
-                <BobaImage></BobaImage>
+				<BobaImage></BobaImage>
 				<View>
 					<Text style={[styles.title, { textAlign: 'center' }]}>What are you feeling today?</Text>
 					<Text style={styles.description}>Customize your preference and let us find your perfect match!</Text>
@@ -72,7 +72,7 @@ export default function PreferenceScreen() {
 										</Text>
 									</LinearGradient>
 								</TouchableOpacity>
-                                <TouchableOpacity onPress={() => setRefreshing(!refreshing)} style={[styles.clickable]}>
+								<TouchableOpacity onPress={() => setRefreshing(!refreshing)} style={[styles.clickable]}>
 									{refreshing && <CancelButton />}
 									<LinearGradient
 										colors={refreshing ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
@@ -122,7 +122,7 @@ export default function PreferenceScreen() {
 								</TouchableOpacity>
 							</View>
 							<View style={styles.row}>
-                            <TouchableOpacity onPress={() => setHerbal(!herbal)} style={[styles.clickable]}>
+								<TouchableOpacity onPress={() => setHerbal(!herbal)} style={[styles.clickable]}>
 									{herbal && <CancelButton />}
 									<LinearGradient
 										colors={herbal ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
@@ -146,7 +146,7 @@ export default function PreferenceScreen() {
 										</Text>
 									</LinearGradient>
 								</TouchableOpacity>
-                                <TouchableOpacity onPress={() => setNutty(!nutty)} style={[styles.clickable]}>
+								<TouchableOpacity onPress={() => setNutty(!nutty)} style={[styles.clickable]}>
 									{nutty && <CancelButton />}
 									<LinearGradient
 										colors={nutty ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
@@ -170,7 +170,7 @@ export default function PreferenceScreen() {
 										</Text>
 									</LinearGradient>
 								</TouchableOpacity>
-                                <TouchableOpacity onPress={() => setFruity(!fruity)} style={[styles.clickable]}>
+								<TouchableOpacity onPress={() => setFruity(!fruity)} style={[styles.clickable]}>
 									{fruity && <CancelButton />}
 									<LinearGradient
 										colors={fruity ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
@@ -204,17 +204,53 @@ export default function PreferenceScreen() {
 							<Text style={styles.sectionTitleText}>TEMP</Text>
 						</View>
 						<View style={[styles.row, { justifyContent: 'center', gap: 15, marginTop: 30 }]}>
-							<TouchableOpacity
-								onPress={() => setHot(!hot)}
-								style={[styles.clickable, { backgroundColor: hot ? 'blue' : 'grey', height: 150, width: 150 }]}
-							>
-								<Text>Hot</Text>
+							<TouchableOpacity onPress={() => setHot(!hot)} style={[styles.clickable, { height: 150, width: 120 }]}>
+								{hot && <CancelButton />}
+								<LinearGradient
+									colors={hot ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+									style={{
+										width: hot ? '100%' : '85%',
+										height: hot ? '100%' : '85%',
+										borderRadius: 15
+									}}
+								>
+									<Text
+										style={[
+											styles.clickableText,
+											{
+												color: hot ? 'white' : '#6F5C63',
+												fontFamily: hot ? 'OverpassBlack' : 'OverpassBold',
+												fontSize: hot ? 20 : 16
+											}
+										]}
+									>
+										Hot
+									</Text>
+								</LinearGradient>
 							</TouchableOpacity>
-							<TouchableOpacity
-								onPress={() => setCold(!cold)}
-								style={[styles.clickable, { backgroundColor: cold ? 'blue' : 'grey', height: 150, width: 150 }]}
-							>
-								<Text>Cold</Text>
+							<TouchableOpacity onPress={() => setCold(!cold)} style={[styles.clickable, { height: 150, width: 120 }]}>
+								{cold && <CancelButton />}
+								<LinearGradient
+									colors={cold ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+									style={{
+										width: cold ? '100%' : '85%',
+										height: cold ? '100%' : '85%',
+										borderRadius: 15
+									}}
+								>
+									<Text
+										style={[
+											styles.clickableText,
+											{
+												color: cold ? 'white' : '#6F5C63',
+												fontFamily: cold ? 'OverpassBlack' : 'OverpassBold',
+												fontSize: cold ? 20 : 16
+											}
+										]}
+									>
+										Cold
+									</Text>
+								</LinearGradient>
 							</TouchableOpacity>
 						</View>
 					</>
@@ -222,27 +258,62 @@ export default function PreferenceScreen() {
 				{page == 3 && (
 					<>
 						<View style={styles.sectionTitleContainer}>
-							<Text style={styles.sectionTitleText}>DIETARY RESTRICTIONS</Text>
+							<Text style={styles.sectionTitleText}>DIETARY</Text>
 						</View>
-						<View style={[styles.row, { justifyContent: 'center', gap: 15, marginTop: 30, flexWrap: 'wrap' }]}>
-							<TouchableOpacity
-								onPress={() => setNutAllergy(!nutAllergy)}
-								style={[styles.clickable, { backgroundColor: nutAllergy ? 'blue' : 'grey', height: 60, width: 120 }]}
-							>
-								<Text>Nut allergy</Text>
-							</TouchableOpacity>
-							<TouchableOpacity
-								onPress={() => setGlutenFree(!glutenFree)}
-								style={[styles.clickable, { backgroundColor: glutenFree ? 'blue' : 'grey', height: 60, width: 120 }]}
-							>
-								<Text>Gluten-free</Text>
-							</TouchableOpacity>
-							<TouchableOpacity
-								onPress={() => setSoyAllergy(!soyAllergy)}
-								style={[styles.clickable, { backgroundColor: soyAllergy ? 'blue' : 'grey', height: 60, width: 120 }]}
-							>
-								<Text>Soy allergy</Text>
-							</TouchableOpacity>
+						{/* <View style={[styles.row, { justifyContent: 'center', gap: 15, marginTop: 30, flexWrap: 'wrap' }]}> */}
+						<View style={styles.column}>
+							<View style={styles.row}>
+								<TouchableOpacity onPress={() => setNutAllergy(!nutAllergy)} style={[styles.clickable, { height: 50, width: 180 }]}>
+									{nutAllergy && <CancelButton />}
+									<LinearGradient
+										colors={nutAllergy ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+										style={{
+											width: nutAllergy ? '100%' : '85%',
+											height: nutAllergy ? '100%' : '85%',
+											borderRadius: 15
+										}}
+									>
+										<Text
+											style={[
+												styles.clickableText,
+												{
+													color: nutAllergy ? 'white' : '#6F5C63',
+													fontFamily: nutAllergy ? 'OverpassBlack' : 'OverpassBold',
+													fontSize: nutAllergy ? 20 : 16
+												}
+											]}
+										>
+											Nut Allergy
+										</Text>
+									</LinearGradient>
+								</TouchableOpacity>
+								<TouchableOpacity onPress={() => setLactose(!lactose)} style={[styles.clickable, { height: 50, width: 180 }]}>
+									{lactose && <CancelButton />}
+									<LinearGradient
+										colors={lactose ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+										style={{
+											width: lactose ? '100%' : '85%',
+											height: lactose ? '100%' : '85%',
+											borderRadius: 15
+										}}
+									>
+										<Text
+											style={[
+												styles.clickableText,
+												{
+													color: lactose ? 'white' : '#6F5C63',
+													fontFamily: lactose ? 'OverpassBlack' : 'OverpassBold',
+													fontSize: lactose ? 20 : 16
+												}
+											]}
+										>
+											Lactose Intolerance
+										</Text>
+									</LinearGradient>
+								</TouchableOpacity>
+							</View>
+							{/* <View style={styles.row}></View>
+                            <View style={styles.row}></View> */}
 						</View>
 					</>
 				)}
@@ -301,7 +372,7 @@ export default function PreferenceScreen() {
 						</MapView>
 					</>
 				)}
-				<View style={[styles.row, { marginTop: 'auto', marginBottom: 30 }]}>
+				<View style={[styles.row, { marginTop: 'auto', marginBottom: 40 }]}>
 					{page > 1 && (
 						<TouchableOpacity onPress={() => setPage(page - 1)} style={[styles.button]}>
 							<Text>back</Text>
