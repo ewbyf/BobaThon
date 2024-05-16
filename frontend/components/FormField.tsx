@@ -6,6 +6,7 @@ type FormFieldProps = {
   value: string;
   setValue: (text: string) => void;
   isPassword: boolean;
+  placeholder: string;
 };
 
 const FormField = (props: FormFieldProps) => {
@@ -17,7 +18,7 @@ const FormField = (props: FormFieldProps) => {
           style={styles.input}
           onChangeText={props.setValue}
           value={props.value}
-          placeholder={"Enter your " + props.label.toLowerCase()}
+          placeholder={props.placeholder}
           placeholderTextColor="#6f5c63"
         />
       )}
@@ -26,7 +27,7 @@ const FormField = (props: FormFieldProps) => {
           style={styles.input}
           onChangeText={props.setValue}
           value={props.value}
-          placeholder={"Enter your " + props.label.toLowerCase()}
+          placeholder={props.placeholder}
           placeholderTextColor="#6f5c63"
           secureTextEntry
         />
@@ -38,18 +39,20 @@ const FormField = (props: FormFieldProps) => {
 const styles = StyleSheet.create({
   label: {
     fontSize: 16,
-    color: "#736067",
+    color: "#6F5C63",
     marginLeft: 40,
     marginRight: 40,
     marginBottom: 10,
+    fontFamily: 'Overpass'
   },
   input: {
     borderRadius: 10,
-    height: 70,
+    height: 60,
     backgroundColor: "#f9e5e4",
-    color: "#6f5c63",
+    color: "#6F5C63",
     fontSize: 16,
     fontWeight: "300",
+    fontFamily: 'OverpassExtraLight',
     padding: 4,
     paddingLeft: 15,
     marginLeft: 40,
