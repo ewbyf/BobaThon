@@ -23,6 +23,7 @@ export default function MatchesScreen() {
         <TextInput
           placeholder="Search for Boba"
           placeholderTextColor="#a38f93"
+          style={styles.searchInput}
         ></TextInput>
       </View>
       <View style={styles.separateMatches}>
@@ -49,5 +50,8 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     width: "90%",
     height: 50,
+  },
+  searchInput: {
+    color: "#a38f93",
   },
 });
