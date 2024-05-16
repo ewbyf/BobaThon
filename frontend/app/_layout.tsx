@@ -5,6 +5,7 @@ import { Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import { Image, View } from 'react-native';
+import { setCustomText } from 'react-native-global-props';
 import 'react-native-reanimated';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
@@ -12,7 +13,14 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
 	const [loaded] = useFonts({
-		SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf')
+		OverpassExtraLight: require('../assets/fonts/Overpass-ExtraLight.ttf'),
+		OverpassLight: require('../assets/fonts/Overpass-Light.ttf'),
+		Overpass: require('../assets/fonts/Overpass-Regular.ttf'),
+		OverpassMedium: require('../assets/fonts/Overpass-Medium.ttf'),
+		OverpassSemiBold: require('../assets/fonts/Overpass-SemiBold.ttf'),
+		OverpassBold: require('../assets/fonts/Overpass-Bold.ttf'),
+		OverpassExtraBold: require('../assets/fonts/Overpass-ExtraBold.ttf'),
+		OverpassBlack: require('../assets/fonts/Overpass-Black.ttf'),
 	});
 
 	useEffect(() => {
@@ -32,6 +40,13 @@ export default function RootLayout() {
 			background: 'white'
 		}
 	};
+
+	const customTextProps = {
+		style: {
+			fontFamily: 'Overpass'
+		}
+	};
+	setCustomText(customTextProps);
 
 	return (
 		<ThemeProvider value={MyTheme}>

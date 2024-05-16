@@ -1,6 +1,7 @@
 import Slider from '@react-native-community/slider';
 import { useState } from 'react';
 import { Image, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import MapView, { Circle, Marker } from 'react-native-maps';
 
 export default function PreferenceScreen() {
 	const [page, setPage] = useState(1);
@@ -27,7 +28,9 @@ export default function PreferenceScreen() {
 			<Text style={styles.description}>Customize your preference and let us find your perfect match!</Text>
 			{page == 1 && (
 				<>
-					<Text style={styles.title}>Taste</Text>
+					<View style={styles.sectionTitleContainer}>
+						<Text style={styles.sectionTitleText}>TASTE</Text>
+					</View>
 					<View style={styles.column}>
 						<View style={styles.row}>
 							<TouchableOpacity onPress={() => setSweet(!sweet)} style={[styles.clickable, { backgroundColor: sweet ? 'blue' : 'grey' }]}>
@@ -59,7 +62,9 @@ export default function PreferenceScreen() {
 			)}
 			{page == 2 && (
 				<>
-					<Text style={styles.title}>Hot or Cold?</Text>
+					<View style={styles.sectionTitleContainer}>
+						<Text style={styles.sectionTitleText}>TEMP</Text>
+					</View>
 					<View style={[styles.row, { justifyContent: 'center', gap: 15, marginTop: 30 }]}>
 						<TouchableOpacity
 							onPress={() => setHot(!hot)}
@@ -78,7 +83,9 @@ export default function PreferenceScreen() {
 			)}
 			{page == 3 && (
 				<>
-					<Text style={styles.title}>Dietary Restrictions</Text>
+					<View style={styles.sectionTitleContainer}>
+						<Text style={styles.sectionTitleText}>DIETARY RESTRICTIONS</Text>
+					</View>
 					<View style={[styles.row, { justifyContent: 'center', gap: 15, marginTop: 30, flexWrap: 'wrap' }]}>
 						<TouchableOpacity
 							onPress={() => setNutAllergy(!nutAllergy)}
@@ -103,19 +110,57 @@ export default function PreferenceScreen() {
 			)}
 			{page == 4 && (
 				<>
-					<Text style={styles.title}>Location</Text>
+					<View style={styles.sectionTitleContainer}>
+						<Text style={styles.sectionTitleText}>LOCATION</Text>
+					</View>
+
 					{/* <Slider value={location} onSlidingComplete={(value) => setLocation(value)} minimumValue={5} maximumValue={50} step={5} /> */}
-                    <Text>{location} miles</Text>
+					<Text>{location} miles</Text>
 					<Slider
 						style={{ width: '100%', height: 40 }}
 						minimumValue={5}
 						maximumValue={50}
-						minimumTrackTintColor='#ff22ff'
-						maximumTrackTintColor='#000000'
-                        value={location}
-                        onValueChange={(e) => {setLocation(e)}}
-                        step={5}
+						minimumTrackTintColor='#E88985'
+						maximumTrackTintColor='#D7D7D7'
+						thumbTintColor='#6F5C63'
+						value={location}
+						onValueChange={(e) => {
+							setLocation(e);
+						}}
+						step={5}
 					/>
+					<MapView
+						initialRegion={{
+							latitude: 47.6545887800112,
+							longitude: -122.30545611222443,
+							latitudeDelta: 0.0922,
+							longitudeDelta: 0.0421
+						}}
+						style={styles.map}
+					>
+						<Circle
+							center={{ latitude: 47.6545887800112, longitude: -122.30545611222443 }}
+							radius={(location * 1609.34) / 2}
+							fillColor='rgba(136, 206, 240, .5)'
+							strokeColor='rgb(69, 156, 199)'
+						/>
+						<Marker
+							coordinate={{
+								latitude: 47.66737562827992,
+								longitude: -122.31148955694742
+							}}
+							titleVisibility='visible'
+							title='Yifang Taiwan Fruit Tea UW'
+						/>
+						<Marker
+							coordinate={{
+								latitude: 47.613455536257206,
+								longitude: -122.31938328835254
+							}}
+							titleVisibility='visible'
+							title='Drip Tea'
+						/>
+					</MapView>
 				</>
 			)}
 			<View style={[styles.row, { marginTop: 'auto', marginBottom: 35 }]}>
@@ -146,6 +191,18 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		textAlign: 'left',
 		width: '100%'
+	},
+	sectionTitleContainer: {
+		backgroundColor: '#EAC9AF',
+		marginRight: 'auto',
+		paddingVertical: 5,
+		paddingHorizontal: 15,
+		borderRadius: 10
+	},
+	sectionTitleText: {
+		fontSize: 20,
+		color: 'white',
+        fontFamily: 'OverpassBlack'
 	},
 	description: {
 		textAlign: 'center',
@@ -180,21 +237,9 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center'
-	}
-});
-
-const customStyles2 = StyleSheet.create({
-	thumb: {
-		backgroundColor: 'white',
-		borderColor: '#30a935',
-		borderRadius: 30 / 2,
-		borderWidth: 2,
-		height: 30,
-		width: 30
 	},
-	track: {
-		borderRadius: 2,
-		height: 4,
-		backgroundColor: 'red'
+	map: {
+		width: 200,
+		height: 200
 	}
 });
