@@ -4,17 +4,19 @@ import {
   View,
   StyleSheet,
   Text,
+  ImageBackground,
   TextInput,
   Button,
 } from "react-native";
 import { Redirect, router } from "expo-router";
 import CustomButton from "@/components/CustomButton";
 import FormField from "@/components/FormField";
+import { GradientButton } from "@/components/GradientButton";
 import api from "@/services/axiosConfig";
 
 function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const handleSignIn = async () => {
     try {
@@ -34,44 +36,55 @@ function SignIn() {
     setPassword("");
   };
   return (
-    <SafeAreaView>
-      <View style={styles.initial}>
-        <Text>Log in to (Insert App Name)</Text>
+    <ImageBackground
+      source={require("../../assets/images/SignUp2.png")}
+      imageStyle={{ resizeMode: "cover" }}
+      style={{ height: "100%", width: "100%" }}
+    >
+      <SafeAreaView>
+        <View style={styles.initial}>
+          <View style={styles.formInputs}>
+            <FormField
+              label="Email"
+              value={email}
+              setValue={setEmail}
+              isPassword={false}
+            />
 
-        <FormField
-          label="Email"
-          value={email}
-          setValue={setEmail}
-          isPassword={false}
-        />
-
-        <FormField
-          label="Password"
-          value={password}
-          setValue={setPassword}
-          isPassword={true}
-        />
-
-        <View style={styles.signin}>
-          <CustomButton content="Sign in" pressFunction={handleSignIn} />
-        </View>
-        <Text style={styles.signup}>
-          Don't have an account?{" "}
-          <Text
-            style={styles.signupText}
-            onPress={() => router.push("/signup")}
-          >
-            Sign Up
+            <FormField
+              label="Password"
+              value={password}
+              setValue={setPassword}
+              isPassword={true}
+            />
+          </View>
+          <Text style={styles.signup}>
+            Don't have an account?{" "}
+            <Text
+              style={styles.signupText}
+              onPress={() => router.push("/signup")}
+            >
+              Sign Up
+            </Text>
           </Text>
-        </Text>
-      </View>
-    </SafeAreaView>
+
+          <View style={styles.signin}>
+            <CustomButton pressFunction={handleSignIn} />
+          </View>
+        </View>
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   initial: {
     margin: 8,
+    marginTop: 300,
+  },
+  formInputs: {
+    display: "flex",
+    gap: 25,
   },
   input: {
     borderWidth: 1,
@@ -80,16 +93,18 @@ const styles = StyleSheet.create({
     textDecorationColor: "white",
   },
   signin: {
-    marginTop: 10,
-    marginBottom: 2,
+    marginLeft: 270,
+    marginTop: 40,
   },
   signup: {
     width: "100%",
     textAlign: "center",
-    marginTop: 3,
+    marginTop: 13,
+    color: "#6f5c63",
   },
   signupText: {
-    color: "#F2D183",
+    color: "#6f5c63",
+    fontWeight: "600",
   },
 });
 

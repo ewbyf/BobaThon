@@ -5,73 +5,42 @@ import {
   StyleSheet,
   Text,
   TextInput,
+  ImageBackground,
   Button,
 } from "react-native";
 import { Redirect, router } from "expo-router";
-import CustomButton from "@/components/CustomButton";
-import FormField from "@/components/FormField";
-import api from "@/services/axiosConfig";
 
 function SignIn() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
-  const handleSignIn = async () => {
-    try {
-      const response = await api.post("/login", {
-        email: email,
-        password: password,
-      });
-
-      //Do smth with token
-      console.log("SUCESS");
-    } catch (error) {
-      console.log("ERROR");
-      console.log(error);
-    }
-
-    setEmail("");
-    setPassword("");
-  };
   return (
-    <SafeAreaView>
-      <View style={styles.initial}>
-        <Text>Log in to (Insert App Name)</Text>
-
-        <FormField
-          label="Email"
-          value={email}
-          setValue={setEmail}
-          isPassword={false}
-        />
-
-        <FormField
-          label="Password"
-          value={password}
-          setValue={setPassword}
-          isPassword={true}
-        />
-
-        <View style={styles.signin}>
-          <CustomButton content="Sign in" pressFunction={handleSignIn} />
+    <ImageBackground
+      source={require("../../assets/images/SignUp.png")}
+      imageStyle={{ resizeMode: "cover" }}
+      style={{ height: "100%", width: "100%" }}
+    >
+      <SafeAreaView>
+        <View style={styles.initial}>
+          <View style={styles.signinButton}>
+            <Text style={styles.text} onPress={() => router.push("/signin")}>
+              Log In
+            </Text>
+          </View>
+          <View style={styles.signupButton}>
+            <Text style={styles.text} onPress={() => router.push("/signup")}>
+              Register
+            </Text>
+          </View>
         </View>
-        <Text style={styles.signup}>
-          Don't have an account?{" "}
-          <Text
-            style={styles.signupText}
-            onPress={() => router.push("/signup")}
-          >
-            Sign Up
-          </Text>
-        </Text>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
   initial: {
     margin: 8,
+    marginTop: 500,
+    display: "flex",
+    gap: 10,
   },
   input: {
     borderWidth: 1,
@@ -79,17 +48,43 @@ const styles = StyleSheet.create({
     backgroundColor: "lightblue",
     textDecorationColor: "white",
   },
-  signin: {
-    marginTop: 10,
-    marginBottom: 2,
+  signinButton: {
+    borderRadius: 30,
+    height: 50,
+    backgroundColor: "#ffffff",
+    color: "#6f5c63",
+    fontSize: 16,
+    fontWeight: "500",
+    padding: 4,
+    marginLeft: 80,
+    marginRight: 80,
+    justifyContent: "center",
+    shadowColor: "rgba(0, 0, 0)",
+    shadowOpacity: 0.8,
+    elevation: 6,
+    shadowRadius: 2,
+    shadowOffset: { width: 0, height: 0 },
   },
-  signup: {
+  signupButton: {
+    borderRadius: 30,
+    height: 50,
+    backgroundColor: "#f8e5e3",
+    color: "#6f5c63",
+    fontSize: 16,
+    fontWeight: "500",
+    padding: 4,
+    marginLeft: 80,
+    marginRight: 80,
+    justifyContent: "center",
+    shadowColor: "rgba(0, 0, 0)",
+    shadowOpacity: 0.8,
+    elevation: 6,
+    shadowRadius: 3,
+    shadowOffset: { width: 0, height: 0 },
+  },
+  text: {
     width: "100%",
     textAlign: "center",
-    marginTop: 3,
-  },
-  signupText: {
-    color: "#F2D183",
   },
 });
 

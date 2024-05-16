@@ -18,11 +18,11 @@ export default function RootLayout() {
 		OverpassBlack: require('../assets/fonts/Overpass-Black.ttf')
 	});
 
-	useEffect(() => {
-		if (loaded) {
-			SplashScreen.hideAsync();
-		}
-	}, [loaded]);
+  useEffect(() => {
+    if (loaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [loaded]);
 
 	if (!loaded) {
 		return null;
@@ -35,4 +35,3 @@ export default function RootLayout() {
 		</Stack>
 	);
 }
-
