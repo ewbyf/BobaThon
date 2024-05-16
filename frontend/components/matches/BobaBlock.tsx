@@ -12,7 +12,13 @@ const BobaBlock = (props: BobaBlockType) => {
         source={require("../../assets/images/DrinkSelection.png")}
         style={styles.bobaImage}
       />
-      <Text style={styles.bobaName}>{props.label}</Text>
+      <View style={styles.bobaDescription}>
+        <Text style={styles.bobaName}>{props.label}</Text>
+        <View>
+          <Image></Image>
+          <Text>Dummy Text</Text>
+        </View>
+      </View>
     </View>
   );
 };
@@ -22,15 +28,20 @@ const styles = StyleSheet.create({
     borderColor: "black",
     borderRadius: 6,
     borderWidth: 2,
-    padding: 10,
     display: "flex",
-    alignItems: "center",
+    gap: 10,
+    flexDirection: "row",
     justifyContent: "center",
+    width: "80%",
+    padding: 30,
   },
   bobaImage: { height: 150, width: 60 },
+  bobaDescription: { width: "80%" },
   bobaName: {
     width: "100%",
-    textAlign: "center",
+    fontSize: 20,
+    fontWeight: "600",
+    paddingBottom: 15,
   },
 });
 
