@@ -2,9 +2,9 @@ import * as React from 'react';
 import Svg, { SvgProps, G, Circle, Path, Defs, LinearGradient, Stop } from 'react-native-svg';
 /* SVGR has dropped some elements not supported by react-native-svg: filter */
 const MsgSelect = (props: SvgProps) => (
-	<Svg width={115} height={115} fill="none" {...props}>
+	<Svg width={115} height={115} fill="none" {...props} style={{marginBottom: -10}}>
 		<G filter="url(#a)">
-			<Circle cx={57.5} cy={52.5} r={37.5} fill="url(#b)" />
+			<Circle cx={57.5} cy={52.5} r={30} fill="url(#b)" />
 		</G>
 		<Path
 			stroke="#F8F8F8"
