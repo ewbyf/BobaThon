@@ -4,9 +4,12 @@ import FormField from '@/components/FormField';
 import SignInBackground from '@/components/SignInBackground';
 import api from '@/services/axiosConfig';
 import { router } from 'expo-router';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+import { save } from '@/lib/storage';
 
 function SignIn() {
 	const [email, setEmail] = useState<string>('');
@@ -18,17 +21,11 @@ function SignIn() {
 				email: email,
 				password: password
 			});
-
-			//Do smth with token
-			console.log('SUCESS');
-			router.push('/home');
-			console.log('router should have pushed');
+			save('token', response.data.token);
+			router.navigate('/home');
 		} catch (error) {
-			console.log('ERROR');
 			console.log(error);
 		}
-		setEmail('');
-		setPassword('');
 	};
 	return (
 		<>
@@ -47,7 +44,7 @@ function SignIn() {
 					</View>
 					<Text style={styles.signup}>
 						Don't have an account?{' '}
-						<Text style={styles.signupText} onPress={() => router.push('/signup')}>
+						<Text style={styles.signupText} onPress={() => router.navigate('/signup')}>
 							Sign Up
 						</Text>
 					</Text>

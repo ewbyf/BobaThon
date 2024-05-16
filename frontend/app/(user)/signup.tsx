@@ -7,6 +7,7 @@ import { router } from 'expo-router';
 import { useState } from 'react';
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { save } from '@/lib/storage';
 
 function SignUp() {
 	const [name, setName] = useState('');
@@ -21,19 +22,12 @@ function SignUp() {
 				email: email,
 				password: password
 			});
-			const data = await response;
-			console.log(data.data);
-			console.log(data.status);
-			console.log('SUCESS');
-			router.push('/home');
+            save('token', response.data.token);
+			router.navigate('/home');
 		} catch (error) {
 			console.log('ERROR');
 			console.log(error);
 		}
-		setName('');
-		setEmail('');
-		setPassword('');
-		setConfirmPassword('');
 	};
 	return (
 		<>
@@ -61,7 +55,7 @@ function SignUp() {
 
 					<Text style={styles.signin}>
 						Already have an account?{' '}
-						<Text style={styles.signinText} onPress={() => router.push('/signin')}>
+						<Text style={styles.signinText} onPress={() => router.navigate('/signin')}>
 							Sign In
 						</Text>
 					</Text>

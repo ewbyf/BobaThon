@@ -9,9 +9,7 @@ const BackArrow = () => (
 		color='white'
 		style={styles.backArrow}
 		onPress={() => {
-			if (router.canGoBack()) {
-				router.back();
-			}
+			router.navigate('/')
 		}}
 	/>
 );
