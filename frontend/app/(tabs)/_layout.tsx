@@ -9,6 +9,8 @@ import { Colors } from '@/constants/Colors';
 import HomeSelect from '@/components/navigation/HomeSelect';
 import StarLogo from '@/components/navigation/StarLogo';
 import StarSelect from '@/components/navigation/StarSelect';
+import PfpSelect from '@/components/navigation/PfpSelect';
+import PfpLogo from '@/components/navigation/PfpLogo';
 
 export default function TabLayout() {
 	return (
@@ -70,7 +72,7 @@ export default function TabLayout() {
 				name="preferences"
 				options={{
 					title: '',
-					tabBarIcon: ({ color, focused }) => <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />,
+					tabBarIcon: ({ color, focused }) => (focused ? <PfpSelect /> : <PfpLogo />),
 				}}
 			/>
 		</Tabs>
