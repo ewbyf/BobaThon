@@ -5,7 +5,7 @@ export function MenuButton() {
 	return (
 		<Ionicons
 			size={36}
-			style={[{ marginBottom: -3 }]}
+			style={[{ marginLeft: 'auto' }]}
 			name='menu-outline'
 			onPress={() => {
 				router.push('/');

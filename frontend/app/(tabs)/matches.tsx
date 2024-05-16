@@ -1,22 +1,15 @@
 import { Image, StyleSheet, Platform, SafeAreaView } from 'react-native';
-
+import Container from '@/components/Container';
 import { Text, ScrollView } from 'react-native';
 
 export default function MatchesScreen() {
   return (
-    <SafeAreaView style={styles.container}>
+    <Container>
         <Text>Hello</Text>
-    </SafeAreaView>
+    </Container>
   );
 }
 
 const styles = StyleSheet.create({
 
-	container: {
-		flex: 1,
-		display: 'flex',
-		alignItems: 'center',
-
-		padding: 20,
-	},
 });
