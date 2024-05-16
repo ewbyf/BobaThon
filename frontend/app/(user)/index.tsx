@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
 		marginTop: 'auto',
 		marginBottom: 50,
 		display: 'flex',
+        alignItems: 'center',
 		gap: 30
 	},
 	signinButton: {
