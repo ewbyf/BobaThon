@@ -4,7 +4,7 @@ import { ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacity, View
 function UserScreen() {
 	return (
 		<ImageBackground
-			source={require('../../assets/images/SignUp.png')}
+			source={require('../../assets/images/mainmenu.png')}
 			imageStyle={{ resizeMode: 'cover' }}
 			style={{ height: '100%', width: '100%' }}
 		>
@@ -15,6 +15,9 @@ function UserScreen() {
 					</TouchableOpacity>
 					<TouchableOpacity style={styles.signupButton} onPress={() => router.push('/signup')}>
 						<Text style={styles.text}>Register</Text>
+					</TouchableOpacity>
+					<TouchableOpacity style={styles.signupButton} onPress={() => router.push('/home')}>
+						<Text style={styles.text}>temp</Text>
 					</TouchableOpacity>
 				</View>
 			</SafeAreaView>
