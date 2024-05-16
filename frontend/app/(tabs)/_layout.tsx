@@ -11,6 +11,8 @@ import StarLogo from '@/components/navigation/StarLogo';
 import StarSelect from '@/components/navigation/StarSelect';
 import PfpSelect from '@/components/navigation/PfpSelect';
 import PfpLogo from '@/components/navigation/PfpLogo';
+import MsgSelect from '@/components/navigation/MsgSelect';
+import MsgLogo from '@/components/navigation/MsgLogo';
 
 export default function TabLayout() {
 	return (
@@ -49,14 +51,14 @@ export default function TabLayout() {
 				name="reviews"
 				options={{
 					title: '',
-					tabBarIcon: ({ color, focused }) => <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />,
+					tabBarIcon: ({ color, focused }) => (focused ? <StarSelect /> : <StarLogo />),
 				}}
 			/>
 			<Tabs.Screen
 				name="matching"
 				options={{
 					title: '',
-					tabBarIcon: ({ color, focused }) => (focused ? <StarSelect /> : <StarLogo />),
+					tabBarIcon: ({ color, focused }) => <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />,
 				}}
 			/>
 
@@ -64,7 +66,7 @@ export default function TabLayout() {
 				name="matches"
 				options={{
 					title: '',
-					tabBarIcon: ({ color, focused }) => <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />,
+					tabBarIcon: ({ color, focused }) => (focused ? <MsgSelect /> : <MsgLogo />),
 				}}
 			/>
 
