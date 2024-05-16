@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     margin: 8,
     marginTop: 500,
     display: "flex",
-    gap: 10,
+    gap: 20,
   },
   input: {
     borderWidth: 1,
@@ -50,14 +50,13 @@ const styles = StyleSheet.create({
   },
   signinButton: {
     borderRadius: 30,
-    height: 50,
+    height: 60,
     backgroundColor: "#ffffff",
     color: "#6f5c63",
     fontSize: 16,
-    fontWeight: "500",
     padding: 4,
-    marginLeft: 80,
-    marginRight: 80,
+    marginLeft: 90,
+    marginRight: 90,
     justifyContent: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -70,14 +69,13 @@ const styles = StyleSheet.create({
   },
   signupButton: {
     borderRadius: 30,
-    height: 50,
+    height: 60,
     backgroundColor: "#f8e5e3",
     color: "#6f5c63",
     fontSize: 16,
-    fontWeight: "500",
     padding: 4,
-    marginLeft: 80,
-    marginRight: 80,
+    marginLeft: 90,
+    marginRight: 90,
     justifyContent: "center",
     shadowColor: "#000",
     shadowOffset: {
@@ -92,6 +90,7 @@ const styles = StyleSheet.create({
   text: {
     width: "100%",
     textAlign: "center",
+    fontWeight: "600",
   },
 });
 
