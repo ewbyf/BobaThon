@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 import AntDesign from "@expo/vector-icons/AntDesign";
-import LinearGradient from "react-native-linear-gradient";
+// import LinearGradient from "react-native-linear-gradient";
 import MaskedView from "@react-native-masked-view/masked-view";
 
 const size = 40;
@@ -9,7 +9,7 @@ const size = 40;
 export function GradientButton({ ...rest }) {
   return (
     <View style={{ width: size }} {...rest}>
-      <MaskedView
+      {/* <MaskedView
         style={{ flex: 1, flexDirection: "row", height: size }}
         maskElement={
           <View
@@ -27,7 +27,7 @@ export function GradientButton({ ...rest }) {
           colors={["#F7C650", "rgba(247, 198, 80, 0.71)"]}
           style={{ flex: 1 }}
         />
-      </MaskedView>
+      </MaskedView> */}
     </View>
   );
 }

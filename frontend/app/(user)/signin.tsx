@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   Text,
+  ImageBackground,
   TextInput,
   Button,
 } from "react-native";
@@ -35,38 +36,44 @@ function SignIn() {
     setPassword("");
   };
   return (
-    <SafeAreaView>
-      <View style={styles.initial}>
-        <View style={styles.formInputs}>
-          <FormField
-            label="Email"
-            value={email}
-            setValue={setEmail}
-            isPassword={false}
-          />
+    <ImageBackground
+      source={require("../../assets/images/SignUp2.png")}
+      imageStyle={{ resizeMode: "cover" }}
+      style={{ height: "100%", width: "100%" }}
+    >
+      <SafeAreaView>
+        <View style={styles.initial}>
+          <View style={styles.formInputs}>
+            <FormField
+              label="Email"
+              value={email}
+              setValue={setEmail}
+              isPassword={false}
+            />
 
-          <FormField
-            label="Password"
-            value={password}
-            setValue={setPassword}
-            isPassword={true}
-          />
-        </View>
-        <Text style={styles.signup}>
-          Don't have an account?{" "}
-          <Text
-            style={styles.signupText}
-            onPress={() => router.push("/signup")}
-          >
-            Sign Up
+            <FormField
+              label="Password"
+              value={password}
+              setValue={setPassword}
+              isPassword={true}
+            />
+          </View>
+          <Text style={styles.signup}>
+            Don't have an account?{" "}
+            <Text
+              style={styles.signupText}
+              onPress={() => router.push("/signup")}
+            >
+              Sign Up
+            </Text>
           </Text>
-        </Text>
 
-        <View style={styles.signin}>
-          <CustomButton pressFunction={handleSignIn} />
+          <View style={styles.signin}>
+            <CustomButton pressFunction={handleSignIn} />
+          </View>
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
 

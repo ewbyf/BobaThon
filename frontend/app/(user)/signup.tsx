@@ -4,6 +4,7 @@ import {
   View,
   StyleSheet,
   Text,
+  ImageBackground,
   TextInput,
   Button,
 } from "react-native";
@@ -40,50 +41,56 @@ function SignUp() {
     setConfirmPassword("");
   };
   return (
-    <SafeAreaView>
-      <View style={styles.initial}>
-        <View style={styles.formInputs}>
-          <FormField
-            label="Name"
-            value={name}
-            setValue={setName}
-            isPassword={false}
-          />
-          <FormField
-            label="Email"
-            value={email}
-            setValue={setEmail}
-            isPassword={false}
-          />
-          <FormField
-            label="Password"
-            value={password}
-            setValue={setPassword}
-            isPassword={true}
-          />
-          <FormField
-            label="Confirm Password"
-            value={confirmPassword}
-            setValue={setConfirmPassword}
-            isPassword={true}
-          />
-        </View>
+    <ImageBackground
+      source={require("../../assets/images/SignUp2.png")}
+      imageStyle={{ resizeMode: "cover" }}
+      style={{ height: "100%", width: "100%" }}
+    >
+      <SafeAreaView>
+        <View style={styles.initial}>
+          <View style={styles.formInputs}>
+            <FormField
+              label="Name"
+              value={name}
+              setValue={setName}
+              isPassword={false}
+            />
+            <FormField
+              label="Email"
+              value={email}
+              setValue={setEmail}
+              isPassword={false}
+            />
+            <FormField
+              label="Password"
+              value={password}
+              setValue={setPassword}
+              isPassword={true}
+            />
+            <FormField
+              label="Confirm Password"
+              value={confirmPassword}
+              setValue={setConfirmPassword}
+              isPassword={true}
+            />
+          </View>
 
-        <Text style={styles.signin}>
-          Already have an account?{" "}
-          <Text
-            style={styles.signinText}
-            onPress={() => router.push("/signin")}
-          >
-            Sign In
+          <Text style={styles.signin}>
+            Already have an account?{" "}
+            <Text
+              style={styles.signinText}
+              onPress={() => router.push("/signin")}
+            >
+              Sign In
+            </Text>
           </Text>
-        </Text>
 
-        <View style={styles.signup}>
-          <CustomButton pressFunction={handleSignUp} />
+          <View style={styles.signup}>
+            <CustomButton pressFunction={handleSignUp} />
+          </View>
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ImageBackground>
   );
 }
 
