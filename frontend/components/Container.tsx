@@ -1,7 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import Header from './Header';
-const Container = ({ children, background }: { children: any; background?: boolean }) => {
+const Container = ({ children, background, title }: { children: any; background?: boolean, title: string }) => {
 	if (background === undefined || background === true) {
 		return (
 			<LinearGradient
@@ -15,7 +15,7 @@ const Container = ({ children, background }: { children: any; background?: boole
 				}}
 			>
 				<SafeAreaView style={styles.container}>
-					<Header></Header>
+					<Header title={title}></Header>
 					{children}
 				</SafeAreaView>
 			</LinearGradient>
@@ -23,7 +23,7 @@ const Container = ({ children, background }: { children: any; background?: boole
 	}
 	return (
 		<SafeAreaView style={styles.container}>
-			<Header></Header>
+			<Header title={title}></Header>
 			{children}
 		</SafeAreaView>
 	);

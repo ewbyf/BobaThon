@@ -92,9 +92,6 @@ def set_preferences():
     preferences = request.json.get('preferences', None)
     token = request.json.get('token', None)
 
-    if preferences is None:
-        return jsonify({"msg": "Invalid preferences"}), 400
-
     users_collection.update_one({'token': token}, {"$set": {'preferences': preferences}})
     users_collection.update_one({'token': token}, {"$set": {'hasSetPreferences': True}})
 

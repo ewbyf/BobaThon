@@ -45,7 +45,7 @@ export default function MatchesScreen() {
 
   //use a useeffect to constantly update the bobas
   return (
-    <Container>
+    <Container title="Matches">
       {/*add a bobablock per each match */}
       <View style={styles.searchbar}>
         <Ionicons name="search" size={30} color="#a38f93" />

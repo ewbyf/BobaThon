@@ -4,7 +4,7 @@ import { StyleSheet, Text, TextInput, Button } from 'react-native';
 
 export default function HomeScreen() {
 	return (
-		<Container>
+		<Container title="Explore Boba">
 			{/* <View style={styles.row}>
 			    <Button title='Navigate' onPress={() => router.push('../(preferences)/tastepreference')}></Button>
 				<Text>B</Text>

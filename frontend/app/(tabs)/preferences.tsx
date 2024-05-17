@@ -2,15 +2,20 @@ import BobaImage from '@/components/BobaImage';
 import CancelButton from '@/components/CancelButton';
 import Container from '@/components/Container';
 import EditButton from '@/components/EditButton';
+import EditIcon from '@/components/EditIcon';
 import GradientText from '@/components/GradientText';
 import MatchButton from '@/components/MatchButton';
 import PreferenceBackground from '@/components/backgrounds/PreferenceBackground';
+import Flower from '@/components/icons/Flower';
+import IceCube from '@/components/icons/IceCube';
+import MarkerIcon from '@/components/icons/Marker';
+import Strawberry from '@/components/icons/Strawberry';
 import { getStorage } from '@/lib/storage';
 import api from '@/services/axiosConfig';
 import Slider from '@react-native-community/slider';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import MapView, { Circle, Marker } from 'react-native-maps';
 
@@ -31,56 +36,124 @@ export default function PreferenceScreen() {
 	const [sugarFree, setSugarFree] = useState(false);
 	const [caffeineFree, setCaffeineFree] = useState(false);
 	const [location, setLocation] = useState(5);
+	const [hasSetPreferences, setHasSetPreferences] = useState(false);
+	const [init, setInit] = useState(true);
 
-    const [hasSetPreferences, setHasSetPreferences] = useState(false);
+	useEffect(() => {
+		const token = getStorage('token');
+		api.get(`/me?token=${token}`)
+			.then((resp) => {
+				setHasSetPreferences(resp.data.hasSetPreferences);
+				if (resp.data.hasSetPreferences) {
+					setSweet(resp.data.preferences.sweet);
+					setRefreshing(resp.data.preferences.refreshing);
+					setCreamy(resp.data.preferences.refreshing);
+					setHerbal(resp.data.preferences.refreshing);
+					setNutty(resp.data.preferences.refreshing);
+					setFruity(resp.data.preferences.refreshing);
+					setHot(resp.data.preferences.refreshing);
+					setCold(resp.data.preferences.refreshing);
+					setNutAllergy(resp.data.preferences.refreshing);
+					setGlutenFree(resp.data.preferences.refreshing);
+					setSoyAllergy(resp.data.preferences.refreshing);
+					setLactose(resp.data.preferences.refreshing);
+					setSugarFree(resp.data.preferences.refreshing);
+					setCaffeineFree(resp.data.preferences.refreshing);
+					setLocation(resp.data.preferences.refreshing);
+				}
+				setInit(false);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, []);
 
-    useEffect(() => {
-        const token = getStorage('token');
-        api.get(`/me?token=${token}`)
-        .then((resp) => {
-            setHasSetPreferences(resp.data.hasSetPreferences);
-            if (resp.data.hasSetPreferences) {
-                api.get(`/preferences`)
-            }
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }, []);
+	const beginMatching = () => {
+		const token = getStorage('token');
+		api.post('/preferences', {
+			preferences: {
+				sweet,
+				refreshing,
+				creamy,
+				herbal,
+				nutty,
+				fruity,
+				hot,
+				cold,
+				nutAllergy,
+				glutenFree,
+				soyAllergy,
+				lactose,
+				sugarFree,
+				caffeineFree,
+				location
+			},
+			token
+		})
+			.then((resp) => {
+				setHasSetPreferences(true);
+				setPage(1);
+				console.log(resp.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+		router.navigate('/matching');
+	};
 
-    const beginMatching = () => {
-        api.post('/preferences', {
-            sweet,
-            refreshing,
-            creamy,
-            herbal,
-            nutty,
-            fruity,
-            hot,
-            cold,
-            nutAllergy,
-            glutenFree,
-            soyAllergy,
-            lactose,
-            sugarFree,
-            caffeineFree,
-            location
-        })
-        .then((resp) => {
-            console.log(resp.data)
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-        router.navigate('/matching');
-    }
+	if (init) {
+		return null; // add loading
+	}
+
+	if (hasSetPreferences) {
+		return (
+			<>
+				{page != 1 && (
+					<View style={{ position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
+						<PreferenceBackground></PreferenceBackground>
+					</View>
+				)}
+				<Container background={page == 1} title={"Customize Profile"}>
+					<BobaImage></BobaImage>
+					{page == 1 && (
+						<View style={styles.editColumn}>
+							<TouchableOpacity style={styles.editPreferences}>
+								<Text style={{ fontSize: 16, fontFamily: 'OverpassBold', color: '#6F5C63' }}>Edit Preferences</Text>
+								<EditIcon></EditIcon>
+							</TouchableOpacity>
+							<View style={styles.editRow}>
+								<TouchableOpacity style={styles.editBox}>
+									<Strawberry></Strawberry>
+									<Text>Taste</Text>
+								</TouchableOpacity>
+								<TouchableOpacity style={styles.editBox}>
+									<IceCube></IceCube>
+									<Text>Temp</Text>
+								</TouchableOpacity>
+							</View>
+							<View style={styles.editRow}>
+								<TouchableOpacity style={styles.editBox}>
+									<Flower></Flower>
+									<Text>Dietary</Text>
+								</TouchableOpacity>
+								<TouchableOpacity style={styles.editBox}>
+									<MarkerIcon></MarkerIcon>
+									<Text>Location</Text>
+								</TouchableOpacity>
+							</View>
+						</View>
+					)}
+				</Container>
+			</>
+		);
+	}
 
 	return (
 		<>
 			<View style={{ position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
 				<PreferenceBackground></PreferenceBackground>
 			</View>
-			<Container background={false}>
+			<Container background={false} title={"Customize Profile"}>
 				<BobaImage></BobaImage>
 
 				{page < 5 && (
@@ -582,9 +655,36 @@ export default function PreferenceScreen() {
 									<Text style={styles.sectionTitleText}>DIETARY</Text>
 									<EditButton style={{ position: 'absolute', top: -15, right: -15, width: 40, height: 40 }}></EditButton>
 								</TouchableOpacity>
-								<View style={[styles.selection, { width: 125 }]}>
-									<Text style={styles.selectionText}>Caffeine-free</Text>
-								</View>
+								{glutenFree && (
+									<View style={[styles.selection, { width: 125 }]}>
+										<Text style={styles.selectionText}>Gluten-free</Text>
+									</View>
+								)}
+								{lactose && (
+									<View style={[styles.selection, { width: 125 }]}>
+										<Text style={styles.selectionText}>Lactose</Text>
+									</View>
+								)}
+								{soyAllergy && (
+									<View style={[styles.selection, { width: 125 }]}>
+										<Text style={styles.selectionText}>Soy Allergy</Text>
+									</View>
+								)}
+								{nutAllergy && (
+									<View style={[styles.selection, { width: 125 }]}>
+										<Text style={styles.selectionText}>Nut Allergy</Text>
+									</View>
+								)}
+								{sugarFree && (
+									<View style={[styles.selection, { width: 125 }]}>
+										<Text style={styles.selectionText}>Sugar-free</Text>
+									</View>
+								)}
+								{caffeineFree && (
+									<View style={[styles.selection, { width: 125 }]}>
+										<Text style={styles.selectionText}>Caffeine-free</Text>
+									</View>
+								)}
 							</View>
 							<View style={[styles.selectionColumn]}>
 								<TouchableOpacity style={[styles.sectionTitleContainer, { marginRight: 0 }]} onPress={() => setPage(4)}>
@@ -793,5 +893,42 @@ const styles = StyleSheet.create({
 		marginBottom: -5,
 		fontSize: 20,
 		color: '#6F5C63'
-	}
+	},
+	editPreferences: {
+		display: 'flex',
+		flexDirection: 'row',
+		gap: 10,
+		backgroundColor: 'white',
+		paddingVertical: 12,
+		paddingHorizontal: 20,
+		borderRadius: 15,
+		shadowOffset: {
+			width: 0,
+			height: 4
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 5,
+        marginVertical: 10,
+	},
+	editColumn: {
+		display: 'flex',
+		alignItems: 'center',
+		gap: 15
+	},
+	editRow: {
+		display: 'flex',
+		flexDirection: 'row',
+		gap: 16,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+    editBox: {
+        backgroundColor: 'white',
+        height: 125,
+        width: 125,
+        borderRadius: 15,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+    }
 });

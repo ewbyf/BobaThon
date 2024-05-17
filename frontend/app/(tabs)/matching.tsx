@@ -42,7 +42,7 @@ export default function MatchingScreen() {
 
 	if (bobas.length == 0 || index == bobas.length) {
 		return (
-			<Container>
+			<Container title="Find Your Boba">
 				<ScrollView
 					refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
 					showsVerticalScrollIndicator={false}
@@ -56,7 +56,7 @@ export default function MatchingScreen() {
 	}
 
 	return (
-		<Container>
+		<Container title="Find Your Boba">
 			<BobaCard boba={bobas[index]} />
 		</Container>
 	);
