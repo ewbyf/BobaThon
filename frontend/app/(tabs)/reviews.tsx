@@ -4,7 +4,7 @@ import { Text, ScrollView } from 'react-native';
 
 export default function ReviewsScreen() {
   return (
-    <Container>
+    <Container title="Reviews">
         <Text>Hello</Text>
         </Container>
   );
