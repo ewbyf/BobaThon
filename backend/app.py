@@ -37,10 +37,9 @@ def signup():
     
     body['password'] = generate_password_hash(body['password'])
     body['token'] = str(rand_token)
-    body['preferences'] = []
+    body['preferences'] = {}
     body['matches'] = []
     body['reviews'] = []
-    body['location'] = 10 # default 10 miles, can change
 
     users_collection.insert_one(body)
 
@@ -81,13 +80,23 @@ def me():
     response_data = {
         "name": existing_user['name'],
         "email": existing_user['email'],
-        "preferences": existing_user['preferences'],
         "reviews": existing_user['reviews'],
-        "location": existing_user['location'],
-        "matches": existing_user['matches'],
     }
     return jsonify(response_data)
 
+@app.route("/preferences", methods=["GET"]) 
+def get_preferences():
+    token = request.json.get('token', None)
+
+    existing_user = users_collection.find_one({'token': token})
+
+    if existing_user is None:
+        return jsonify({"msg": "Invalid token"}), 400
+
+    response_data = {
+        "preferences": existing_user['preferences'],
+    }
+    return jsonify(response_data)
 
 @app.route("/preferences", methods=["POST"]) 
 def set_preferences():

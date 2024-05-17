@@ -5,6 +5,7 @@ import EditButton from '@/components/EditButton';
 import GradientText from '@/components/GradientText';
 import MatchButton from '@/components/MatchButton';
 import PreferenceBackground from '@/components/backgrounds/PreferenceBackground';
+import api from '@/services/axiosConfig';
 import Slider from '@react-native-community/slider';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
@@ -31,7 +32,15 @@ export default function PreferenceScreen() {
 	const [location, setLocation] = useState(5);
 
     const beginMatching = () => {
-        
+        api.post('/preferences', {
+
+        })
+        .then((resp) => {
+            console.log(resp.data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
         router.navigate('/matching');
     }
 
