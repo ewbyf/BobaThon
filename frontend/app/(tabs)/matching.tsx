@@ -60,13 +60,13 @@ export default function MatchingScreen() {
 	}
 
 	return (
-		<Container title="Find Your Boba">
+		<View title="Find Your Boba">
 			<View style={styles.contCard}>
 				{bobas.map((boba) => (
 					<BobaCard key={boba.id} boba={boba} numOfBobas={bobas.length} curIndex={index} />
 				))}
 			</View>
-		</Container>
+		</View>
 	);
 }
 
@@ -75,50 +75,20 @@ const styles = StyleSheet.create({
 		height: '100%',
 		width: '100%',
 	},
-	scrollView: {
-		height: '100%',
-		width: '100%',
-		display: 'flex',
-	},
+	// scrollView: {
+	// 	height: '100%',
+	// 	width: '100%',
+	// 	display: 'flex',
+	// },
 	card: {
+		position: 'absolute',
 		backgroundColor: 'pink',
 		width: '100%',
 		display: 'flex',
 		borderRadius: 15,
 		marginBottom: 30,
 	},
-	reject: {
-		height: 65,
-		width: 65,
-		backgroundColor: 'red',
-		position: 'absolute',
-		bottom: -20,
-		left: 10,
-		borderRadius: 100,
-		shadowOffset: { width: 0, height: 3 },
-		shadowColor: 'black',
-		shadowRadius: 4,
-		shadowOpacity: 0.5,
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	accept: {
-		height: 65,
-		width: 65,
-		backgroundColor: 'lightgreen',
-		position: 'absolute',
-		bottom: -20,
-		right: 10,
-		borderRadius: 100,
-		shadowOffset: { width: 0, height: 3 },
-		shadowColor: 'black',
-		shadowRadius: 4,
-		shadowOpacity: 0.5,
-		display: 'flex',
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
+
 	aboutSection: {
 		height: 600,
 	},
