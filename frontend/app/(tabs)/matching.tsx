@@ -68,7 +68,7 @@ export default function MatchingScreen() {
 			<Stack.Screen options={{ headerShown: false }} />
 
 			{bobas.map((boba, i) => (
-				<BobaCard key={boba.id} boba={boba} numOfBobas={bobas.length} index={i} activeIndex={activeIndex} onResponse={onResponse} />
+				<BobaCard boba={boba} numOfBobas={bobas.length} index={i} activeIndex={activeIndex} onResponse={onResponse} />
 			))}
 		</View>
 	);
