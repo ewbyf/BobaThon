@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
-
+import { StarRatingDisplay } from 'react-native-star-rating-widget';
 import Animated, { SharedValue, interpolate, runOnJS, useAnimatedStyle, useDerivedValue, useSharedValue, withSpring } from 'react-native-reanimated';
 import { PanGesture } from 'react-native-gesture-handler';
 import { IBoba } from '@/interfaces/interfaces';
@@ -76,6 +76,8 @@ const BobaCard = ({ boba, numOfBobas, index, activeIndex, onResponse }: BobaType
 				/> */}
 				<View style={styles.footer}>
 					<Text style={styles.name}>{boba.name}</Text>
+					<StarRatingDisplay rating={boba.stars} starStyle={{ marginHorizontal: 0, marginBottom: 6 }} starSize={20} color="#E9A898" />
+					<Text style={styles.description}>{boba.description}</Text>
 				</View>
 			</Animated.View>
 		</GestureDetector>
@@ -108,8 +110,8 @@ const styles = StyleSheet.create({
 		marginTop: 16,
 		alignSelf: 'center',
 		borderRadius: 15,
-		height: tinderCardWidth,
-		width: tinderCardWidth * 0.8,
+		height: '68%',
+		width: '90%',
 	},
 	overlay: {
 		top: '50%',
@@ -117,12 +119,19 @@ const styles = StyleSheet.create({
 		borderBottomRightRadius: 15,
 	},
 	footer: {
+		flex: 1,
+		gap: 5,
 		padding: 10,
+		paddingLeft: 20,
 	},
 	name: {
 		fontSize: 24,
+		fontFamily: 'OverpassBold',
 		color: '#6F5C63',
-		fontFamily: 'InterBold',
+	},
+	description: {
+		fontFamily: 'Overpass',
+		color: '#6F5C63',
 	},
 });
 

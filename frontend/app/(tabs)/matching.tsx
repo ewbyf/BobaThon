@@ -67,7 +67,7 @@ export default function MatchingScreen() {
 
 	return (
 		<Container title="Find a Boba!">
-			<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+			<View style={{ flex: 1, alignItems: 'center' }}>
 				<Stack.Screen options={{ headerShown: false }} />
 
 				{bobas.map((boba, i) => (
