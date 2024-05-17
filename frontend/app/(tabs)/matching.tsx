@@ -5,13 +5,41 @@ import { IBoba } from '@/interfaces/interfaces';
 import { shuffle } from '@/lib/shuffle';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useCallback, useEffect, useState } from 'react';
-import { Image, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Pressable, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Animated, { withSpring, useSharedValue, useAnimatedStyle } from 'react-native-reanimated';
+import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import { SwipeGesture } from 'react-native-swipe-gesture-handler';
 
 export default function MatchingScreen() {
 	const [bobas, setBobas] = useState<IBoba[]>([]);
 	const [index, setIndex] = useState(0);
 	const [refreshing, setRefreshing] = useState(false);
+
+	const onSwipePerformed = (action) => {
+		switch (action) {
+			case 'left': {
+				console.log('left Swipe performed');
+				break;
+			}
+			case 'right': {
+				console.log('right Swipe performed');
+				break;
+			}
+			default: {
+				console.log('Undeteceted action');
+			}
+		}
+	};
 	// TODO: FIX BUG WITH SPACING ON TOP OF SCROLLVIEW
+
+	// const sharedValue = useSharedValue(1);
+	// const cardStyle = useAnimatedStyle(() => ({
+	// 	transform: [
+	// 		{
+	// 			translateX: sharedValue.value * 500 - 250,
+	// 		},
+	// 	],
+	// }));
 
 	const resetBobaList = () => {
 		setBobas(bobaList);
@@ -57,12 +85,26 @@ export default function MatchingScreen() {
 
 	return (
 		<Container>
-			<BobaCard boba={bobas[index]} />
+			<SwipeGesture onSwipePerformed={onSwipePerformed}>
+				<View style={styles.contCard}>
+					<BobaCard boba={bobas[index]} />
+				</View>
+			</SwipeGesture>
+			{/* <Animated.View style={[{ width: '100%', height: '100%', display: 'flex' }, cardStyle]}>
+				<BobaCard boba={bobas[index]} />
+			</Animated.View>
+			<Pressable onPress={() => (sharedValue.value = withSpring(Math.random()))} style={{ position: 'absolute', top: 100 }}>
+				<Text>Change value</Text>
+			</Pressable> */}
 		</Container>
 	);
 }
 
 const styles = StyleSheet.create({
+	contCard: {
+		height: '100%',
+		width: '100%',
+	},
 	scrollView: {
 		height: '100%',
 		width: '100%',
