@@ -1,5 +1,6 @@
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect, useState } from 'react';
@@ -7,7 +8,6 @@ import { useEffect, useState } from 'react';
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-
 	const [loaded] = useFonts({
 		OverpassExtraLight: require('../assets/fonts/Overpass-ExtraLight.ttf'),
 		OverpassLight: require('../assets/fonts/Overpass-Light.ttf'),
@@ -16,7 +16,7 @@ export default function RootLayout() {
 		OverpassSemiBold: require('../assets/fonts/Overpass-SemiBold.ttf'),
 		OverpassBold: require('../assets/fonts/Overpass-Bold.ttf'),
 		OverpassExtraBold: require('../assets/fonts/Overpass-ExtraBold.ttf'),
-		OverpassBlack: require('../assets/fonts/Overpass-Black.ttf')
+		OverpassBlack: require('../assets/fonts/Overpass-Black.ttf'),
 	});
 
 	useEffect(() => {
@@ -30,10 +30,12 @@ export default function RootLayout() {
 	}
 
 	return (
-		<Stack initialRouteName='/' screenOptions={{ headerShown: false }}>
-			<Stack.Screen name='(auth)' options={{ headerShown: false }} />
-			<Stack.Screen name='(tabs)' options={{ headerShown: false }} />
-			<Stack.Screen name='+not-found' options={{ headerShown: false }} />
-		</Stack>
+		<GestureHandlerRootView>
+			<Stack initialRouteName="/" screenOptions={{ headerShown: false }}>
+				<Stack.Screen name="(auth)" options={{ headerShown: false }} />
+				<Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+				<Stack.Screen name="+not-found" options={{ headerShown: false }} />
+			</Stack>
+		</GestureHandlerRootView>
 	);
 }

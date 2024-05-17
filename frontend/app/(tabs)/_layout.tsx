@@ -2,7 +2,7 @@ import HomeLogo from '@/components/navigation/HomeLogo';
 import { Tabs } from 'expo-router';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { Colors } from '@/constants/Colors';
 
 import BobaSelect from '@/components/navigation/BobaSelect';
@@ -34,33 +34,33 @@ export default function TabLayout() {
 					paddingHorizontal: 10,
 					shadowOffset: {
 						width: 0,
-						height: 12
+						height: 12,
 					},
 					shadowOpacity: 0.58,
-					shadowRadius: 16.0
+					shadowRadius: 16.0,
 				},
 
 				tabBarActiveTintColor: Colors['light'].tint,
 				headerShown: false,
-				tabBarShowLabel: false
+				tabBarShowLabel: false,
 			}}
 		>
 			<Tabs.Screen
-				name='home'
+				name="home"
 				options={{
 					title: '',
-					tabBarIcon: ({ focused }) => (focused ? <HomeSelect /> : <HomeLogo />)
+					tabBarIcon: ({ focused }) => (focused ? <HomeSelect /> : <HomeLogo />),
 				}}
 			/>
 			<Tabs.Screen
-				name='reviews'
+				name="reviews"
 				options={{
 					title: '',
-					tabBarIcon: ({ color, focused }) => (focused ? <StarSelect /> : <StarLogo />)
+					tabBarIcon: ({ color, focused }) => (focused ? <StarSelect /> : <StarLogo />),
 				}}
 			/>
 			<Tabs.Screen
-				name='matching'
+				name="matching"
 				options={{
 					title: '',
 					tabBarIcon: ({ color, focused }) => (
@@ -68,10 +68,10 @@ export default function TabLayout() {
 							style={{
 								shadowOffset: {
 									width: 0,
-									height: 4
+									height: 4,
 								},
 								shadowOpacity: 0.25,
-								shadowRadius: 4
+								shadowRadius: 4,
 							}}
 						>
 							<LinearGradient
@@ -90,32 +90,32 @@ export default function TabLayout() {
 									alignItems: 'center',
 									shadowOffset: {
 										width: 0,
-										height: 4
+										height: 4,
 									},
 									shadowOpacity: 0.25,
-									shadowRadius: 4
+									shadowRadius: 4,
 								}}
 							>
 								<BobaSelect></BobaSelect>
 							</LinearGradient>
 						</View>
-					)
+					),
 				}}
 			/>
 
 			<Tabs.Screen
-				name='matches'
+				name="matches"
 				options={{
 					title: '',
-					tabBarIcon: ({ color, focused }) => (focused ? <MsgSelect /> : <MsgLogo />)
+					tabBarIcon: ({ color, focused }) => (focused ? <MsgSelect /> : <MsgLogo />),
 				}}
 			/>
 
 			<Tabs.Screen
-				name='preferences'
+				name="preferences"
 				options={{
 					title: '',
-					tabBarIcon: ({ color, focused }) => (focused ? <PfpSelect /> : <PfpLogo />)
+					tabBarIcon: ({ color, focused }) => (focused ? <PfpSelect /> : <PfpLogo />),
 				}}
 			/>
 		</Tabs>
@@ -125,6 +125,6 @@ export default function TabLayout() {
 const styles = StyleSheet.create({
 	imgTab: {
 		height: 37,
-		width: 40
-	}
+		width: 40,
+	},
 });

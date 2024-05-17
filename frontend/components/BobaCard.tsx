@@ -1,165 +1,127 @@
-import Container from '@/components/Container';
-import { bobaList } from '@/data/bobaList';
-import { IBoba } from '@/interfaces/interfaces';
-import { shuffle } from '@/lib/shuffle';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { useCallback, useEffect, useState } from 'react';
-import { Dimensions, Image, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { View, Text, StyleSheet, Image, Dimensions } from 'react-native';
 import React from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
+import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 
-export const bobaCardWidth = Dimensions.get('screen').width * 0.8;
+import Animated, { SharedValue, interpolate, runOnJS, useAnimatedStyle, useDerivedValue, useSharedValue, withSpring } from 'react-native-reanimated';
+import { PanGesture } from 'react-native-gesture-handler';
+import { IBoba } from '@/interfaces/interfaces';
 
-const BobaCard = ({ boba, numOfBobas, curIndex }: { boba: IBoba; numOfBobas: number; curIndex: number }) => {
+const screenWidth = Dimensions.get('screen').width;
+export const tinderCardWidth = screenWidth * 0.8;
+
+interface BobaType {
+	boba: IBoba;
+	numOfBobas: number;
+	index: number;
+	activeIndex: SharedValue<number>;
+	onResponse: (a: boolean) => void;
+}
+
+const BobaCard = ({ boba, numOfBobas, index, activeIndex, onResponse }: BobaType) => {
+	const translationX = useSharedValue(0);
+
+	const animatedCard = useAnimatedStyle(() => ({
+		opacity: interpolate(activeIndex.value, [index - 1, index, index + 1], [1 - 1 / 5, 1, 1]),
+		transform: [
+			{
+				scale: interpolate(activeIndex.value, [index - 1, index, index + 1], [0.95, 1, 1]),
+			},
+			{
+				translateY: interpolate(activeIndex.value, [index - 1, index, index + 1], [-30, 0, 0]),
+			},
+			{
+				translateX: translationX.value,
+			},
+			{
+				rotateZ: `${interpolate(translationX.value, [-screenWidth / 2, 0, screenWidth / 2], [-15, 0, 15])}deg`,
+			},
+		],
+	}));
+
+	const gesture = Gesture.Pan()
+		.onChange((event) => {
+			translationX.value = event.translationX;
+
+			activeIndex.value = interpolate(Math.abs(translationX.value), [0, 500], [index, index + 0.8]);
+		})
+		.onEnd((event) => {
+			if (Math.abs(event.velocityX) > 400) {
+				translationX.value = withSpring(Math.sign(event.velocityX) * 500, {
+					velocity: event.velocityX,
+				});
+				activeIndex.value = withSpring(index + 1);
+
+				runOnJS(onResponse)(event.velocityX > 0);
+			} else {
+				translationX.value = withSpring(0);
+			}
+		});
+
 	return (
-		<View
-			style={[
-				styles.card,
-				{
-					zIndex: numOfBobas - curIndex,
-					opacity: 0.5,
-					transform: [{ scale: 1 - curIndex * 0.1 }, { translateY: -curIndex * 90 }],
-				},
-			]}
-		>
-			<Image source={boba.img} style={[StyleSheet.absoluteFillObject, styles.image]} resizeMode="contain"></Image>
-			<LinearGradient colors={['transparent', 'rgba(0,0,0,0.8)']} style={[StyleSheet.absoluteFill, styles.overlay]} />
+		<GestureDetector gesture={gesture}>
+			<Animated.View
+				style={[
+					styles.card,
+					animatedCard,
+					{
+						zIndex: numOfBobas - index,
+					},
+				]}
+			>
+				<Image style={[StyleSheet.absoluteFillObject, styles.image]} source={boba.img} />
 
-			<View style={styles.imgFooter}>
-				<Text style={styles.name}>{boba.name}</Text>
-			</View>
-		</View>
+				<LinearGradient
+					// Background Linear Gradient
+					colors={['transparent', 'rgba(0,0,0,0.8)']}
+					style={[StyleSheet.absoluteFillObject, styles.overlay]}
+				/>
 
-		// <ScrollView
-		// 	style={styles.scrollView}
-		// 	snapToInterval={600}
-		// 	showsVerticalScrollIndicator={false}
-		// 	snapToAlignment="start"
-		// 	decelerationRate={0.9}
-		// 	disableIntervalMomentum={true}
-		// 	contentContainerStyle={{ justifyContent: 'flex-start' }}>
-		// 	<View style={styles.card}>
-		// 		<Image source={boba.img} style={styles.image} resizeMode="contain"></Image>
-		// 		<TouchableOpacity
-		// 			style={styles.reject} //</View>onPress={reject}
-		// 		>
-		// 			<Ionicons size={28} name="close-outline" color="white"></Ionicons>
-		// 		</TouchableOpacity>
-		// 		<TouchableOpacity
-		// 			style={styles.accept} //</View>onPress={match}
-		// 		>
-		// 			<Ionicons size={28} name="checkmark-outline" color="white"></Ionicons>
-		// 		</TouchableOpacity>
-		// 	</View>
-		// 	<View style={styles.aboutSection}>
-		// 		<View style={styles.descriptionContainer}>
-		// 			<Text>Matcha {boba.name}</Text>
-		// 		</View>
-		// 	</View>
-		//</ScrollView>
+				<View style={styles.footer}>
+					<Text style={styles.name}>{boba.name}</Text>
+				</View>
+			</Animated.View>
+		</GestureDetector>
 	);
 };
 
-//
-
 const styles = StyleSheet.create({
 	card: {
-		width: bobaCardWidth,
+		width: tinderCardWidth,
+		// height: tinderCardWidth * 1.67,
 		aspectRatio: 1 / 1.67,
-		borderRadius: 18,
-		overflow: 'hidden',
-
-		// with abosulte the last boba will be the one on the top
-		position: 'absolute',
-		// name
+		borderRadius: 15,
 		justifyContent: 'flex-end',
+
+		position: 'absolute',
+
 		// shadow
 		shadowColor: '#000',
 		shadowOffset: {
 			width: 0,
-			height: 2,
+			height: 1,
 		},
-		shadowOpacity: 0.23,
-		shadowRadius: 2.62,
+		shadowOpacity: 0.22,
+		shadowRadius: 2.22,
 
-		elevation: 4,
+		elevation: 3,
 	},
 	image: {
-		borderRadius: 18,
-	},
-	imgFooter: {
-		padding: 10,
-	},
-	name: {
-		fontFamily: 'OverpassBol',
-		fontSize: 24,
-		color: 'white',
+		borderRadius: 15,
 	},
 	overlay: {
 		top: '50%',
-		borderBottomLeftRadius: 18,
-		borderBottomRightRadius: 18,
+		borderBottomLeftRadius: 15,
+		borderBottomRightRadius: 15,
+	},
+	footer: {
+		padding: 10,
+	},
+	name: {
+		fontSize: 24,
+		color: 'white',
+		fontFamily: 'InterBold',
 	},
 });
-
-// const styles = StyleSheet.create({
-// 	scrollView: {
-// 		height: bobaCardWidth * 4,
-// 		width: bobaCardWidth,
-// 		display: 'flex',
-// 	},
-// 	card: {
-// 		backgroundColor: 'grey',
-// 		width: '100%',
-// 		display: 'flex',
-// 		borderRadius: 15,
-// 		marginBottom: 30,
-// 	},
-// 	image: {
-// 		height: 450,
-// 	},
-
-// 	reject: {
-// 		height: 65,
-// 		width: 65,
-// 		backgroundColor: 'red',
-// 		position: 'absolute',
-// 		bottom: -20,
-// 		left: 10,
-// 		borderRadius: 100,
-// 		shadowOffset: { width: 0, height: 3 },
-// 		shadowColor: 'black',
-// 		shadowRadius: 4,
-// 		shadowOpacity: 0.5,
-// 		display: 'flex',
-// 		justifyContent: 'center',
-// 		alignItems: 'center',
-// 	},
-// 	accept: {
-// 		height: 65,
-// 		width: 65,
-// 		backgroundColor: 'lightgreen',
-// 		position: 'absolute',
-// 		bottom: -20,
-// 		right: 10,
-// 		borderRadius: 100,
-// 		shadowOffset: { width: 0, height: 3 },
-// 		shadowColor: 'black',
-// 		shadowRadius: 4,
-// 		shadowOpacity: 0.5,
-// 		display: 'flex',
-// 		justifyContent: 'center',
-// 		alignItems: 'center',
-// 	},
-// 	aboutSection: {
-// 		height: 600,
-// 	},
-// 	descriptionContainer: {
-// 		height: 200,
-// 		width: '100%',
-// 		backgroundColor: 'grey',
-// 		borderRadius: 20,
-// 	},
-// });
 
 export default BobaCard;

@@ -2,18 +2,38 @@ import BobaCard from '@/components/BobaCard';
 import Container from '@/components/Container';
 import { bobaList } from '@/data/bobaList';
 import { IBoba } from '@/interfaces/interfaces';
-import { shuffle } from '@/lib/shuffle';
-import Ionicons from '@expo/vector-icons/Ionicons';
-import { useCallback, useEffect, useState } from 'react';
-import { Image, Pressable, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import Animated, { withSpring, useSharedValue, useAnimatedStyle } from 'react-native-reanimated';
-import { GestureDetector, Gesture } from 'react-native-gesture-handler';
 import { Stack } from 'expo-router';
+import { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import { interpolate, useAnimatedReaction, useDerivedValue, useSharedValue, withDecay, withSpring, runOnJS } from 'react-native-reanimated';
 
 export default function MatchingScreen() {
 	const [bobas, setBobas] = useState<IBoba[]>([]);
+	const activeIndex = useSharedValue(0);
 	const [index, setIndex] = useState(0);
+
 	const [refreshing, setRefreshing] = useState(false);
+
+	useAnimatedReaction(
+		() => activeIndex.value,
+		(value, prevValue) => {
+			if (Math.floor(value) !== index) {
+				runOnJS(setIndex)(Math.floor(value));
+			}
+		}
+	);
+
+	useEffect(() => {
+		if (index > bobas.length - 3) {
+			console.warn('Last 2 cards remining. Fetch more!');
+			setBobas((bobs) => [...bobs, ...bobs.reverse()]);
+		}
+	}, [index]);
+
+	const onResponse = (res: boolean) => {
+		console.log('on Response: ', res);
+	};
 
 	// TODO: FIX BUG WITH SPACING ON TOP OF SCROLLVIEW
 
@@ -26,22 +46,6 @@ export default function MatchingScreen() {
 
 	useEffect(() => {
 		resetBobaList();
-	}, []);
-
-	const reject = () => {
-		setIndex(index + 1);
-	};
-
-	const match = () => {
-		setIndex(index + 1);
-	};
-
-	const onRefresh = useCallback(() => {
-		setRefreshing(true);
-		setTimeout(() => {
-			resetBobaList();
-			setRefreshing(false);
-		}, 2000);
 	}, []);
 
 	// if (bobas.length == 0 || index == bobas.length) {
@@ -64,7 +68,7 @@ export default function MatchingScreen() {
 			<Stack.Screen options={{ headerShown: false }} />
 
 			{bobas.map((boba, i) => (
-				<BobaCard key={boba.id} boba={boba} numOfBobas={bobas.length} curIndex={i} />
+				<BobaCard key={boba.id} boba={boba} numOfBobas={bobas.length} index={i} activeIndex={activeIndex} onResponse={onResponse} />
 			))}
 		</View>
 	);
