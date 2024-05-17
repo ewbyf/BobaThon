@@ -83,19 +83,6 @@ def me():
         "email": existing_user['email'],
         "hasSetPreferences": existing_user['hasSetPreferences'],
         "reviews": existing_user['reviews'],
-    }
-    return jsonify(response_data)
-
-@app.route("/preferences", methods=["GET"]) 
-def get_preferences():
-    token = request.json.get('token', None)
-
-    existing_user = users_collection.find_one({'token': token})
-
-    if existing_user is None:
-        return jsonify({"msg": "Invalid token"}), 400
-
-    response_data = {
         "preferences": existing_user['preferences'],
     }
     return jsonify(response_data)

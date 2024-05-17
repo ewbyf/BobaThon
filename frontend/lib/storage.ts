@@ -1,17 +1,10 @@
 import * as SecureStore from 'expo-secure-store';
 
-export const getStorage = async(key: string) => {
-	SecureStore.getItemAsync(key)
-    .then((res) => {
-        if (res) {
-            return Promise.resolve(res);
-        } else {
-            return null;
-        }
-    })
-    .catch((err) => {
-        return null;
-    })
+export const getStorage = (key: string) => {
+	const token = SecureStore.getItem(key)
+    if (token) {
+        return token;
+    }
     return null;
 }
 

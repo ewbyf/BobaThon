@@ -5,6 +5,7 @@ import EditButton from '@/components/EditButton';
 import GradientText from '@/components/GradientText';
 import MatchButton from '@/components/MatchButton';
 import PreferenceBackground from '@/components/backgrounds/PreferenceBackground';
+import { getStorage } from '@/lib/storage';
 import api from '@/services/axiosConfig';
 import Slider from '@react-native-community/slider';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -31,8 +32,20 @@ export default function PreferenceScreen() {
 	const [caffeineFree, setCaffeineFree] = useState(false);
 	const [location, setLocation] = useState(5);
 
-    useEffect(() => {
+    const [hasSetPreferences, setHasSetPreferences] = useState(false);
 
+    useEffect(() => {
+        const token = getStorage('token');
+        api.get(`/me?token=${token}`)
+        .then((resp) => {
+            setHasSetPreferences(resp.data.hasSetPreferences);
+            if (resp.data.hasSetPreferences) {
+                api.get(`/preferences`)
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
     }, []);
 
     const beginMatching = () => {
