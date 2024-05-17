@@ -8,7 +8,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { Image, Pressable, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import Animated, { withSpring, useSharedValue, useAnimatedStyle } from 'react-native-reanimated';
 import { GestureDetector, Gesture } from 'react-native-gesture-handler';
-import { SwipeGesture } from 'react-native-swipe-gesture-handler';
+import { Stack } from 'expo-router';
 
 export default function MatchingScreen() {
 	const [bobas, setBobas] = useState<IBoba[]>([]);
@@ -20,7 +20,7 @@ export default function MatchingScreen() {
 	const resetBobaList = () => {
 		setBobas(bobaList);
 		// remove previously matched bobas
-		shuffle(bobas);
+		// shuffle(bobas);
 		setIndex(0);
 	};
 
@@ -44,58 +44,30 @@ export default function MatchingScreen() {
 		}, 2000);
 	}, []);
 
-	if (bobas.length == 0 || index == bobas.length) {
-		return (
-			<Container title="Find Your Boba">
-				<ScrollView
-					refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-					showsVerticalScrollIndicator={false}
-					style={[styles.scrollView, { display: 'flex' }]}
-					contentContainerStyle={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-				>
-					<Text>No bobas left! Consider increasing your radius</Text>
-				</ScrollView>
-			</Container>
-		);
-	}
+	// if (bobas.length == 0 || index == bobas.length) {
+	// 	return (
+	// 		<Container title="Find Your Boba">
+	// 			<ScrollView
+	// 				refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
+	// 				showsVerticalScrollIndicator={false}
+	// 				style={[styles.scrollView, { display: 'flex' }]}
+	// 				contentContainerStyle={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
+	// 			>
+	// 				<Text>No bobas left! Consider increasing your radius</Text>
+	// 			</ScrollView>
+	// 		</Container>
+	// 	);
+	// }
 
 	return (
-		<View title="Find Your Boba">
-			<View style={styles.contCard}>
-				{bobas.map((boba) => (
-					<BobaCard key={boba.id} boba={boba} numOfBobas={bobas.length} curIndex={index} />
-				))}
-			</View>
+		<View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+			<Stack.Screen options={{ headerShown: false }} />
+
+			{bobas.map((boba) => (
+				<BobaCard key={boba.id} boba={boba} numOfBobas={bobas.length} curIndex={index} />
+			))}
 		</View>
 	);
 }
 
-const styles = StyleSheet.create({
-	contCard: {
-		height: '100%',
-		width: '100%',
-	},
-	// scrollView: {
-	// 	height: '100%',
-	// 	width: '100%',
-	// 	display: 'flex',
-	// },
-	card: {
-		position: 'absolute',
-		backgroundColor: 'pink',
-		width: '100%',
-		display: 'flex',
-		borderRadius: 15,
-		marginBottom: 30,
-	},
-
-	aboutSection: {
-		height: 600,
-	},
-	descriptionContainer: {
-		height: 200,
-		width: '100%',
-		backgroundColor: 'grey',
-		borderRadius: 20,
-	},
-});
+const styles = StyleSheet.create({});

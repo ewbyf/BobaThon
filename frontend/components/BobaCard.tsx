@@ -6,13 +6,25 @@ import Ionicons from '@expo/vector-icons/Ionicons';
 import { useCallback, useEffect, useState } from 'react';
 import { Dimensions, Image, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
 
 export const bobaCardWidth = Dimensions.get('screen').width * 0.8;
 
 const BobaCard = ({ boba, numOfBobas, curIndex }: { boba: IBoba; numOfBobas: number; curIndex: number }) => {
 	return (
-		<View style={styles.card}>
+		<View
+			style={[
+				styles.card,
+				{
+					zIndex: numOfBobas - curIndex,
+					opacity: 0.5,
+					transform: [{ scale: 1 - curIndex * 0.1 }, { translateY: -curIndex * 90 }],
+				},
+			]}
+		>
 			<Image source={boba.img} style={[StyleSheet.absoluteFillObject, styles.image]} resizeMode="contain"></Image>
+			<LinearGradient colors={['transparent', 'rgba(0,0,0,0.8)']} style={[StyleSheet.absoluteFill, styles.overlay]} />
+
 			<View style={styles.imgFooter}>
 				<Text style={styles.name}>{boba.name}</Text>
 			</View>
@@ -57,6 +69,8 @@ const styles = StyleSheet.create({
 		borderRadius: 18,
 		overflow: 'hidden',
 
+		// with abosulte the last boba will be the one on the top
+		position: 'absolute',
 		// name
 		justifyContent: 'flex-end',
 		// shadow
@@ -80,6 +94,11 @@ const styles = StyleSheet.create({
 		fontFamily: 'OverpassBol',
 		fontSize: 24,
 		color: 'white',
+	},
+	overlay: {
+		top: '50%',
+		borderBottomLeftRadius: 18,
+		borderBottomRightRadius: 18,
 	},
 });
 
