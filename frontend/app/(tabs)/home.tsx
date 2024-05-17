@@ -66,7 +66,7 @@ export default function HomeScreen() {
 					<Text style={[styles.title, { paddingLeft: 20 }]}>Popular Posts</Text>
 					<ScrollView
 						horizontal
-						snapToInterval={350}
+						snapToInterval={370}
 						snapToAlignment='start'
                         decelerationRate="fast"
 						style={{ display: 'flex', paddingVertical: 20, paddingHorizontal: 20, width: width }}
