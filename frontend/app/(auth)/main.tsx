@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
 		marginTop: 'auto',
 		marginBottom: 50,
 		display: 'flex',
-        alignItems: 'center',
-		gap: 30
+		alignItems: 'center',
+		gap: 30,
 	},
 	signinButton: {
 		borderRadius: 30,
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
 		shadowColor: 'rgba(0, 0, 0)',
 		shadowOpacity: 0.25,
 		shadowRadius: 5,
-		shadowOffset: { width: 0, height: 3 }
+		shadowOffset: { width: 0, height: 3 },
 	},
 	signupButton: {
 		borderRadius: 30,
@@ -69,15 +69,15 @@ const styles = StyleSheet.create({
 		shadowColor: 'rgba(0, 0, 0)',
 		shadowOpacity: 0.25,
 		shadowRadius: 5,
-		shadowOffset: { width: 0, height: 3 }
+		shadowOffset: { width: 0, height: 3 },
 	},
 	text: {
 		width: '100%',
 		textAlign: 'center',
 		fontSize: 18,
 		fontFamily: 'OverpassBold',
-		color: '#6F5C63'
-	}
+		color: '#6F5C63',
+	},
 });
 
 export default UserScreen;

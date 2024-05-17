@@ -5,13 +5,18 @@ import { IBoba } from '@/interfaces/interfaces';
 import { shuffle } from '@/lib/shuffle';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useCallback, useEffect, useState } from 'react';
-import { Image, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Pressable, RefreshControl, SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import Animated, { withSpring, useSharedValue, useAnimatedStyle } from 'react-native-reanimated';
+import { GestureDetector, Gesture } from 'react-native-gesture-handler';
+import { SwipeGesture } from 'react-native-swipe-gesture-handler';
 
 export default function MatchingScreen() {
 	const [bobas, setBobas] = useState<IBoba[]>([]);
 	const [index, setIndex] = useState(0);
 	const [refreshing, setRefreshing] = useState(false);
+
 	// TODO: FIX BUG WITH SPACING ON TOP OF SCROLLVIEW
+
 
 	const resetBobaList = () => {
 		setBobas(bobaList);
@@ -57,12 +62,18 @@ export default function MatchingScreen() {
 
 	return (
 		<Container title="Find Your Boba">
-			<BobaCard boba={bobas[index]} />
+				<View style={styles.contCard}>
+					<BobaCard boba={bobas[index]} />
+				</View>
 		</Container>
 	);
 }
 
 const styles = StyleSheet.create({
+	contCard: {
+		height: '100%',
+		width: '100%',
+	},
 	scrollView: {
 		height: '100%',
 		width: '100%',
