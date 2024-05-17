@@ -15,31 +15,8 @@ export default function MatchingScreen() {
 	const [index, setIndex] = useState(0);
 	const [refreshing, setRefreshing] = useState(false);
 
-	const onSwipePerformed = (action) => {
-		switch (action) {
-			case 'left': {
-				console.log('left Swipe performed');
-				break;
-			}
-			case 'right': {
-				console.log('right Swipe performed');
-				break;
-			}
-			default: {
-				console.log('Undeteceted action');
-			}
-		}
-	};
 	// TODO: FIX BUG WITH SPACING ON TOP OF SCROLLVIEW
 
-	// const sharedValue = useSharedValue(1);
-	// const cardStyle = useAnimatedStyle(() => ({
-	// 	transform: [
-	// 		{
-	// 			translateX: sharedValue.value * 500 - 250,
-	// 		},
-	// 	],
-	// }));
 
 	const resetBobaList = () => {
 		setBobas(bobaList);
@@ -85,17 +62,10 @@ export default function MatchingScreen() {
 
 	return (
 		<Container>
-			<SwipeGesture onSwipePerformed={onSwipePerformed}>
+			
 				<View style={styles.contCard}>
 					<BobaCard boba={bobas[index]} />
 				</View>
-			</SwipeGesture>
-			{/* <Animated.View style={[{ width: '100%', height: '100%', display: 'flex' }, cardStyle]}>
-				<BobaCard boba={bobas[index]} />
-			</Animated.View>
-			<Pressable onPress={() => (sharedValue.value = withSpring(Math.random()))} style={{ position: 'absolute', top: 100 }}>
-				<Text>Change value</Text>
-			</Pressable> */}
 		</Container>
 	);
 }
