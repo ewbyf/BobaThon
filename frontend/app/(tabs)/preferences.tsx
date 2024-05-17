@@ -33,7 +33,7 @@ export default function PreferenceScreen() {
 
     const beginMatching = () => {
         api.post('/preferences', {
-
+            sweet
         })
         .then((resp) => {
             console.log(resp.data)

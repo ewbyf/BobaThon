@@ -40,6 +40,7 @@ def signup():
     body['preferences'] = {}
     body['matches'] = []
     body['reviews'] = []
+    body['hasSetPreferences'] = False
 
     users_collection.insert_one(body)
 
@@ -107,6 +108,7 @@ def set_preferences():
         return jsonify({"msg": "Invalid preferences"}), 400
 
     users_collection.update_one({'token': token}, {"$set": {'preferences': preferences}})
+    users_collection.update_one({'token': token}, {"$set": {'hasSetPreferences': True}})
 
     response_data = {
         "preferences": preferences
