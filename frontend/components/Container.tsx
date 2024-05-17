@@ -1,7 +1,23 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 import Header from './Header';
-const Container = ({ children, background, title }: { children: any; background?: boolean, title: string }) => {
+const Container = ({ children, background, title, explore }: { children: any; background?: boolean; title: string; explore?: boolean }) => {
+	if (explore) {
+		return (
+			<SafeAreaView>
+				<ScrollView
+					showsVerticalScrollIndicator={false}
+					style={{ height: '100%', paddingHorizontal: 20, display: 'flex' }}
+					contentContainerStyle={{ alignItems: 'center', gap: 20 }}
+				>
+					<Header title={title}></Header>
+					{children}
+				</ScrollView>
+			</SafeAreaView>
+		);
+	}
+
 	if (background === undefined || background === true) {
 		return (
 			<LinearGradient
