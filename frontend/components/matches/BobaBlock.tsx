@@ -3,6 +3,8 @@ import React from "react";
 
 type BobaBlockType = {
   label: String;
+  rating: Number;
+  description: String;
 };
 
 const BobaBlock = (props: BobaBlockType) => {
@@ -17,14 +19,43 @@ const BobaBlock = (props: BobaBlockType) => {
       <View style={styles.bobaDescription}>
         <Text style={styles.bobaName}>{props.label}</Text>
         <View>
-          <Image
-            source={require("../../assets/images/FiveStar.png")}
-            style={styles.rating}
-          />
-          <Text style={styles.bobaInfo}>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry.
-          </Text>
+          {props.rating == 0 && (
+            <Image
+              source={require("../../assets/images/ZeroStar.png")}
+              style={styles.rating}
+            />
+          )}
+          {props.rating == 1 && (
+            <Image
+              source={require("../../assets/images/OneStar.png")}
+              style={styles.rating}
+            />
+          )}
+          {props.rating == 2 && (
+            <Image
+              source={require("../../assets/images/TwoStar.png")}
+              style={styles.rating}
+            />
+          )}
+          {props.rating == 3 && (
+            <Image
+              source={require("../../assets/images/ThreeStar.png")}
+              style={styles.rating}
+            />
+          )}
+          {props.rating == 4 && (
+            <Image
+              source={require("../../assets/images/FourStar.png")}
+              style={styles.rating}
+            />
+          )}
+          {props.rating == 5 && (
+            <Image
+              source={require("../../assets/images/FiveStar.png")}
+              style={styles.rating}
+            />
+          )}
+          <Text style={styles.bobaInfo}>{props.description}</Text>
         </View>
         <View style={styles.positionInfo}>
           <View style={styles.moreInfoButton}>
@@ -43,7 +74,7 @@ const styles = StyleSheet.create({
     gap: 10,
     flexDirection: "row",
     justifyContent: "center",
-    width: "80%",
+    width: "90%",
     padding: 10,
     paddingLeft: 45,
     backgroundColor: "white",

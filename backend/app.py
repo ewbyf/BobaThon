@@ -37,10 +37,10 @@ def signup():
     
     body['password'] = generate_password_hash(body['password'])
     body['token'] = str(rand_token)
-    body['preferences'] = []
+    body['preferences'] = {}
     body['matches'] = []
     body['reviews'] = []
-    body['location'] = 10 # default 10 miles, can change
+    body['hasSetPreferences'] = False
 
     users_collection.insert_one(body)
 
@@ -81,13 +81,11 @@ def me():
     response_data = {
         "name": existing_user['name'],
         "email": existing_user['email'],
-        "preferences": existing_user['preferences'],
+        "hasSetPreferences": existing_user['hasSetPreferences'],
         "reviews": existing_user['reviews'],
-        "location": existing_user['location'],
-        "matches": existing_user['matches'],
+        "preferences": existing_user['preferences'],
     }
     return jsonify(response_data)
-
 
 @app.route("/preferences", methods=["POST"]) 
 def set_preferences():
@@ -98,6 +96,7 @@ def set_preferences():
         return jsonify({"msg": "Invalid preferences"}), 400
 
     users_collection.update_one({'token': token}, {"$set": {'preferences': preferences}})
+    users_collection.update_one({'token': token}, {"$set": {'hasSetPreferences': True}})
 
     response_data = {
         "preferences": preferences
@@ -119,29 +118,32 @@ def set_location():
     }
     return jsonify(response_data)
 
-@app.route("/matches", methods=["GET", "POST"]) 
+@app.route("/matches", methods=["GET"]) 
+def get_matches():
+    token = request.args.get('token')
+
+    user = users_collection.find_one({'token': token})
+        
+    response_data = {
+        "matches": user['matches']
+    }
+    return jsonify(response_data)
+
+@app.route("/matches", methods=["POST"]) 
 def add_match():
     token = request.json.get('token', None)
+    match = request.json.get('match', None)
 
-    if request.method == "POST":
-        match = request.json.get('match', None)
+    if match is None:
+        return jsonify({"msg": "Invalid match"}), 400
 
-        if match is None:
-            return jsonify({"msg": "Invalid match"}), 400
+    users_collection.update_one({'token': token}, {"$push": {'matches': match}})
 
-        users_collection.update_one({'token': token}, {"$push": {'matches': match}})
-
-        response_data = {
-            "match": match
-        }
-        return jsonify(response_data)
-    else:
-        user = users_collection.find_one({'token': token})
-        
-        response_data = {
-            "matches": user['matches']
-        }
-        return jsonify(response_data)
+    response_data = {
+        "match": match
+    }
+    return jsonify(response_data)
+    
 
 @app.route("/reviews", methods=["POST"]) 
 def add_review():

@@ -1,7 +1,7 @@
 import HomeLogo from '@/components/navigation/HomeLogo';
-import { Tabs, router } from 'expo-router';
+import { Tabs } from 'expo-router';
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 
 import { Colors } from '@/constants/Colors';
 
@@ -63,22 +63,21 @@ export default function TabLayout() {
 				name='matching'
 				options={{
 					title: '',
-					tabBarIcon: ({ color, focused }) =>
-						focused ? (
-                            <View
-								style={{
-									shadowOffset: {
-										width: 0,
-										height: 4
-									},
-									shadowOpacity: 0.25,
-									shadowRadius: 4
-								}}
-							>
+					tabBarIcon: ({ color, focused }) => (
+						<View
+							style={{
+								shadowOffset: {
+									width: 0,
+									height: 4
+								},
+								shadowOpacity: 0.25,
+								shadowRadius: 4
+							}}
+						>
 							<LinearGradient
-                            colors={['#E78481', '#EACBAD']}
-                            start={{x: 0.5, y: 0}}
-                            end={{x: 0.5, y: 1}}
+								colors={['#E78481', '#EACBAD']}
+								start={{ x: 0.5, y: 0 }}
+								end={{ x: 0.5, y: 1 }}
 								style={{
 									height: 75,
 									width: 75,
@@ -99,31 +98,8 @@ export default function TabLayout() {
 							>
 								<BobaSelect></BobaSelect>
 							</LinearGradient>
-                            </View>
-						) : (
-							<View
-								style={{
-									backgroundColor: '#E9B7B6',
-									height: 75,
-									width: 75,
-									marginBottom: 50,
-									borderRadius: 100,
-									paddingRight: 3,
-									paddingBottom: 2,
-									display: 'flex',
-									justifyContent: 'center',
-									alignItems: 'center',
-									shadowOffset: {
-										width: 0,
-										height: 4
-									},
-									shadowOpacity: 0.25,
-									shadowRadius: 4
-								}}
-							>
-								<BobaSelect></BobaSelect>
-							</View>
-						)
+						</View>
+					)
 				}}
 			/>
 

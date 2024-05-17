@@ -1,10 +1,16 @@
 import BobaImage from '@/components/BobaImage';
 import CancelButton from '@/components/CancelButton';
 import Container from '@/components/Container';
+import EditButton from '@/components/EditButton';
+import GradientText from '@/components/GradientText';
+import MatchButton from '@/components/MatchButton';
 import PreferenceBackground from '@/components/backgrounds/PreferenceBackground';
+import { getStorage } from '@/lib/storage';
+import api from '@/services/axiosConfig';
 import Slider from '@react-native-community/slider';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useState } from 'react';
+import { router } from 'expo-router';
+import { useState, useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import MapView, { Circle, Marker } from 'react-native-maps';
 
@@ -26,14 +32,50 @@ export default function PreferenceScreen() {
 	const [caffeineFree, setCaffeineFree] = useState(false);
 	const [location, setLocation] = useState(5);
 
+    const [hasSetPreferences, setHasSetPreferences] = useState(false);
+
+    useEffect(() => {
+        const token = getStorage('token');
+        api.get(`/me?token=${token}`)
+        .then((resp) => {
+            setHasSetPreferences(resp.data.hasSetPreferences);
+            if (resp.data.hasSetPreferences) {
+                api.get(`/preferences`)
+            }
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    }, []);
+
+    const beginMatching = () => {
+        api.post('/preferences', {
+            sweet,
+            refreshing,
+            creamy,
+            herbal,
+            nutty,
+            fruity,
+            hot,
+            cold,
+            nutAllergy,
+            glutenFree,
+            soyAllergy,
+            lactose,
+            sugarFree,
+            caffeineFree,
+            location
+        })
+        .then((resp) => {
+            console.log(resp.data)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+        router.navigate('/matching');
+    }
+
 	return (
-		// <ImageBackground
-		// 	source={require('../../assets/images/backgrounds/preferencebg.png')}
-		// 	style={styles.imgBg}
-		// 	imageStyle={{
-		// 		resizeMode: 'stretch'
-		// 	}}
-		// >
 		<>
 			<View style={{ position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
 				<PreferenceBackground></PreferenceBackground>
@@ -41,10 +83,17 @@ export default function PreferenceScreen() {
 			<Container background={false}>
 				<BobaImage></BobaImage>
 
-				<View>
-					<Text style={[styles.title, { textAlign: 'center' }]}>What are you feeling today?</Text>
-					<Text style={styles.description}>Customize your preference and let us find your perfect match!</Text>
-				</View>
+				{page < 5 && (
+					<View>
+						<Text style={[styles.title, { textAlign: 'center' }]}>What are you feeling today?</Text>
+						<Text style={styles.description}>Customize your preference and let us find your perfect match!</Text>
+					</View>
+				)}
+				{page == 5 && (
+					<View>
+						<Text style={[styles.title, { textAlign: 'center' }]}>Is this right?</Text>
+					</View>
+				)}
 
 				{page == 1 && (
 					<>
@@ -473,16 +522,149 @@ export default function PreferenceScreen() {
 						</MapView>
 					</>
 				)}
-				<View style={[styles.row, { marginTop: 'auto', marginBottom: 90 }]}>
-					{page > 1 && (
-						<TouchableOpacity onPress={() => setPage(page - 1)} style={[styles.button]}>
-							<Text>back</Text>
-						</TouchableOpacity>
-					)}
-					<TouchableOpacity onPress={() => setPage(page + 1)} style={[styles.button, { marginLeft: 'auto' }]}>
-						<Text>next</Text>
-					</TouchableOpacity>
-				</View>
+				{page == 5 && (
+					<>
+						<View style={[styles.row, { flexWrap: 'wrap', rowGap: 30 }]}>
+							<View style={[styles.selectionColumn]}>
+								<TouchableOpacity style={[styles.sectionTitleContainer, { marginRight: 0 }]} onPress={() => setPage(1)}>
+									<Text style={styles.sectionTitleText}>TASTE</Text>
+									<EditButton style={{ position: 'absolute', top: -15, right: -15, width: 40, height: 40 }}></EditButton>
+								</TouchableOpacity>
+								{sweet && (
+									<View style={[styles.selection, { width: 110 }]}>
+										<Text style={styles.selectionText}>Sweet</Text>
+									</View>
+								)}
+								{refreshing && (
+									<View style={[styles.selection, { width: 110 }]}>
+										<Text style={styles.selectionText}>Refreshing</Text>
+									</View>
+								)}
+								{creamy && (
+									<View style={[styles.selection, { width: 110 }]}>
+										<Text style={styles.selectionText}>Creamy</Text>
+									</View>
+								)}
+								{herbal && (
+									<View style={[styles.selection, { width: 110 }]}>
+										<Text style={styles.selectionText}>Herbal</Text>
+									</View>
+								)}
+								{fruity && (
+									<View style={[styles.selection, { width: 110 }]}>
+										<Text style={styles.selectionText}>Fruity</Text>
+									</View>
+								)}
+								{nutty && (
+									<View style={[styles.selection, { width: 110 }]}>
+										<Text style={styles.selectionText}>Nutty</Text>
+									</View>
+								)}
+							</View>
+							<View style={[styles.selectionColumn]}>
+								<TouchableOpacity style={[styles.sectionTitleContainer, { marginRight: 0 }]} onPress={() => setPage(2)}>
+									<Text style={styles.sectionTitleText}>TEMP</Text>
+									<EditButton style={{ position: 'absolute', top: -15, right: -15, width: 40, height: 40 }}></EditButton>
+								</TouchableOpacity>
+								{hot && (
+									<View style={styles.selection}>
+										<Text style={styles.selectionText}>Hot</Text>
+									</View>
+								)}
+								{cold && (
+									<View style={styles.selection}>
+										<Text style={styles.selectionText}>Cold</Text>
+									</View>
+								)}
+							</View>
+							<View style={[styles.selectionColumn]}>
+								<TouchableOpacity style={[styles.sectionTitleContainer, { marginRight: 0 }]} onPress={() => setPage(3)}>
+									<Text style={styles.sectionTitleText}>DIETARY</Text>
+									<EditButton style={{ position: 'absolute', top: -15, right: -15, width: 40, height: 40 }}></EditButton>
+								</TouchableOpacity>
+								<View style={[styles.selection, { width: 125 }]}>
+									<Text style={styles.selectionText}>Caffeine-free</Text>
+								</View>
+							</View>
+							<View style={[styles.selectionColumn]}>
+								<TouchableOpacity style={[styles.sectionTitleContainer, { marginRight: 0 }]} onPress={() => setPage(4)}>
+									<Text style={styles.sectionTitleText}>LOCATION</Text>
+									<EditButton style={{ position: 'absolute', top: -15, right: -15, width: 40, height: 40 }}></EditButton>
+								</TouchableOpacity>
+								<View style={styles.selection}>
+									<Text style={styles.selectionText}>{location} miles</Text>
+								</View>
+							</View>
+						</View>
+						<View style={styles.matchContainer}>
+							<Text style={styles.matchText}>MATCH ME!</Text>
+							<TouchableOpacity onPress={() => beginMatching()}>
+								<MatchButton></MatchButton>
+							</TouchableOpacity>
+						</View>
+					</>
+				)}
+				{page < 5 && (
+					<View style={[styles.row, { marginTop: 'auto', marginBottom: 90 }]}>
+						{page > 1 && (
+							<TouchableOpacity onPress={() => setPage(page - 1)} style={[styles.button]}>
+								<Text>back</Text>
+							</TouchableOpacity>
+						)}
+						{(page == 1 && !sweet && !refreshing && !creamy && !herbal && !fruity && !nutty) ||
+						(page == 2 && !hot && !cold) ||
+						(page == 3 && !glutenFree && !lactose && !soyAllergy && !nutAllergy && !sugarFree && !caffeineFree) ? (
+							<TouchableOpacity disabled onPress={() => setPage(page + 1)} style={[styles.button, { marginLeft: 'auto' }]}>
+								<LinearGradient
+									colors={['#E88985', '#EAC1A7']}
+									start={{ x: 0, y: 0 }}
+									end={{ x: 1, y: 0 }}
+									style={{ padding: 2, width: '100%', height: '100%', borderRadius: 15 }}
+								>
+									<View
+										style={{
+											backgroundColor: 'white',
+											width: '100%',
+											height: '100%',
+											borderRadius: 13,
+											display: 'flex',
+											justifyContent: 'center',
+											alignItems: 'center'
+										}}
+									>
+										<GradientText style={{ fontFamily: 'OverpassBold', fontSize: 16 }}>NEXT</GradientText>
+									</View>
+								</LinearGradient>
+							</TouchableOpacity>
+						) : (
+							<TouchableOpacity onPress={() => setPage(page + 1)} style={[styles.button, { marginLeft: 'auto' }]}>
+								<LinearGradient
+									colors={['#EAC5A9', '#E88984']}
+									start={{ x: 0, y: 0 }}
+									end={{ x: 1, y: 0 }}
+									style={{ padding: 2, width: '100%', height: '100%', borderRadius: 15 }}
+								>
+									<LinearGradient
+										colors={['#E98C86', '#E0A694']}
+										start={{ x: 0, y: 0 }}
+										end={{ x: 1, y: 0 }}
+										style={{
+											backgroundColor: 'white',
+											width: '100%',
+											height: '100%',
+											borderRadius: 13,
+											display: 'flex',
+											justifyContent: 'center',
+											alignItems: 'center'
+										}}
+									>
+										<Text style={{ fontFamily: 'OverpassBold', fontSize: 16, color: 'white' }}>NEXT</Text>
+									</LinearGradient>
+								</LinearGradient>
+							</TouchableOpacity>
+						)}
+					</View>
+				)}
 			</Container>
 		</>
 
@@ -556,9 +738,9 @@ const styles = StyleSheet.create({
 	},
 	button: {
 		width: 100,
-		height: 50,
-		backgroundColor: 'grey',
-		borderRadius: 20,
+		height: 40,
+		backgroundColor: 'white',
+		borderRadius: 15,
 		display: 'flex',
 		justifyContent: 'center',
 		alignItems: 'center'
@@ -578,6 +760,37 @@ const styles = StyleSheet.create({
 	},
 	locationText: {
 		fontFamily: 'OverpassBold',
+		fontSize: 20,
+		color: '#6F5C63'
+	},
+	selectionColumn: {
+		display: 'flex',
+		alignItems: 'center',
+		gap: 12
+	},
+	selection: {
+		backgroundColor: '#F8E3E5',
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		paddingVertical: 6,
+		paddingHorizontal: 12,
+		width: 100,
+		height: 35,
+		borderRadius: 20
+	},
+	selectionText: {
+		fontSize: 16,
+		fontFamily: 'OverpassBold',
+		color: '#6F5C63'
+	},
+	matchContainer: {
+		display: 'flex',
+		alignItems: 'center'
+	},
+	matchText: {
+		fontFamily: 'OverpassBold',
+		marginBottom: -5,
 		fontSize: 20,
 		color: '#6F5C63'
 	}

@@ -1,14 +1,15 @@
 import { router } from 'expo-router';
-import { ImageBackground, SafeAreaView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { SafeAreaView, StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
+import MainMenuBackground from '@/components/backgrounds/MainMenuBackground';
 
 function UserScreen() {
 	return (
-		<ImageBackground
-			source={require('../../assets/images/backgrounds/mainmenu.png')}
-			imageStyle={{ resizeMode: 'cover' }}
-			style={{ height: '100%', width: '100%' }}
-		>
-			<SafeAreaView style={{ flex: 1, justifyContent: 'center' }}>
+        <>
+            <View style={{ position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
+                    <MainMenuBackground></MainMenuBackground>
+			</View>                    
+            <Image source={require('@/assets/images/logo.png')} style={{position: 'absolute', top: '34%', left: '20%', width: 275, height: 275}}></Image>
+            <SafeAreaView style={{ flex: 1 }}>
 				<View style={styles.initial}>
 					<TouchableOpacity style={styles.signinButton} onPress={() => router.push('/signin')}>
 						<Text style={styles.text}>Log In</Text>
@@ -21,7 +22,9 @@ function UserScreen() {
 					</TouchableOpacity>
 				</View>
 			</SafeAreaView>
-		</ImageBackground>
+        </>
+
+
 	);
 }
 
