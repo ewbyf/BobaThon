@@ -1,5 +1,6 @@
 import Container from '@/components/Container';
 import Review from '@/components/Review';
+import SearchBar from '@/components/SearchBar';
 import ExploreBackground from '@/components/backgrounds/ExploreBackground';
 import { bobaList } from '@/data/bobaList';
 import { reviewList } from '@/data/reviewList';
@@ -13,7 +14,6 @@ import { useEffect, useState } from 'react';
 import { Button, Dimensions, Image, StyleSheet, Text, TextInput, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Carousel from 'react-native-reanimated-carousel';
-import { StarRatingDisplay } from 'react-native-star-rating-widget';
 
 export default function HomeScreen() {
 	const width = Dimensions.get('window').width;
@@ -36,12 +36,8 @@ export default function HomeScreen() {
 				<ExploreBackground></ExploreBackground>
 			</View>
 
-			<Container title='Explore Boba' explore={true}>
-				<View style={styles.searchbar}>
-					<Ionicons name='search-outline' color='#98858A' size={24}></Ionicons>
-					<TextInput placeholder='Search for boba...' style={styles.innerSearch}></TextInput>
-				</View>
-
+			<Container title='Explore Boba' scroll>
+				<SearchBar />
 				<Carousel
 					loop
 					width={width}
@@ -98,23 +94,6 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		width: '100%'
 	},
-	searchbar: {
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-		borderRadius: 50,
-		paddingHorizontal: 20,
-		paddingVertical: 12.5,
-		width: '100%',
-		backgroundColor: '#F8E3E5'
-	},
-    innerSearch: {
-        flex: 1,
-        paddingLeft: 10,
-        fontFamily: 'Overpass',
-        fontSize: 14,
-        color: '#6F5C63'
-    },
 	title: {
 		fontSize: 20,
 		fontFamily: 'OverpassBold',

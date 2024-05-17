@@ -1,15 +1,24 @@
-import { Image, StyleSheet, Platform, SafeAreaView } from 'react-native';
 import Container from '@/components/Container';
-import { Text, ScrollView } from 'react-native';
+import Review from '@/components/Review';
+import SearchBar from '@/components/SearchBar';
+import DefaultBackground from '@/components/backgrounds/DefaultBackground';
+import { reviewList } from '@/data/reviewList';
+import { StyleSheet, View } from 'react-native';
 
 export default function ReviewsScreen() {
-  return (
-    <Container title="Reviews">
-        <Text>Hello</Text>
-        </Container>
-  );
+	return (
+		<>
+			<View style={{ position: 'absolute', top: 0, left: 0, zIndex: 0 }}>
+				<DefaultBackground></DefaultBackground>
+			</View>
+			<Container title='Reviews' scroll>
+				<SearchBar />
+				{reviewList.map((review) => (
+					<Review review={review}></Review>
+				))}
+			</Container>
+		</>
+	);
 }
 
-const styles = StyleSheet.create({
-
-});
+const styles = StyleSheet.create({});

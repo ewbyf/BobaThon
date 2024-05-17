@@ -2,8 +2,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView, StyleSheet } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Header from './Header';
-const Container = ({ children, background, title, explore }: { children: any; background?: boolean; title: string; explore?: boolean }) => {
-	if (explore) {
+const Container = ({ children, background, title, scroll }: { children: any; background?: boolean; title: string; scroll?: boolean }) => {
+	if (scroll) {
 		return (
 			<SafeAreaView>
 				<ScrollView
