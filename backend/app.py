@@ -81,6 +81,7 @@ def me():
     response_data = {
         "name": existing_user['name'],
         "email": existing_user['email'],
+        "hasSetPreferences": existing_user['hasSetPreferences'],
         "reviews": existing_user['reviews'],
     }
     return jsonify(response_data)

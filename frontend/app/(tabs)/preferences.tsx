@@ -9,7 +9,7 @@ import api from '@/services/axiosConfig';
 import Slider from '@react-native-community/slider';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import MapView, { Circle, Marker } from 'react-native-maps';
 
@@ -31,9 +31,27 @@ export default function PreferenceScreen() {
 	const [caffeineFree, setCaffeineFree] = useState(false);
 	const [location, setLocation] = useState(5);
 
+    useEffect(() => {
+
+    }, []);
+
     const beginMatching = () => {
         api.post('/preferences', {
-            sweet
+            sweet,
+            refreshing,
+            creamy,
+            herbal,
+            nutty,
+            fruity,
+            hot,
+            cold,
+            nutAllergy,
+            glutenFree,
+            soyAllergy,
+            lactose,
+            sugarFree,
+            caffeineFree,
+            location
         })
         .then((resp) => {
             console.log(resp.data)
