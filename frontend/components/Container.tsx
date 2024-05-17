@@ -9,7 +9,7 @@ const Container = ({ children, background, title, explore }: { children: any; ba
 				<ScrollView
 					showsVerticalScrollIndicator={false}
 					style={{ height: '100%', paddingHorizontal: 20, display: 'flex' }}
-					contentContainerStyle={{ alignItems: 'center', gap: 20 }}
+					contentContainerStyle={{ alignItems: 'center', gap: 20, paddingBottom: 50 }}
 				>
 					<Header title={title}></Header>
 					{children}
