@@ -5,6 +5,7 @@ import EditButton from '@/components/EditButton';
 import EditIcon from '@/components/EditIcon';
 import GradientText from '@/components/GradientText';
 import MatchButton from '@/components/MatchButton';
+import DefaultBackground from '@/components/backgrounds/DefaultBackground';
 import PreferenceBackground from '@/components/backgrounds/PreferenceBackground';
 import Flower from '@/components/icons/Flower';
 import IceCube from '@/components/icons/IceCube';
@@ -38,6 +39,7 @@ export default function PreferenceScreen() {
 	const [location, setLocation] = useState(5);
 	const [hasSetPreferences, setHasSetPreferences] = useState(false);
 	const [init, setInit] = useState(true);
+	const [editing, setEditing] = useState(false);
 
 	useEffect(() => {
 		const token = getStorage('token');
@@ -47,19 +49,19 @@ export default function PreferenceScreen() {
 				if (resp.data.hasSetPreferences) {
 					setSweet(resp.data.preferences.sweet);
 					setRefreshing(resp.data.preferences.refreshing);
-					setCreamy(resp.data.preferences.refreshing);
-					setHerbal(resp.data.preferences.refreshing);
-					setNutty(resp.data.preferences.refreshing);
-					setFruity(resp.data.preferences.refreshing);
-					setHot(resp.data.preferences.refreshing);
-					setCold(resp.data.preferences.refreshing);
-					setNutAllergy(resp.data.preferences.refreshing);
-					setGlutenFree(resp.data.preferences.refreshing);
-					setSoyAllergy(resp.data.preferences.refreshing);
-					setLactose(resp.data.preferences.refreshing);
-					setSugarFree(resp.data.preferences.refreshing);
-					setCaffeineFree(resp.data.preferences.refreshing);
-					setLocation(resp.data.preferences.refreshing);
+					setCreamy(resp.data.preferences.creamy);
+					setHerbal(resp.data.preferences.herbal);
+					setNutty(resp.data.preferences.nutty);
+					setFruity(resp.data.preferences.fruity);
+					setHot(resp.data.preferences.hot);
+					setCold(resp.data.preferences.cold);
+					setNutAllergy(resp.data.preferences.nutAllergy);
+					setGlutenFree(resp.data.preferences.glutenFree);
+					setSoyAllergy(resp.data.preferences.soyAllergy);
+					setLactose(resp.data.preferences.lactose);
+					setSugarFree(resp.data.preferences.sugarFree);
+					setCaffeineFree(resp.data.preferences.caffeineFree);
+					setLocation(resp.data.preferences.location);
 				}
 				setInit(false);
 			})
@@ -67,6 +69,35 @@ export default function PreferenceScreen() {
 				console.log(err);
 			});
 	}, []);
+
+	const savePreferences = () => {
+		const token = getStorage('token');
+		setPage(1);
+		api.post('/preferences', {
+			preferences: {
+				sweet,
+				refreshing,
+				creamy,
+				herbal,
+				nutty,
+				fruity,
+				hot,
+				cold,
+				nutAllergy,
+				glutenFree,
+				soyAllergy,
+				lactose,
+				sugarFree,
+				caffeineFree,
+				location
+			},
+			token
+		})
+			.then((resp) => {})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
 
 	const beginMatching = () => {
 		const token = getStorage('token');
@@ -91,14 +122,13 @@ export default function PreferenceScreen() {
 			token
 		})
 			.then((resp) => {
+				router.navigate('/matching');
 				setHasSetPreferences(true);
 				setPage(1);
-				console.log(resp.data);
 			})
 			.catch((err) => {
 				console.log(err);
 			});
-		router.navigate('/matching');
 	};
 
 	if (init) {
@@ -108,39 +138,558 @@ export default function PreferenceScreen() {
 	if (hasSetPreferences) {
 		return (
 			<>
-				{page != 1 && (
-					<View style={{ position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
+				{page != 1 ? (
+					<View style={{ position: 'absolute', top: 0, left: 0, zIndex: 0 }}>
 						<PreferenceBackground></PreferenceBackground>
 					</View>
+				) : (
+					<View style={{ position: 'absolute', top: 0, left: 0, zIndex: 0 }}>
+						<DefaultBackground></DefaultBackground>
+					</View>
 				)}
-				<Container background={page == 1} title={"Customize Profile"}>
+
+				<Container background={false} title={'Customize Profile'}>
 					<BobaImage></BobaImage>
 					{page == 1 && (
-						<View style={styles.editColumn}>
-							<TouchableOpacity style={styles.editPreferences}>
+						<View style={[styles.editColumn]}>
+							<TouchableOpacity style={styles.editPreferences} onPress={() => setEditing(!editing)}>
 								<Text style={{ fontSize: 16, fontFamily: 'OverpassBold', color: '#6F5C63' }}>Edit Preferences</Text>
 								<EditIcon></EditIcon>
 							</TouchableOpacity>
 							<View style={styles.editRow}>
-								<TouchableOpacity style={styles.editBox}>
+								<TouchableOpacity style={styles.editBox} disabled={!editing} onPress={() => setPage(2)}>
+									{editing && <EditButton style={{ position: 'absolute', top: -15, right: -15, width: 50, height: 50 }}></EditButton>}
 									<Strawberry></Strawberry>
-									<Text>Taste</Text>
+									<Text style={styles.editText}>Taste</Text>
 								</TouchableOpacity>
-								<TouchableOpacity style={styles.editBox}>
+								<TouchableOpacity style={styles.editBox} disabled={!editing} onPress={() => setPage(3)}>
+									{editing && <EditButton style={{ position: 'absolute', top: -15, right: -15, width: 50, height: 50 }}></EditButton>}
 									<IceCube></IceCube>
-									<Text>Temp</Text>
+									<Text style={styles.editText}>Temp</Text>
 								</TouchableOpacity>
 							</View>
 							<View style={styles.editRow}>
-								<TouchableOpacity style={styles.editBox}>
+								<TouchableOpacity style={styles.editBox} disabled={!editing} onPress={() => setPage(4)}>
+									{editing && <EditButton style={{ position: 'absolute', top: -15, right: -15, width: 50, height: 50 }}></EditButton>}
 									<Flower></Flower>
-									<Text>Dietary</Text>
+									<Text style={styles.editText}>Dietary</Text>
 								</TouchableOpacity>
-								<TouchableOpacity style={styles.editBox}>
+								<TouchableOpacity style={styles.editBox} disabled={!editing} onPress={() => setPage(5)}>
+									{editing && <EditButton style={{ position: 'absolute', top: -15, right: -15, width: 50, height: 50 }}></EditButton>}
 									<MarkerIcon></MarkerIcon>
-									<Text>Location</Text>
+									<Text style={styles.editText}>Location</Text>
 								</TouchableOpacity>
 							</View>
+						</View>
+					)}
+					{page == 2 && (
+						<>
+							<View style={styles.sectionTitleContainer}>
+								<Text style={styles.sectionTitleText}>TASTE</Text>
+							</View>
+							<View style={[styles.column]}>
+								<View style={styles.row}>
+									<TouchableOpacity onPress={() => setSweet(!sweet)} style={[styles.clickable]}>
+										{sweet && <CancelButton />}
+										<LinearGradient
+											colors={sweet ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+											style={{
+												width: sweet ? '100%' : '85%',
+												height: sweet ? '100%' : '85%',
+												borderRadius: 15
+											}}
+										>
+											<Text
+												style={[
+													styles.clickableText,
+													{
+														color: sweet ? 'white' : '#6F5C63',
+														fontFamily: sweet ? 'OverpassBlack' : 'OverpassBold',
+														fontSize: sweet ? 20 : 16
+													}
+												]}
+											>
+												Sweet
+											</Text>
+										</LinearGradient>
+									</TouchableOpacity>
+									<TouchableOpacity onPress={() => setRefreshing(!refreshing)} style={[styles.clickable]}>
+										{refreshing && <CancelButton />}
+										<LinearGradient
+											colors={refreshing ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+											style={{
+												width: refreshing ? '100%' : '85%',
+												height: refreshing ? '100%' : '85%',
+												borderRadius: 15
+											}}
+										>
+											<Text
+												style={[
+													styles.clickableText,
+													{
+														color: refreshing ? 'white' : '#6F5C63',
+														fontFamily: refreshing ? 'OverpassBlack' : 'OverpassBold',
+														fontSize: refreshing ? 20 : 16
+													}
+												]}
+											>
+												Refreshing
+											</Text>
+										</LinearGradient>
+									</TouchableOpacity>
+									<TouchableOpacity onPress={() => setCreamy(!creamy)} style={[styles.clickable]}>
+										{creamy && <CancelButton />}
+										<LinearGradient
+											colors={creamy ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+											style={{
+												width: creamy ? '100%' : '85%',
+												height: creamy ? '100%' : '85%',
+												borderRadius: 15
+											}}
+										>
+											<Text
+												style={[
+													styles.clickableText,
+													{
+														color: creamy ? 'white' : '#6F5C63',
+														fontFamily: creamy ? 'OverpassBlack' : 'OverpassBold',
+														fontSize: creamy ? 20 : 16
+													}
+												]}
+											>
+												Creamy
+											</Text>
+										</LinearGradient>
+									</TouchableOpacity>
+								</View>
+								<View style={styles.row}>
+									<TouchableOpacity onPress={() => setHerbal(!herbal)} style={[styles.clickable]}>
+										{herbal && <CancelButton />}
+										<LinearGradient
+											colors={herbal ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+											style={{
+												width: herbal ? '100%' : '85%',
+												height: herbal ? '100%' : '85%',
+												borderRadius: 15
+											}}
+										>
+											<Text
+												style={[
+													styles.clickableText,
+													{
+														color: herbal ? 'white' : '#6F5C63',
+														fontFamily: herbal ? 'OverpassBlack' : 'OverpassBold',
+														fontSize: herbal ? 20 : 16
+													}
+												]}
+											>
+												Herbal
+											</Text>
+										</LinearGradient>
+									</TouchableOpacity>
+									<TouchableOpacity onPress={() => setNutty(!nutty)} style={[styles.clickable]}>
+										{nutty && <CancelButton />}
+										<LinearGradient
+											colors={nutty ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+											style={{
+												width: nutty ? '100%' : '85%',
+												height: nutty ? '100%' : '85%',
+												borderRadius: 15
+											}}
+										>
+											<Text
+												style={[
+													styles.clickableText,
+													{
+														color: nutty ? 'white' : '#6F5C63',
+														fontFamily: nutty ? 'OverpassBlack' : 'OverpassBold',
+														fontSize: nutty ? 20 : 16
+													}
+												]}
+											>
+												Nutty
+											</Text>
+										</LinearGradient>
+									</TouchableOpacity>
+									<TouchableOpacity onPress={() => setFruity(!fruity)} style={[styles.clickable]}>
+										{fruity && <CancelButton />}
+										<LinearGradient
+											colors={fruity ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+											style={{
+												width: fruity ? '100%' : '85%',
+												height: fruity ? '100%' : '85%',
+												borderRadius: 15
+											}}
+										>
+											<Text
+												style={[
+													styles.clickableText,
+													{
+														color: fruity ? 'white' : '#6F5C63',
+														fontFamily: fruity ? 'OverpassBlack' : 'OverpassBold',
+														fontSize: fruity ? 20 : 16
+													}
+												]}
+											>
+												Fruity
+											</Text>
+										</LinearGradient>
+									</TouchableOpacity>
+								</View>
+							</View>
+						</>
+					)}
+					{page == 3 && (
+						<>
+							<View style={styles.sectionTitleContainer}>
+								<Text style={styles.sectionTitleText}>TEMP</Text>
+							</View>
+							<View style={[styles.row, { justifyContent: 'center', gap: 15, marginTop: 10 }]}>
+								<TouchableOpacity onPress={() => setHot(!hot)} style={[styles.clickable, { height: 150, width: 120 }]}>
+									{hot && <CancelButton />}
+									<LinearGradient
+										colors={hot ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+										style={{
+											width: hot ? '100%' : '85%',
+											height: hot ? '100%' : '85%',
+											borderRadius: 15
+										}}
+									>
+										<Text
+											style={[
+												styles.clickableText,
+												{
+													color: hot ? 'white' : '#6F5C63',
+													fontFamily: hot ? 'OverpassBlack' : 'OverpassBold',
+													fontSize: hot ? 20 : 16
+												}
+											]}
+										>
+											Hot
+										</Text>
+									</LinearGradient>
+								</TouchableOpacity>
+								<TouchableOpacity onPress={() => setCold(!cold)} style={[styles.clickable, { height: 150, width: 120 }]}>
+									{cold && <CancelButton />}
+									<LinearGradient
+										colors={cold ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+										style={{
+											width: cold ? '100%' : '85%',
+											height: cold ? '100%' : '85%',
+											borderRadius: 15
+										}}
+									>
+										<Text
+											style={[
+												styles.clickableText,
+												{
+													color: cold ? 'white' : '#6F5C63',
+													fontFamily: cold ? 'OverpassBlack' : 'OverpassBold',
+													fontSize: cold ? 20 : 16
+												}
+											]}
+										>
+											Cold
+										</Text>
+									</LinearGradient>
+								</TouchableOpacity>
+							</View>
+						</>
+					)}
+					{page == 4 && (
+						<>
+							<View style={styles.sectionTitleContainer}>
+								<Text style={styles.sectionTitleText}>DIETARY</Text>
+							</View>
+							{/* <View style={[styles.row, { justifyContent: 'center', gap: 15, marginTop: 30, flexWrap: 'wrap' }]}> */}
+							<View style={styles.column}>
+								<View style={styles.row}>
+									<TouchableOpacity onPress={() => setGlutenFree(!glutenFree)} style={[styles.clickable, { height: 50, width: 180 }]}>
+										{glutenFree && <CancelButton />}
+										<LinearGradient
+											colors={glutenFree ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+											style={{
+												width: glutenFree ? '100%' : '85%',
+												height: glutenFree ? '100%' : '85%',
+												borderRadius: 15
+											}}
+										>
+											<Text
+												style={[
+													styles.clickableText,
+													{
+														color: glutenFree ? 'white' : '#6F5C63',
+														fontFamily: glutenFree ? 'OverpassBlack' : 'OverpassBold',
+														fontSize: glutenFree ? 20 : 16
+													}
+												]}
+											>
+												Gluten-free
+											</Text>
+										</LinearGradient>
+									</TouchableOpacity>
+									<TouchableOpacity onPress={() => setLactose(!lactose)} style={[styles.clickable, { height: 50, width: 180 }]}>
+										{lactose && <CancelButton />}
+										<LinearGradient
+											colors={lactose ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+											style={{
+												width: lactose ? '100%' : '85%',
+												height: lactose ? '100%' : '85%',
+												borderRadius: 15
+											}}
+										>
+											<Text
+												style={[
+													styles.clickableText,
+													{
+														color: lactose ? 'white' : '#6F5C63',
+														fontFamily: lactose ? 'OverpassBlack' : 'OverpassBold',
+														fontSize: lactose ? 20 : 16
+													}
+												]}
+											>
+												Lactose Intolerant
+											</Text>
+										</LinearGradient>
+									</TouchableOpacity>
+								</View>
+								<View style={styles.row}>
+									<TouchableOpacity onPress={() => setSoyAllergy(!soyAllergy)} style={[styles.clickable, { height: 50, width: 180 }]}>
+										{soyAllergy && <CancelButton />}
+										<LinearGradient
+											colors={soyAllergy ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+											style={{
+												width: soyAllergy ? '100%' : '85%',
+												height: soyAllergy ? '100%' : '85%',
+												borderRadius: 15
+											}}
+										>
+											<Text
+												style={[
+													styles.clickableText,
+													{
+														color: soyAllergy ? 'white' : '#6F5C63',
+														fontFamily: soyAllergy ? 'OverpassBlack' : 'OverpassBold',
+														fontSize: soyAllergy ? 20 : 16
+													}
+												]}
+											>
+												Soy Allergy
+											</Text>
+										</LinearGradient>
+									</TouchableOpacity>
+									<TouchableOpacity onPress={() => setNutAllergy(!nutAllergy)} style={[styles.clickable, { height: 50, width: 180 }]}>
+										{nutAllergy && <CancelButton />}
+										<LinearGradient
+											colors={nutAllergy ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+											style={{
+												width: nutAllergy ? '100%' : '85%',
+												height: nutAllergy ? '100%' : '85%',
+												borderRadius: 15
+											}}
+										>
+											<Text
+												style={[
+													styles.clickableText,
+													{
+														color: nutAllergy ? 'white' : '#6F5C63',
+														fontFamily: nutAllergy ? 'OverpassBlack' : 'OverpassBold',
+														fontSize: nutAllergy ? 20 : 16
+													}
+												]}
+											>
+												Nut Allergy
+											</Text>
+										</LinearGradient>
+									</TouchableOpacity>
+								</View>
+								<View style={styles.row}>
+									<TouchableOpacity onPress={() => setSugarFree(!sugarFree)} style={[styles.clickable, { height: 50, width: 180 }]}>
+										{sugarFree && <CancelButton />}
+										<LinearGradient
+											colors={sugarFree ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+											style={{
+												width: sugarFree ? '100%' : '85%',
+												height: sugarFree ? '100%' : '85%',
+												borderRadius: 15
+											}}
+										>
+											<Text
+												style={[
+													styles.clickableText,
+													{
+														color: sugarFree ? 'white' : '#6F5C63',
+														fontFamily: sugarFree ? 'OverpassBlack' : 'OverpassBold',
+														fontSize: sugarFree ? 20 : 16
+													}
+												]}
+											>
+												Sugar-free
+											</Text>
+										</LinearGradient>
+									</TouchableOpacity>
+									<TouchableOpacity onPress={() => setCaffeineFree(!caffeineFree)} style={[styles.clickable, { height: 50, width: 180 }]}>
+										{caffeineFree && <CancelButton />}
+										<LinearGradient
+											colors={caffeineFree ? ['#E9B7B6', '#E89089'] : ['#F8E3E5', '#F9E6E3']}
+											style={{
+												width: caffeineFree ? '100%' : '85%',
+												height: caffeineFree ? '100%' : '85%',
+												borderRadius: 15
+											}}
+										>
+											<Text
+												style={[
+													styles.clickableText,
+													{
+														color: caffeineFree ? 'white' : '#6F5C63',
+														fontFamily: caffeineFree ? 'OverpassBlack' : 'OverpassBold',
+														fontSize: caffeineFree ? 20 : 16
+													}
+												]}
+											>
+												Caffeine-free
+											</Text>
+										</LinearGradient>
+									</TouchableOpacity>
+								</View>
+							</View>
+						</>
+					)}
+					{page == 5 && (
+						<>
+							<View style={{ width: '100%', display: 'flex', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
+								<View style={styles.sectionTitleContainer}>
+									<Text style={styles.sectionTitleText}>LOCATION</Text>
+								</View>
+								<Text style={styles.locationText}>{location} miles</Text>
+							</View>
+							<Slider
+								style={{ width: '100%', height: 40 }}
+								minimumValue={5}
+								maximumValue={50}
+								minimumTrackTintColor='#E88985'
+								maximumTrackTintColor='#D7D7D7'
+								thumbTintColor='#6F5C63'
+								value={location}
+								onValueChange={(e) => {
+									setLocation(e);
+								}}
+								step={5}
+							/>
+							<MapView
+								initialRegion={{
+									latitude: 47.6545887800112,
+									longitude: -122.30545611222443,
+									latitudeDelta: 0.0922,
+									longitudeDelta: 0.0421
+								}}
+								style={styles.map}
+							>
+								<Circle
+									center={{ latitude: 47.6545887800112, longitude: -122.30545611222443 }}
+									radius={(location * 1609.34) / 2}
+									fillColor='rgba(136, 206, 240, .5)'
+									strokeColor='rgb(69, 156, 199)'
+								/>
+								<Marker
+									coordinate={{
+										latitude: 47.66737562827992,
+										longitude: -122.31148955694742
+									}}
+									title='Yifang Taiwan Fruit Tea UW'
+								/>
+								<Marker
+									coordinate={{
+										latitude: 47.613455536257206,
+										longitude: -122.31938328835254
+									}}
+									title='Drip Tea'
+								/>
+							</MapView>
+						</>
+					)}
+					{page != 1 && (
+						<View style={[styles.row, { marginTop: 'auto', marginBottom: 90 }]}>
+							{page > 1 && (
+								<TouchableOpacity onPress={() => setPage(1)} style={[styles.button]}>
+									<LinearGradient
+										colors={['#EAC5A9', '#E88984']}
+										start={{ x: 0, y: 0 }}
+										end={{ x: 1, y: 0 }}
+										style={{ padding: 2, width: '100%', height: '100%', borderRadius: 15 }}
+									>
+										<LinearGradient
+											colors={['#E98C86', '#E0A694']}
+											start={{ x: 0, y: 0 }}
+											end={{ x: 1, y: 0 }}
+											style={{
+												backgroundColor: 'white',
+												width: '100%',
+												height: '100%',
+												borderRadius: 13,
+												display: 'flex',
+												justifyContent: 'center',
+												alignItems: 'center'
+											}}
+										>
+											<Text style={{ fontFamily: 'OverpassBold', fontSize: 16, color: 'white' }}>BACK</Text>
+										</LinearGradient>
+									</LinearGradient>
+								</TouchableOpacity>
+							)}
+							{(page == 2 && !sweet && !refreshing && !creamy && !herbal && !fruity && !nutty) ||
+							(page == 3 && !hot && !cold) ||
+							(page == 4 && !glutenFree && !lactose && !soyAllergy && !nutAllergy && !sugarFree && !caffeineFree) ? (
+								<TouchableOpacity disabled style={[styles.button, { marginLeft: 'auto' }]}>
+									<LinearGradient
+										colors={['#E88985', '#EAC1A7']}
+										start={{ x: 0, y: 0 }}
+										end={{ x: 1, y: 0 }}
+										style={{ padding: 2, width: '100%', height: '100%', borderRadius: 15 }}
+									>
+										<View
+											style={{
+												backgroundColor: 'white',
+												width: '100%',
+												height: '100%',
+												borderRadius: 13,
+												display: 'flex',
+												justifyContent: 'center',
+												alignItems: 'center'
+											}}
+										>
+											<GradientText style={{ fontFamily: 'OverpassBold', fontSize: 16 }}>SAVE</GradientText>
+										</View>
+									</LinearGradient>
+								</TouchableOpacity>
+							) : (
+								<TouchableOpacity onPress={() => savePreferences()} style={[styles.button, { marginLeft: 'auto' }]}>
+									<LinearGradient
+										colors={['#EAC5A9', '#E88984']}
+										start={{ x: 0, y: 0 }}
+										end={{ x: 1, y: 0 }}
+										style={{ padding: 2, width: '100%', height: '100%', borderRadius: 15 }}
+									>
+										<LinearGradient
+											colors={['#E98C86', '#E0A694']}
+											start={{ x: 0, y: 0 }}
+											end={{ x: 1, y: 0 }}
+											style={{
+												backgroundColor: 'white',
+												width: '100%',
+												height: '100%',
+												borderRadius: 13,
+												display: 'flex',
+												justifyContent: 'center',
+												alignItems: 'center'
+											}}
+										>
+											<Text style={{ fontFamily: 'OverpassBold', fontSize: 16, color: 'white' }}>SAVE</Text>
+										</LinearGradient>
+									</LinearGradient>
+								</TouchableOpacity>
+							)}
 						</View>
 					)}
 				</Container>
@@ -153,7 +702,7 @@ export default function PreferenceScreen() {
 			<View style={{ position: 'absolute', top: 0, left: 0, zIndex: -1 }}>
 				<PreferenceBackground></PreferenceBackground>
 			</View>
-			<Container background={false} title={"Customize Profile"}>
+			<Container background={false} title={'Customize Profile'}>
 				<BobaImage></BobaImage>
 
 				{page < 5 && (
@@ -706,9 +1255,54 @@ export default function PreferenceScreen() {
 				)}
 				{page < 5 && (
 					<View style={[styles.row, { marginTop: 'auto', marginBottom: 90 }]}>
-						{page > 1 && (
+						{page == 1 ? (
+							<TouchableOpacity disabled onPress={() => setPage(page - 1)} style={[styles.button]}>
+								<LinearGradient
+									colors={['#E88985', '#EAC1A7']}
+									start={{ x: 0, y: 0 }}
+									end={{ x: 1, y: 0 }}
+									style={{ padding: 2, width: '100%', height: '100%', borderRadius: 15 }}
+								>
+									<View
+										style={{
+											backgroundColor: 'white',
+											width: '100%',
+											height: '100%',
+											borderRadius: 13,
+											display: 'flex',
+											justifyContent: 'center',
+											alignItems: 'center'
+										}}
+									>
+										<GradientText style={{ fontFamily: 'OverpassBold', fontSize: 16 }}>BACK</GradientText>
+									</View>
+								</LinearGradient>
+							</TouchableOpacity>
+						) : (
 							<TouchableOpacity onPress={() => setPage(page - 1)} style={[styles.button]}>
-								<Text>back</Text>
+								<LinearGradient
+									colors={['#EAC5A9', '#E88984']}
+									start={{ x: 0, y: 0 }}
+									end={{ x: 1, y: 0 }}
+									style={{ padding: 2, width: '100%', height: '100%', borderRadius: 15 }}
+								>
+									<LinearGradient
+										colors={['#E98C86', '#E0A694']}
+										start={{ x: 0, y: 0 }}
+										end={{ x: 1, y: 0 }}
+										style={{
+											backgroundColor: 'white',
+											width: '100%',
+											height: '100%',
+											borderRadius: 13,
+											display: 'flex',
+											justifyContent: 'center',
+											alignItems: 'center'
+										}}
+									>
+										<Text style={{ fontFamily: 'OverpassBold', fontSize: 16, color: 'white' }}>BACK</Text>
+									</LinearGradient>
+								</LinearGradient>
 							</TouchableOpacity>
 						)}
 						{(page == 1 && !sweet && !refreshing && !creamy && !herbal && !fruity && !nutty) ||
@@ -908,7 +1502,7 @@ const styles = StyleSheet.create({
 		},
 		shadowOpacity: 0.25,
 		shadowRadius: 5,
-        marginVertical: 10,
+		marginVertical: 10
 	},
 	editColumn: {
 		display: 'flex',
@@ -922,13 +1516,18 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center'
 	},
-    editBox: {
-        backgroundColor: 'white',
-        height: 125,
-        width: 125,
-        borderRadius: 15,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
+	editBox: {
+		backgroundColor: 'white',
+		height: 125,
+		width: 125,
+		borderRadius: 15,
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	editText: {
+		color: '#6F5C63',
+		fontSize: 16,
+		fontFamily: 'OverpassBold'
+	}
 });
