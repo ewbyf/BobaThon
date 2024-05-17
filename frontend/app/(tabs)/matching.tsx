@@ -17,7 +17,6 @@ export default function MatchingScreen() {
 
 	// TODO: FIX BUG WITH SPACING ON TOP OF SCROLLVIEW
 
-
 	const resetBobaList = () => {
 		setBobas(bobaList);
 		// remove previously matched bobas
@@ -62,9 +61,11 @@ export default function MatchingScreen() {
 
 	return (
 		<Container title="Find Your Boba">
-				<View style={styles.contCard}>
-					<BobaCard boba={bobas[index]} />
-				</View>
+			<View style={styles.contCard}>
+				{bobas.map((boba) => (
+					<BobaCard key={boba.id} boba={boba} numOfBobas={bobas.length} curIndex={index} />
+				))}
+			</View>
 		</Container>
 	);
 }
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
 		display: 'flex',
 	},
 	card: {
-		backgroundColor: 'grey',
+		backgroundColor: 'pink',
 		width: '100%',
 		display: 'flex',
 		borderRadius: 15,

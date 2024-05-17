@@ -20,12 +20,12 @@ const BobaCard = ({ boba }: { boba: IBoba }) => {
 		>
 			<View style={styles.card}>
 				<Image source={require('../assets/images/DrinkSelection.png')} style={{ height: 450 }} resizeMode="contain"></Image>
-				<TouchableOpacity style={styles.reject} /*onPress={reject} */>
+				{/* <TouchableOpacity style={styles.reject} onPress={reject} >
 					<Ionicons size={28} name="close-outline" color="white"></Ionicons>
-				</TouchableOpacity>
-				<TouchableOpacity style={styles.accept} /* onPress={match}*/>
+				</TouchableOpacity> */}
+				{/* <TouchableOpacity style={styles.accept} onPress={match}>
 					<Ionicons size={28} name="checkmark-outline" color="white"></Ionicons>
-				</TouchableOpacity>
+				</TouchableOpacity> */}
 			</View>
 			<View style={styles.aboutSection}>
 				<View style={styles.descriptionContainer}>
