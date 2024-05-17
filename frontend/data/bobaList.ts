@@ -12,13 +12,7 @@ export const bobaList: IBoba[] = [
 		cost: '$10',
 		stars: 5,
 		popularToppings: ['boba'],
-		reviews: [
-			{
-				name: 'Bob',
-				content: 'Very delicious! My favorite!',
-				stars: 5,
-			},
-		],
+		reviews: [],
 	},
 	{
 		id: 1,
