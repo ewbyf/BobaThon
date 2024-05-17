@@ -4,18 +4,6 @@ import { Images } from '../lib/images';
 export const bobaList: IBoba[] = [
 	{
 		id: 0,
-		name: 'Taro Bubble Tea',
-		description: 'Delicious boba with milky flavor',
-		store: 'Cube Tea',
-		img: Images.boba1,
-		tags: ['sweet'],
-		cost: '$10',
-		stars: 5,
-		popularToppings: ['boba'],
-		reviews: [],
-	},
-	{
-		id: 1,
 		name: 'Yifang Fruit Tea',
 		description: 'PUT SOME DESCRIPTION HERE',
 		store: 'Yifang Taiwan Fruit Tea',
@@ -27,7 +15,7 @@ export const bobaList: IBoba[] = [
 		reviews: [],
 	},
 	{
-		id: 2,
+		id: 1,
 		name: 'Mango Pomelo Sago',
 		description: 'PUT SOME DESCRIPTION HERE',
 		store: 'Yifang Taiwan Fruit Tea',
@@ -39,7 +27,7 @@ export const bobaList: IBoba[] = [
 		reviews: [],
 	},
 	{
-		id: 3,
+		id: 2,
 		name: 'Brown Sugar Pearl Oolong Tea Latte',
 		description: 'PUT SOME DESCRIPTION HERE',
 		store: 'Yifang Taiwan Fruit Tea',
@@ -51,7 +39,7 @@ export const bobaList: IBoba[] = [
 		reviews: [],
 	},
 	{
-		id: 4,
+		id: 3,
 		name: 'Grapefruit Lemon Fruit Tea',
 		description: 'PUT SOME DESCRIPTION HERE',
 		store: 'Yifang Taiwan Fruit Tea',
@@ -63,7 +51,7 @@ export const bobaList: IBoba[] = [
 		reviews: [],
 	},
 	{
-		id: 5,
+		id: 4,
 		name: 'Pineapple Green Tea',
 		description: 'PUT SOME DESCRIPTION HERE',
 		store: 'Yifang Taiwan Fruit Tea',
@@ -75,7 +63,7 @@ export const bobaList: IBoba[] = [
 		reviews: [],
 	},
 	{
-		id: 6,
+		id: 5,
 		name: 'Yakult with Passion Fruit Green Tea',
 		description: 'PUT SOME DESCRIPTION HERE',
 		store: 'Yifang Taiwan Fruit Tea',
@@ -87,7 +75,7 @@ export const bobaList: IBoba[] = [
 		reviews: [],
 	},
 	{
-		id: 7,
+		id: 6,
 		name: 'Sweet Taro Sago Latte',
 		description: 'PUT SOME DESCRIPTION HERE',
 		store: 'Yifang Taiwan Fruit Tea',
@@ -99,7 +87,7 @@ export const bobaList: IBoba[] = [
 		reviews: [],
 	},
 	{
-		id: 8,
+		id: 7,
 		name: 'Taro with Milk',
 		description: 'PUT SOME DESCRIPTION HERE',
 		store: 'Yifang Taiwan Fruit Tea',

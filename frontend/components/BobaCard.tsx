@@ -69,14 +69,11 @@ const BobaCard = ({ boba, numOfBobas, index, activeIndex, onResponse }: BobaType
 					},
 				]}
 			>
-				<Image style={[StyleSheet.absoluteFillObject, styles.image]} source={boba.img} />
-
-				<LinearGradient
-					// Background Linear Gradient
+				<Image style={styles.image} source={boba.img} />
+				{/* <LinearGradient
 					colors={['transparent', 'rgba(0,0,0,0.8)']}
 					style={[StyleSheet.absoluteFillObject, styles.overlay]}
-				/>
-
+				/> */}
 				<View style={styles.footer}>
 					<Text style={styles.name}>{boba.name}</Text>
 				</View>
@@ -91,8 +88,8 @@ const styles = StyleSheet.create({
 		// height: tinderCardWidth * 1.67,
 		aspectRatio: 1 / 1.67,
 		borderRadius: 15,
-		justifyContent: 'flex-end',
 
+		backgroundColor: 'white',
 		position: 'absolute',
 
 		// shadow
@@ -105,11 +102,14 @@ const styles = StyleSheet.create({
 		shadowRadius: 2.22,
 
 		elevation: 3,
+		gap: 10,
 	},
 	image: {
+		marginTop: 16,
+		alignSelf: 'center',
 		borderRadius: 15,
-		height: '100%',
-		width: '100%',
+		height: tinderCardWidth,
+		width: tinderCardWidth * 0.8,
 	},
 	overlay: {
 		top: '50%',
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
 	},
 	name: {
 		fontSize: 24,
-		color: 'white',
+		color: '#6F5C63',
 		fontFamily: 'InterBold',
 	},
 });
