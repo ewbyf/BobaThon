@@ -108,6 +108,8 @@ const styles = StyleSheet.create({
 	},
 	image: {
 		borderRadius: 15,
+		height: '100%',
+		width: '100%',
 	},
 	overlay: {
 		top: '50%',
