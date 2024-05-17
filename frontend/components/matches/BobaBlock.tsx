@@ -1,8 +1,9 @@
 import { View, Text, Image, StyleSheet } from "react-native";
 import React from "react";
+import { router } from "expo-router";
 
 type BobaBlockType = {
-  label: String;
+  label: string;
   rating: Number;
   description: String;
 };
@@ -59,7 +60,17 @@ const BobaBlock = (props: BobaBlockType) => {
         </View>
         <View style={styles.positionInfo}>
           <View style={styles.moreInfoButton}>
-            <Text style={styles.infoButtonText}>MORE</Text>
+            <Text
+              style={styles.infoButtonText}
+              onPress={() =>
+                router.push({
+                  pathname: "/bobaMatch",
+                  params: { boba: props.label },
+                })
+              }
+            >
+              MORE
+            </Text>
           </View>
         </View>
       </View>

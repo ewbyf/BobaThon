@@ -16,7 +16,7 @@ import api from "@/services/axiosConfig";
 import * as SecureStore from "expo-secure-store";
 
 type Boba = {
-  name: String;
+  name: string;
   description: String;
   store: String;
   // img: Images.SweetTaroSagoLatte,
@@ -30,22 +30,68 @@ type Boba = {
 export default function MatchesScreen() {
   const [matches, setMatches] = useState<Boba[]>([]);
 
+  let id: NodeJS.Timeout;
+
+  // const promisifedPingApi = new Promise((resolve, reject) => {
+  //   id = setInterval(async () => {
+  //     const response = await api.get("/matches", {
+  //       params: { token: "617d6beb-a61f-42ee-9f6a-de6ce8083609" },
+  //     });
+  //     resolve(response.data);
+  //   }, 3000);
+  // });
+
+  // Promise.race([
+  //   promisifedPingApi,
+  //   new Promise((_, reject) => {
+  //     setTimeout(() => reject("Timeout!"), 1000);
+  //   }),
+  // ])
+  //   .then((res) => {
+  //     console.log("response: ", res);
+  //     clearInterval(id);
+  //   })
+  //   .catch((e) => {
+  //     console.error("error: ", e);
+  //     clearInterval(id);
+  //   });
+
   async function getMatches() {
-    const response = await api.get("/matches", {
-      params: { token: "617d6beb-a61f-42ee-9f6a-de6ce8083609" },
-    });
-    setMatches(response.data.matches);
+    // api
+    //   .get("/matches", {
+    //     params: { token: "617d6beb-a61f-42ee-9f6a-de6ce8083609" },
+    //   })
+    //   .then((response) => {
+    //     setMatches(response.data.matches);
+    //   })
+    //   .catch((error) => {
+    //     if (error.response) {
+    //       // The server responded with a status code outside the 2xx range
+    //       console.log("Error response:", error.response);
+    //     } else if (error.request) {
+    //       // The request was made but no response was received
+    //       console.log("Error request:", error.request);
+    //     } else {
+    //       // Something happened in setting up the request that triggered an error
+    //       console.log("Error message:", error.message);
+    //     }
+    //   });
+
+    try {
+      const response = await api.get("/matches", {
+        params: { token: "617d6beb-a61f-42ee-9f6a-de6ce8083609" },
+      });
+      setMatches(response.data.matches);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  function startShowingMessage() {
-    setInterval(getMatches, 10000);
-  }
+  getMatches();
+  // setInterval(getMatches, 10000);
 
-  startShowingMessage;
-
-  //use a useeffect to constantly update the bobas
   return (
-    <Container title="Matches">
+    <Container title="Matches" scroll>
       {/*add a bobablock per each match */}
       <View style={styles.searchbar}>
         <Ionicons name="search" size={30} color="#a38f93" />
@@ -55,19 +101,16 @@ export default function MatchesScreen() {
           style={styles.searchInput}
         ></TextInput>
       </View>
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.separateMatches}>
-          {matches.map((match: Boba, i) => (
-            <BobaBlock
-              label={match.name}
-              rating={3}
-              description={match.description}
-              key={i}
-            />
-          ))}
-          <Text onPress={() => getMatches()}>press this </Text>
-        </View>
-      </ScrollView>
+      <View style={styles.separateMatches}>
+        {matches.map((match: Boba, i) => (
+          <BobaBlock
+            label={match.name}
+            rating={3}
+            description={match.description}
+            key={i}
+          />
+        ))}
+      </View>
     </Container>
   );
 }
