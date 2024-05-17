@@ -1,3 +1,5 @@
+import { ImageSourcePropType } from "react-native";
+
 export interface IBoba {
 	id: number;
 	name: string;
@@ -16,4 +18,5 @@ export interface IReview {
 	content: string;
 	stars: number;
     author: string;
+    img?: ImageSourcePropType;
 }

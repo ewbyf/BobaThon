@@ -2,15 +2,8 @@ import { IReview } from "@/interfaces/interfaces";
 import { Images } from "@/lib/images";
 import { ImageSourcePropType } from "react-native";
 
-interface ReviewListType {
-    name: string;
-    author: string;
-    content: string;
-    stars: number;
-    img: ImageSourcePropType;
-}
 
-export const reviewList: ReviewListType[] = [
+export const reviewList: IReview[] = [
     {
         name: 'Taro with Milk',
         author: 'Eric Wong',

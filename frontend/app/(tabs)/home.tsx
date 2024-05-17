@@ -1,4 +1,5 @@
 import Container from '@/components/Container';
+import Review from '@/components/Review';
 import ExploreBackground from '@/components/backgrounds/ExploreBackground';
 import { bobaList } from '@/data/bobaList';
 import { reviewList } from '@/data/reviewList';
@@ -6,6 +7,7 @@ import { IBoba } from '@/interfaces/interfaces';
 import { Images } from '@/lib/images';
 import { getStorage } from '@/lib/storage';
 import api from '@/services/axiosConfig';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { Button, Dimensions, Image, StyleSheet, Text, TextInput, View } from 'react-native';
@@ -34,8 +36,12 @@ export default function HomeScreen() {
 				<ExploreBackground></ExploreBackground>
 			</View>
 
-			<Container title="Explore Boba" explore={true}>
-				<TextInput placeholder="Search" style={styles.searchbar}></TextInput>
+			<Container title='Explore Boba' explore={true}>
+				<View style={styles.searchbar}>
+					<Ionicons name='search-outline' color='#98858A' size={24}></Ionicons>
+					<TextInput placeholder='Search for boba...' style={styles.innerSearch}></TextInput>
+				</View>
+
 				<Carousel
 					loop
 					width={width}
@@ -53,10 +59,10 @@ export default function HomeScreen() {
 								alignItems: 'center',
 								marginHorizontal: 15,
 								borderRadius: 25,
-								height: 200,
+								height: 200
 							}}
 						>
-							<Image source={item} style={{ width: '100%', height: '100%', borderRadius: 25 }} resizeMode="cover"></Image>
+							<Image source={item} style={{ width: '100%', height: '100%', borderRadius: 25 }} resizeMode='cover'></Image>
 						</View>
 					)}
 				/>
@@ -68,33 +74,17 @@ export default function HomeScreen() {
 						horizontal
 						snapToInterval={370}
 						snapToAlignment='start'
-                        decelerationRate="fast"
+						decelerationRate='fast'
 						style={{ display: 'flex', paddingVertical: 20, paddingHorizontal: 20, width: width }}
 						contentContainerStyle={{ gap: 20, paddingRight: 40 }}
 					>
 						{reviewList.map((review) => (
-							<View style={styles.post}>
-								<View style={{ width: '45%', height: '100%', borderRadius: 25 }}>
-									<Image source={review.img} resizeMode="cover" style={{ height: '100%', width: '100%', borderRadius: 25 }}></Image>
-								</View>
-
-								<View style={styles.postContent}>
-									<Text style={styles.title}>{review.name}</Text>
-									<Text style={styles.name}>{review.author}</Text>
-									<StarRatingDisplay
-										rating={review.stars}
-										starStyle={{ marginHorizontal: 0, marginTop: 3, marginBottom: 8 }}
-										starSize={20}
-										color="#E9A898"
-									/>
-									<Text style={styles.description}>{review.content}</Text>
-								</View>
-							</View>
+							<Review review={review}></Review>
 						))}
 					</ScrollView>
 				</View>
 
-				<Button onPress={() => router.navigate('/main')} title="aa"></Button>
+				<Button onPress={() => router.navigate('/main')} title='aa'></Button>
 			</Container>
 		</>
 	);
@@ -106,29 +96,38 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-		width: '100%',
+		width: '100%'
 	},
 	searchbar: {
-		borderWidth: 1.5,
-		borderColor: 'grey',
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
 		borderRadius: 50,
-		paddingHorizontal: 15,
-		paddingVertical: 10,
+		paddingHorizontal: 20,
+		paddingVertical: 12.5,
 		width: '100%',
+		backgroundColor: '#F8E3E5'
 	},
+    innerSearch: {
+        flex: 1,
+        paddingLeft: 10,
+        fontFamily: 'Overpass',
+        fontSize: 14,
+        color: '#6F5C63'
+    },
 	title: {
 		fontSize: 20,
 		fontFamily: 'OverpassBold',
 		textAlign: 'left',
 		width: '100%',
-		color: '#6F5C63',
+		color: '#6F5C63'
 	},
 	post: {
 		width: 350,
 		height: 250,
 		shadowOffset: {
 			width: 0,
-			height: 3,
+			height: 3
 		},
 		shadowOpacity: 0.25,
 		shadowRadius: 5,
@@ -138,25 +137,25 @@ const styles = StyleSheet.create({
 		borderRadius: 15,
 		alignItems: 'center',
 		gap: 10,
-		padding: 15,
+		padding: 15
 	},
 	postContent: {
 		display: 'flex',
 		justifyContent: 'flex-start',
 		height: '100%',
 		flex: 1,
-		paddingVertical: 10,
+		paddingVertical: 10
 	},
 	name: {
 		fontSize: 16,
 		fontFamily: 'OverpassLight',
 		textAlign: 'left',
 		color: '#6F5C63',
-		marginLeft: 3,
+		marginLeft: 3
 	},
 	description: {
 		fontSize: 16,
 		fontFamily: 'OverpassLight',
-		color: '#6F5C63',
-	},
+		color: '#6F5C63'
+	}
 });
