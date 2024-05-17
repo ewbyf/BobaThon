@@ -76,7 +76,7 @@ export default function MatchingScreen() {
 				<View style={styles.matchingIcons}>
 					<Left />
 					<Right />
-				</View>	
+				</View>
 			</View>
 		</Container>
 	);

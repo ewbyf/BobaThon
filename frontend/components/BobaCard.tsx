@@ -8,7 +8,7 @@ import { PanGesture } from 'react-native-gesture-handler';
 import { IBoba } from '@/interfaces/interfaces';
 
 const screenWidth = Dimensions.get('screen').width;
-export const tinderCardWidth = screenWidth * 0.8;
+export const tinderCardWidth = screenWidth * 0.86;
 
 interface BobaType {
 	boba: IBoba;
@@ -28,7 +28,7 @@ const BobaCard = ({ boba, numOfBobas, index, activeIndex, onResponse }: BobaType
 				scale: interpolate(activeIndex.value, [index - 1, index, index + 1], [0.95, 1, 1]),
 			},
 			{
-				translateY: interpolate(activeIndex.value, [index - 1, index, index + 1], [-30, 0, 0]),
+				translateY: interpolate(activeIndex.value, [index - 1, index, index + 1], [-25, 0, 0]),
 			},
 			{
 				translateX: translationX.value,
