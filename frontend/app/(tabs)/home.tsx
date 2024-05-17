@@ -1,4 +1,5 @@
 import Container from '@/components/Container';
+import Review from '@/components/Review';
 import ExploreBackground from '@/components/backgrounds/ExploreBackground';
 import { bobaList } from '@/data/bobaList';
 import { reviewList } from '@/data/reviewList';
@@ -78,23 +79,7 @@ export default function HomeScreen() {
 						contentContainerStyle={{ gap: 20, paddingRight: 40 }}
 					>
 						{reviewList.map((review) => (
-							<View style={styles.post}>
-								<View style={{ width: '45%', height: '100%', borderRadius: 25 }}>
-									<Image source={review.img} resizeMode='cover' style={{ height: '100%', width: '100%', borderRadius: 25 }}></Image>
-								</View>
-
-								<View style={styles.postContent}>
-									<Text style={styles.title}>{review.name}</Text>
-									<Text style={styles.name}>{review.author}</Text>
-									<StarRatingDisplay
-										rating={review.stars}
-										starStyle={{ marginHorizontal: 0, marginTop: 3, marginBottom: 8 }}
-										starSize={20}
-										color='#E9A898'
-									/>
-									<Text style={styles.description}>{review.content}</Text>
-								</View>
-							</View>
+							<Review review={review}></Review>
 						))}
 					</ScrollView>
 				</View>
