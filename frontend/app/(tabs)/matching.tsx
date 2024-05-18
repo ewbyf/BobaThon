@@ -16,6 +16,7 @@ import First from '@/components/icons/First';
 import Second from '@/components/icons/Second';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
+import BeforePref from '@/components/BeforePref';
 
 export default function MatchingScreen() {
 	const [bobas, setBobas] = useState<IBoba[]>([]);
@@ -161,48 +162,56 @@ export default function MatchingScreen() {
 
 	if (!hasSetPreferences) {
 		return (
-			<View>
-				<First />
-				<Text style={styles.header}>Set Up Preferences!</Text>
-				<Second />
-				<View style={styles.textCont}>
-					<Text>Get Personalized Recomendations</Text>
-					<Text>and</Text>
-					<Text>Match with the Boba of Your Dreams!</Text>
+			<>
+				<View style={{ position: 'absolute', top: 0, left: 0, zIndex: -2 }}>
+					<BeforePref />
 				</View>
-				<TouchableOpacity
-					onPress={() =>
-						router.navigate({
-							pathname: '/preferences',
-						})
-					}
-					style={[styles.btn, { marginLeft: 'auto' }]}
-				>
-					<LinearGradient
-						colors={['#EAC5A9', '#E88984']}
-						start={{ x: 0, y: 0 }}
-						end={{ x: 1, y: 0 }}
-						style={{ padding: 2, width: '100%', height: '100%', borderRadius: 15 }}
-					>
-						<LinearGradient
-							colors={['#E98C86', '#E0A694']}
-							start={{ x: 0, y: 0 }}
-							end={{ x: 1, y: 0 }}
-							style={{
-								backgroundColor: 'white',
-								width: '100%',
-								height: '100%',
-								borderRadius: 13,
-								display: 'flex',
-								justifyContent: 'center',
-								alignItems: 'center',
-							}}
+
+				<Container title={"Let's go!"} background={false}>
+					<View style={styles.box}>
+						<First />
+						<Text style={styles.header}>Set Up Preferences!</Text>
+						<Second />
+						<View style={styles.textCont}>
+							<Text style={styles.header}>Get Personalized Recomendations</Text>
+							<Text style={[styles.header, { marginTop: 5, marginBottom: 8 }]}>and</Text>
+							<Text style={styles.header}>Match with the Boba of Your Dreams!</Text>
+						</View>
+						<TouchableOpacity
+							onPress={() =>
+								router.navigate({
+									pathname: '/preferences',
+								})
+							}
+							style={styles.btn}
 						>
-							<Text style={{ fontFamily: 'OverpassBold', fontSize: 16, color: 'white' }}>Start</Text>
-						</LinearGradient>
-					</LinearGradient>
-				</TouchableOpacity>
-			</View>
+							<LinearGradient
+								colors={['#EAC5A9', '#E88984']}
+								start={{ x: 0, y: 0 }}
+								end={{ x: 1, y: 0 }}
+								style={{ padding: 2, width: '100%', height: '100%', borderRadius: 15 }}
+							>
+								<LinearGradient
+									colors={['#E98C86', '#E0A694']}
+									start={{ x: 0, y: 0 }}
+									end={{ x: 1, y: 0 }}
+									style={{
+										backgroundColor: 'white',
+										width: '100%',
+										height: '100%',
+										borderRadius: 13,
+										display: 'flex',
+										justifyContent: 'center',
+										alignItems: 'center',
+									}}
+								>
+									<Text style={{ fontFamily: 'OverpassBold', fontSize: 29, color: 'white' }}>Start</Text>
+								</LinearGradient>
+							</LinearGradient>
+						</TouchableOpacity>
+					</View>
+				</Container>
+			</>
 		);
 	}
 
@@ -274,11 +283,24 @@ const styles = StyleSheet.create({
 		shadowRadius: 4,
 	},
 	// NO PREF SET
-	header: {},
+	box: {
+		height: '100%',
+		flex: 1,
+		alignItems: 'center',
+		width: '100%',
+		marginTop: 20,
+		gap: 30,
+	},
+	header: {
+		color: 'white',
+		fontFamily: 'OverpassBold',
+		fontSize: 30,
+		textAlign: 'center',
+	},
 	textCont: {},
 	btn: {
-		width: 100,
-		height: 40,
+		width: 150,
+		height: 60,
 		backgroundColor: 'white',
 		borderRadius: 15,
 		display: 'flex',
