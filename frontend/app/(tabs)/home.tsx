@@ -49,6 +49,7 @@ export default function HomeScreen() {
 					autoPlayInterval={5000}
 					renderItem={({ item }) => (
 						<View
+                            key={item}
 							style={{
 								flex: 1,
 								display: 'flex',
