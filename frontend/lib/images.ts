@@ -14,4 +14,5 @@ export const Images = {
 	Nigo: require('../assets/images/Nigo.png'),
 	Takahashi: require('../assets/images/Takahashi.png'),
 	Monogram: require('../assets/images/Monogram.png'),
+	Heart: require('../assets/images/Heart.png'),
 };
