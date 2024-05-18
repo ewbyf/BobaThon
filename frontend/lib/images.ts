@@ -9,5 +9,6 @@ export const Images = {
 	PineappleGreenTea: require('../assets/images/PineappleGreenTea.png'),
 	YakultwithPassionFruitGreenTea: require('../assets/images/YakultwithPassionFruitGreenTea.png'),
 	SweetTaroSagoLatte: require('../assets/images/SweetTaroSagoLatte.png'),
-	TarowithMilk: require('../assets/images/TarowithMilk.png')
+	TarowithMilk: require('../assets/images/TarowithMilk.png'),
+	Abloh: require('../assets/images/Abloh.png'),
 };

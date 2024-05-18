@@ -226,4 +226,90 @@ export const bobaList: IBoba[] = [
 			},
 		],
 	},
+	// SECOND BUBBLE TEA SHOP
+	{
+		id: 8,
+		name: 'Abloh',
+		description:
+			'Abloh bursts with mango & passion fruit, balanced by green tea. Chewy mango bits add a playful twist. A refreshing tropical escape in every sip.',
+		store: 'Drip Tea',
+		img: Images.Abloh,
+		tags: ['Cold', 'Fruity', 'Refreshing', 'Lactose-Intolerance'],
+		cost: '$7.25',
+		stars: 5,
+		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
+		reviews: [
+			{
+				name: 'Abloh',
+				author: 'Matthew G.',
+				content:
+					"The passion fruit and mango flavors are perfectly balanced against the green tea, creating a refreshing and vibrant drink. The chewy mango bits add a delightful textural surprise. It's like a mini vacation in every sip!  Absolutely love it!",
+				stars: 5,
+			},
+			{
+				name: 'Abloh',
+				author: 'William B',
+				content:
+					"I wasn't expecting much from Abloh, but I was pleasantly surprised! The flavors are so well-balanced, and the mango bits add a nice textural contrast.  It's refreshing and delicious, perfect for a hot day.  A new favorite!",
+				stars: 4,
+			},
+		],
+	},
+	//next
+	{
+		id: 9,
+		name: '',
+		description: '',
+		store: 'Drip Tea',
+		img: Images.Abloh,
+		tags: ['Cold', 'Fruity', 'Refreshing', 'Lactose-Intolerance'],
+		cost: '$7.25',
+		stars: 5,
+		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
+		reviews: [],
+	},
+
+	//next
+
+	{
+		id: 10,
+		name: '',
+		description: '',
+		store: 'Drip Tea',
+		img: Images.Abloh,
+		tags: ['Cold', 'Fruity', 'Refreshing', 'Lactose-Intolerance'],
+		cost: '$7.25',
+		stars: 5,
+		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
+		reviews: [],
+	},
+
+	// nez
+	{
+		id: 11,
+		name: '',
+		description: '',
+		store: 'Drip Tea',
+		img: Images.Abloh,
+		tags: ['Cold', 'Fruity', 'Refreshing', 'Lactose-Intolerance'],
+		cost: '$7.25',
+		stars: 5,
+		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
+		reviews: [],
+	},
+
+	//
+
+	{
+		id: 12,
+		name: '',
+		description: '',
+		store: 'Drip Tea',
+		img: Images.Abloh,
+		tags: ['Cold', 'Fruity', 'Refreshing', 'Lactose-Intolerance'],
+		cost: '$7.25',
+		stars: 5,
+		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
+		reviews: [],
+	},
 ];
