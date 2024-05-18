@@ -1,8 +1,9 @@
 import { IBoba } from '@/interfaces/interfaces';
 import { router } from 'expo-router';
 import React from 'react';
-import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { StarRatingDisplay } from 'react-native-star-rating-widget';
+import { Image } from 'expo-image';
 
 const BobaBlock = ({ boba }: { boba: IBoba }) => {
 	return (

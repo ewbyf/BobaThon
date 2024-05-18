@@ -26,12 +26,12 @@ export default function MatchingScreen() {
 		}
 	);
 
-	useEffect(() => {
-		if (index > bobas.length - 3) {
-			console.warn('Last 2 cards remining. Fetch more!');
-			setBobas((bobs) => [...bobs, ...bobs.reverse()]);
-		}
-	}, [index]);
+	// useEffect(() => {
+	// 	if (index > bobas.length - 3) {
+	// 		console.warn('Last 2 cards remining. Fetch more!');
+	// 		setBobas((bobs) => [...bobs, ...bobs.reverse()]);
+	// 	}
+	// }, [index]);
 
 	const onResponse = (res: boolean) => {
 		console.log('on Response: ', res);

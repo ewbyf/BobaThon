@@ -1,6 +1,7 @@
 import { IReview } from '@/interfaces/interfaces';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { StarRatingDisplay } from 'react-native-star-rating-widget';
+import { Image } from 'expo-image';
 
 const Review = ({ review }: { review: IReview }) => {
 	return (
