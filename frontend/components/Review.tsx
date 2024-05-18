@@ -1,22 +1,27 @@
 import { IReview } from '@/interfaces/interfaces';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { StarRatingDisplay } from 'react-native-star-rating-widget';
 import { Image } from 'expo-image';
+import { router } from 'expo-router';
 
 const Review = ({ review }: { review: IReview }) => {
 	return (
-		<View style={styles.post}>
-			<View style={{ width: '45%', height: '100%', borderRadius: 25 }}>
-				<Image source={review.img} resizeMode='cover' style={{ height: '100%', width: '100%', borderRadius: 25 }}></Image>
-			</View>
-
+		<TouchableOpacity style={styles.post} onPress={() =>
+            router.navigate({
+                pathname: '/bobaMatch',
+                params: { id: review.id, back: '/reviews' }
+            })
+        }>
+			{review.img && <View style={{ width: '45%', height: '100%', borderRadius: 25 }}>
+				<Image source={review.img} contentFit='cover' style={{ height: '100%', width: '100%', borderRadius: 25 }}></Image>
+			</View>}
 			<View style={styles.postContent}>
-				<Text style={styles.title}>{review.name}</Text>
+				<Text style={styles.title} numberOfLines={2}>{review.name}</Text>
 				<Text style={styles.name}>{review.author}</Text>
 				<StarRatingDisplay rating={review.stars} starStyle={{ marginHorizontal: 0, marginTop: 3, marginBottom: 8 }} starSize={20} color='#E9A898' />
-				<Text style={styles.description}>{review.content}</Text>
+				<Text style={styles.description} numberOfLines={5}>{review.content}</Text>
 			</View>
-		</View>
+		</TouchableOpacity>
 	);
 };
 

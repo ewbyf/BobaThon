@@ -22,7 +22,6 @@ export default function MatchesScreen() {
 			if (token) {
 				api.get(`matches?token=${token}`)
 					.then((resp) => {
-						console.log(resp.data);
 						setMatches([...bobaList.filter((boba) => resp.data.matches.includes(boba.id))]);
 						setInit(false);
 					})

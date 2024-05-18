@@ -10,43 +10,27 @@ import BobaProfile from '@/components/BobaProfile';
 function BobaMatch() {
 	const [boba, setBoba] = useState<IBoba>();
 	const [init, setInit] = useState(true);
-	const { id } = useLocalSearchParams();
+	const { id, back } = useLocalSearchParams();
 	const [selected, setSelected] = useState('origin');
+    const [currentImage, setCurrentImage] = useState()
+    const [imageLoading, setImageLoading] = useState(false);
 
 	useEffect(() => {
-		setBoba(bobaList.find((bob) => bob.id == Number(id)));
+        const b = bobaList.find((bob) => bob.id == Number(id));
+		setBoba(b);
+        setCurrentImage(b?.img);
 		setInit(false);
-	}, []);
+	}, [id]);
 
 	if (init) {
 		return null; // replace loading
 	}
 
 	return (
-		<BobaMatchContainer title='Matches'>
-			<Image source={boba?.img} style={styles.bobaImage}></Image>
+		<BobaMatchContainer title='Matches' back={typeof back === "string" ? back : "/"}>
+			<Image source={currentImage} onLoadStart={() => setImageLoading(true)} onLoadEnd={() => setImageLoading(false)} style={[styles.bobaImage, {height: imageLoading ? 0 : 400}]}></Image>
+            {imageLoading && <Text>LOADING</Text>}
             <BobaProfile boba={boba}/>
-			{/* <Text style={styles.bobaName}>{boba?.name}</Text>
-			<View style={styles.buttons}>
-				<TouchableOpacity onPress={() => setSelected('origin')} style={[styles.clickable]}>
-					<LinearGradient colors={selected === 'origin' ? ['#E9B2B0', '#E8948E'] : ['#EAC9AF', '#EAC9AF']} style={styles.buttonGradient}>
-						<Text style={[styles.clickableText]}>ORIGIN</Text>
-					</LinearGradient>
-				</TouchableOpacity>
-				<TouchableOpacity onPress={() => setSelected('ingredients')} style={[styles.clickable]}>
-					<LinearGradient colors={selected === 'ingredients' ? ['#E9B7B6', '#E89089'] : ['#EAC9AF', '#EAC9AF']} style={styles.buttonGradient}>
-						<Text style={[styles.clickableText]}>INGREDIENTS</Text>
-					</LinearGradient>
-				</TouchableOpacity>
-				<TouchableOpacity onPress={() => setSelected('reviews')} style={[styles.clickable]}>
-					<LinearGradient colors={selected === 'reviews' ? ['#E9B7B6', '#E89089'] : ['#EAC9AF', '#EAC9AF']} style={styles.buttonGradient}>
-						<Text style={[styles.clickableText]}>REVIEWS</Text>
-					</LinearGradient>
-				</TouchableOpacity>
-			</View>
-			<View style={styles.display}>
-				<Text style={styles.displayText}>somehow display origin</Text>
-			</View> */}
 		</BobaMatchContainer>
 	);
 }
@@ -54,7 +38,6 @@ function BobaMatch() {
 const styles = StyleSheet.create({
     bobaImage: {
 		width: '100%',
-		height: 400,
 		borderRadius: 15,
 		alignItems: 'center',
 		justifyContent: 'center'

@@ -177,7 +177,7 @@ export const bobaList: IBoba[] = [
 			'Taro is a root vegetable similar in texture to that of a potato, common in many sweet desserts across Asia. The Sweet Taro Sago Latte uses real mashed taro, organic milk and cream, and comes with chewy sago as a topping. This drink is caffeine-free.',
 		store: 'Yifang Taiwan Fruit Tea',
 		img: Images.SweetTaroSagoLatte,
-		tags: ['Cold', 'Creamy', 'Caffeine-Free'],
+		tags: ['Cold', 'Creamy', 'Caffeine-free'],
 		cost: '$7.50',
 		stars: 5,
 		popularToppings: ['Chewy Sago', 'Grass Jelly', 'Tapioca'],

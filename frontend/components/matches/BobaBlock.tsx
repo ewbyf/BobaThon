@@ -12,18 +12,18 @@ const BobaBlock = ({ boba }: { boba: IBoba }) => {
 			onPress={() =>
 				router.navigate({
 					pathname: '/bobaMatch',
-					params: { id: boba.id }
+					params: { id: boba.id, back: '/matches' }
 				})
 			}
 		>
 			<View style={{ width: '45%', height: '100%', borderRadius: 25 }}>
-				<Image source={boba.img} resizeMode='cover' style={{ height: '100%', width: '100%', borderRadius: 25 }}></Image>
+				<Image source={boba.img} contentFit='cover' style={{ height: '100%', width: '100%', borderRadius: 25 }}></Image>
 			</View>
 
 			<View style={styles.postContent}>
-				<Text style={styles.title}>{boba.name}</Text>
+				<Text style={styles.title} numberOfLines={2}>{boba.name}</Text>
 				<StarRatingDisplay rating={boba.stars} starStyle={{ marginHorizontal: 0, marginTop: 3, marginBottom: 8 }} starSize={20} color='#E9A898' />
-				<Text style={styles.description}>{boba.description}</Text>
+				<Text style={styles.description} numberOfLines={6}>{boba.description}</Text>
 			</View>
 		</TouchableOpacity>
 	);

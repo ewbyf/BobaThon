@@ -2,7 +2,7 @@ import { SafeAreaView, ScrollView, StyleSheet, View } from 'react-native';
 import BobaMatchHeader from './BobaMatchHeader';
 import SignInBackground from './backgrounds/SignInBackground';
 
-const BobaMatchContainer = ({ children, background, title }: { children: any; background?: boolean; title: string }) => {
+const BobaMatchContainer = ({ children, background, title, back }: { children: any; background?: boolean; title: string, back: string }) => {
 	if (background === undefined || background === true) {
 		return (
 			<>
@@ -16,7 +16,7 @@ const BobaMatchContainer = ({ children, background, title }: { children: any; ba
 						style={{ height: '100%', paddingHorizontal: 20, display: 'flex' }}
 						contentContainerStyle={{ alignItems: 'center', gap: 20, paddingBottom: 80 }}
 					>
-						<BobaMatchHeader title={title}></BobaMatchHeader>
+						<BobaMatchHeader title={title} back={back}></BobaMatchHeader>
 						{children}
 					</ScrollView>
 				</SafeAreaView>
@@ -25,7 +25,7 @@ const BobaMatchContainer = ({ children, background, title }: { children: any; ba
 	}
 	return (
 		<SafeAreaView style={styles.container}>
-			<BobaMatchHeader title={title}></BobaMatchHeader>
+			<BobaMatchHeader title={title} back={back}></BobaMatchHeader>
 			{children}
 		</SafeAreaView>
 	);

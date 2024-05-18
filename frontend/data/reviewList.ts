@@ -5,24 +5,37 @@ import { ImageSourcePropType } from "react-native";
 
 export const reviewList: IReview[] = [
     {
-        name: 'Taro with Milk',
-        author: 'Eric Wong',
-        content: 'Very delicious boba! Easily my favorite!',
+        name: 'Brown Sugar Pearl Oolong Tea Latte',
+        author: 'Lee C.',
+        content:
+            'This drink is a must! The oolong tea has a delicate floral aroma that perfectly complements the rich brown sugar flavor. The pearls are chewy and bursting with sweetness, and the creamy latte base ties everything together beautifully. A new favorite!"',
         stars: 5,
-        img: Images.TarowithMilk
+        id: 2
     },
     {
-        name: 'Taro with Milk',
-        author: 'Eric Wong',
-        content: 'Very delicious boba! Easily my favorite!',
+        name: 'Grapefruit Lemon Fruit Tea',
+        author: 'Juan P.',
+        content:
+            "Their aiyu jelly was delicate and flavorful, and the tea was so refreshing--the more I drank, the more complex the flavors became. I'm usually more of a milk tea fan, but this was kind of like drinking sunshine.",
         stars: 5,
-        img: Images.TarowithMilk
+        img: Images.GrapefruitLemonFruitTea,
+        id: 3
     },
     {
-        name: 'Taro with Milk',
-        author: 'Eric Wong',
-        content: 'Very delicious boba! Easily my favorite!',
+        name: 'Pineapple Green Tea',
+        author: 'Chris L.',
+        content:
+            'This is a delightful blend of tropical pineapple and refreshing green tea. The sweetness of the pineapple perfectly complements the grassy notes of the green tea, making for a well-balanced and flavorful drink.  Highly recommend!',
         stars: 5,
-        img: Images.TarowithMilk
+        img: Images.PineappleGreenTea,
+        id: 4
+    },
+    {
+        name: 'Yakult with Passion Fruit Green Tea',
+        author: 'Azula L.',
+        content:
+            "This unique combination is a total winner! The creamy sweetness of Yakult blends surprisingly well with the tangy passion fruit and the subtle earthiness of green tea. It's a delightful explosion of flavors and textures that's both refreshing and satisfying. Definitely recommend giving it a try!",
+        stars: 5,
+        id: 5
     },
 ]

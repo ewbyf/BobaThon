@@ -75,7 +75,7 @@ export default function HomeScreen() {
 						contentContainerStyle={{ gap: 20, paddingRight: 40 }}
 					>
 						{reviewList.map((review) => (
-							<Review review={review}></Review>
+							<Review review={review} key={review.content}></Review>
 						))}
 					</ScrollView>
 				</View>
