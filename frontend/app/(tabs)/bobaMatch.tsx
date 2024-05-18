@@ -70,7 +70,7 @@ function BobaMatch() {
     });
   }
 
-  useEffect(() => getContent(), []);
+  useEffect(() => getContent(), [item.bobaId]);
 
   return (
     <>
