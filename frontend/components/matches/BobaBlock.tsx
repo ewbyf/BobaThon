@@ -5,14 +5,14 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { StarRatingDisplay } from 'react-native-star-rating-widget';
 import { Image } from 'expo-image';
 
-const BobaBlock = ({ boba }: { boba: IBoba }) => {
+const BobaBlock = ({ boba, favorites }: { boba: IBoba, favorites ?: boolean }) => {
 	return (
 		<TouchableOpacity
 			style={styles.post}
 			onPress={() =>
 				router.navigate({
 					pathname: '/bobaMatch',
-					params: { id: boba.id, back: '/matches' }
+					params: { id: boba.id, back: favorites ? 'favorites' : '/matches' }
 				})
 			}
 		>

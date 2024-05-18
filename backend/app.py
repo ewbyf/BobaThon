@@ -177,8 +177,31 @@ def add_favorite():
 
     if favorite is None:
         return jsonify({"msg": "Invalid favorite"}), 400
+    
+    user = users_collection.find_one({'token': token})
+        
+    if (favorite not in user['favorites']):
+        users_collection.update_one({'token': token}, {"$push": {'favorites': favorite}})
 
-    users_collection.update_one({'token': token}, {"$push": {'favorites': favorite}})
+    response_data = {
+        "favorite": favorite
+    }
+    return jsonify(response_data)
+
+@app.route("/favorites", methods=["DELETE"]) 
+def delete_favorite():
+    favorite = request.json.get('favorite', None)
+    token = request.json.get('token', None)
+
+    if favorite is None:
+        return jsonify({"msg": "Invalid favorite"}), 400
+    
+    user = users_collection.find_one({'token': token})
+        
+    if (favorite in user['favorites']): 
+        newFavorites = user['favorites']
+        newFavorites.remove(favorite)
+        users_collection.update_one({'token': token}, {"$set": {'favorites': newFavorites}})
 
     response_data = {
         "favorite": favorite

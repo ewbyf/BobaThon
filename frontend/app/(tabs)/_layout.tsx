@@ -54,7 +54,7 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="reviews"
+        name="favorites"
         options={{
           title: "",
           tabBarIcon: ({ color, focused }) =>
