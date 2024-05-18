@@ -345,4 +345,57 @@ export const bobaList: IBoba[] = [
 		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
 		reviews: [],
 	},
+
+	//
+	{
+		id: 13,
+		name: '',
+		description: '',
+		store: 'Drip Tea',
+		img: Images.Abloh,
+		tags: ['Cold', 'Fruity', 'Refreshing', 'Lactose-Intolerance'],
+		cost: '$7.25',
+		stars: 5,
+		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
+		reviews: [],
+	},
+	//
+	{
+		id: 14,
+		name: '',
+		description: '',
+		store: 'Drip Tea',
+		img: Images.Abloh,
+		tags: ['Cold', 'Fruity', 'Refreshing', 'Lactose-Intolerance'],
+		cost: '$7.25',
+		stars: 5,
+		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
+		reviews: [],
+	},
+	//
+	{
+		id: 15,
+		name: '',
+		description: '',
+		store: 'Drip Tea',
+		img: Images.Abloh,
+		tags: ['Cold', 'Fruity', 'Refreshing', 'Lactose-Intolerance'],
+		cost: '$7.25',
+		stars: 5,
+		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
+		reviews: [],
+	},
+
+	{
+		id: 16,
+		name: '',
+		description: '',
+		store: 'Drip Tea',
+		img: Images.Abloh,
+		tags: ['Cold', 'Fruity', 'Refreshing', 'Lactose-Intolerance'],
+		cost: '$7.25',
+		stars: 5,
+		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
+		reviews: [],
+	},
 ];
