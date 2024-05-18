@@ -16,6 +16,7 @@ import api from "@/services/axiosConfig";
 import * as SecureStore from "expo-secure-store";
 
 type Boba = {
+  id: number;
   name: string;
   description: String;
   store: String;
@@ -104,6 +105,7 @@ export default function MatchesScreen() {
       <View style={styles.separateMatches}>
         {matches.map((match: Boba, i) => (
           <BobaBlock
+            id={match.id}
             label={match.name}
             rating={3}
             description={match.description}

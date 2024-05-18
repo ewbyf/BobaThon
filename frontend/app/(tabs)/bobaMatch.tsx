@@ -19,6 +19,7 @@ import {
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { useLocalSearchParams } from "expo-router";
 import BobaMatchContainer from "@/components/BobaMatchContainer";
+import { bobaInfoList } from "@/data/bobaInfoList";
 
 import { save } from "@/lib/storage";
 
@@ -26,6 +27,8 @@ function BobaMatch() {
   const [originColor, setOriginColor] = useState("#eac9af");
   const [ingredientsColor, setIngredientsColor] = useState("#eac9af");
   const [reviewColor, setReviewColor] = useState("#eac9af");
+  const [originContent, setOriginContent] = useState("");
+  const [ingredientsContent, setIngredientsContent] = useState<string[]>([]);
 
   function changeOriginColor() {
     if (originColor == "#eac9af") {
@@ -51,6 +54,20 @@ function BobaMatch() {
 
   const item = useLocalSearchParams();
   console.log(item);
+
+  // console.log(bobaInfoList);
+
+  function getContent() {
+    bobaInfoList.forEach((bobaInfo) => {
+      if (bobaInfo.bobaId == parseInt(item.bobaId as string)) {
+        console.log(bobaInfo);
+        setOriginContent(bobaInfo.origin);
+        setIngredientsContent(bobaInfo.ingredients);
+      }
+    });
+  }
+
+  useEffect(() => getContent(), []);
 
   return (
     <BobaMatchContainer title="Matches">
@@ -85,12 +102,16 @@ function BobaMatch() {
       </View>
       {originColor != "#eac9af" && (
         <View style={styles.display}>
-          <Text style={styles.displayText}>somehow display origin</Text>
+          <Text style={[styles.displayText, styles.info]}>{originContent}</Text>
         </View>
       )}
       {ingredientsColor != "#eac9af" && (
         <View style={styles.display}>
-          <Text style={styles.displayText}>somehow display ingredients</Text>
+          <View style={styles.displayText}>
+            {ingredientsContent.map((ingredient) => (
+              <Text style={styles.info}>- {ingredient}</Text>
+            ))}
+          </View>
         </View>
       )}
       {reviewColor != "#eac9af" && (
@@ -147,8 +168,12 @@ const styles = StyleSheet.create({
     padding: 40,
   },
   displayText: {
-    fontWeight: "500",
+    display: "flex",
+    flexDirection: "column",
+  },
+  info: {
     color: "#89757b",
+    fontWeight: "500",
   },
 });
 

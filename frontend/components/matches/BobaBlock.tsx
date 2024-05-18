@@ -3,6 +3,7 @@ import React from "react";
 import { router } from "expo-router";
 
 type BobaBlockType = {
+  id: number;
   label: string;
   rating: Number;
   description: String;
@@ -65,7 +66,7 @@ const BobaBlock = (props: BobaBlockType) => {
               onPress={() =>
                 router.push({
                   pathname: "/bobaMatch",
-                  params: { boba: props.label },
+                  params: { bobaId: props.id, boba: props.label },
                 })
               }
             >
