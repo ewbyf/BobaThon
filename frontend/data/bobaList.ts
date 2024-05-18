@@ -439,14 +439,30 @@ export const bobaList: IBoba[] = [
 	{
 		id: 15,
 		name: 'Lover Boy',
-		description: '',
+		description:
+			'Lover Boy is a romantic infusion of rose-kissed lemonade and plump lychee jelly. The delicate floral notes of rose dance with the refreshing tang of lemonade, creating a delightful and balanced drink. Chewy lychee jelly adds a playful pop of texture, making Lover Boy a truly captivating and delicious experience.',
 		store: 'Drip Tea',
 		img: Images.Lover,
 		tags: ['Cold', 'Herbal', 'Refreshing', 'Fruity', 'Lactose-Free'],
 		cost: '$7.25',
 		stars: 5,
 		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
-		reviews: [],
+		reviews: [
+			{
+				name: 'Lover Boy',
+				author: 'Sarah M.',
+				content:
+					"Lover Boy is a total charmer! The rose-infused lemonade is like a fragrant love letter in a cup. The floral notes are subtle and perfectly balanced by the refreshing lemonade. The lychee jelly adds a delightful burst of sweetness and a fun textural contrast. It's beautiful, delicious, and perfect for a romantic day out.  Highly recommend!",
+				stars: 5,
+			},
+			{
+				name: 'Lover Boy',
+				author: 'Katara W.',
+				content:
+					'Lover Boy is a good drink, but the rose flavor was a bit too subtle for me. I would have preferred a more prominent floral presence. The lemonade was refreshing, and the lychee jelly was a nice touch. Overall, a good drink, but could be a bit more on the floral side for those who really love rose-flavored things.',
+				stars: 4,
+			},
+		],
 	},
 
 	{
