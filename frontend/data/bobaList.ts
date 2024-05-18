@@ -26,7 +26,7 @@ export const bobaList: IBoba[] = [
 				author: 'Kyle Z.',
 				content:
 					"Some of the best fruit teas I've had in a while! Unlike other bubble tea shops, they don't have a lot of toppings like lychee jelly and popping boba.",
-				stars: 5,
+				stars: 4.5,
 			},
 		],
 	},
@@ -39,7 +39,7 @@ export const bobaList: IBoba[] = [
 		img: Images.MangoPomeloSago,
 		tags: ['Cold', 'Fruity', 'Creamy', 'Caffeine-free'],
 		cost: '$7.50',
-		stars: 5,
+		stars: 4.5,
 		popularToppings: ['Sago', 'Pearls', 'Lychee Jelly', 'Coconut Jelly'],
 		reviews: [
 			{
@@ -54,7 +54,7 @@ export const bobaList: IBoba[] = [
 				author: 'Mia A.',
 				content:
 					'This Mango Pomelo Sago Bubble Tea is incredible! The mango flavor is so fresh and perfectly balanced by the tartness of the pomelo. The sago pearls add a fun and chewy texture, and the bubbles are nice and juicy. Absolutely delicious!',
-				stars: 5,
+				stars: 4.5,
 			},
 		],
 	},
@@ -103,7 +103,7 @@ export const bobaList: IBoba[] = [
 				author: 'Juan P.',
 				content:
 					"Their aiyu jelly was delicate and flavorful, and the tea was so refreshing--the more I drank, the more complex the flavors became. I'm usually more of a milk tea fan, but this was kind of like drinking sunshine.",
-				stars: 5,
+				stars: 4.5,
 			},
 			{
 				name: 'Grapefruit Lemon Fruit Tea',
@@ -298,7 +298,22 @@ export const bobaList: IBoba[] = [
 		cost: '$7.25',
 		stars: 4,
 		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Jelly'],
-		reviews: [],
+		reviews: [
+			{
+				name: 'Takahashi',
+				author: 'Emily M.',
+				content:
+					'Takahashi is okay for me. The black tea flavor was a bit strong for my taste, overpowering the fruit flavors a bit. I would have preferred a weaker black tea or a stronger fruit presence. The strawberry bits were a nice touch, but overall the drink felt a bit too astringent. Maybe a different black tea blend or a sweeter option would work better for me.',
+				stars: 3,
+			},
+			{
+				name: 'Takahashi',
+				author: 'Maya P.',
+				content:
+					'Takahashi is a good drink, but the strawberry flavor was a bit more prominent than I would have liked. I prefer a more balanced taste between the strawberry, peach, and black tea. The strawberry bits were a nice touch, and the black tea added a nice depth. Overall, a refreshing drink, but could be improved with a more even flavor profile.',
+				stars: 4,
+			},
+		],
 	},
 
 	// nez
@@ -366,36 +381,68 @@ export const bobaList: IBoba[] = [
 	{
 		id: 13,
 		name: 'Yellow Heart',
-		description: '',
+		description:
+			'Sunshine in a cup!  "Yellow Heart" blends vibrant mango milk with the earthy elegance of matcha. Chewy mango bits add a playful texture to this refreshing and tropical bubble tea experience.',
 		store: 'Drip Tea',
-		img: Images.Abloh,
-		tags: ['Cold', 'Fruity', 'Refreshing', 'Lactose-free'],
+		img: Images.Yellow,
+		tags: ['Cold', 'Fruity', 'Herbal', 'Lactose-free', 'Creamy'],
 		cost: '$7.25',
-		stars: 5,
+		stars: 4,
 		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
-		reviews: [],
+		reviews: [
+			{
+				name: 'Yellow Heart',
+				author: 'Mitski M.',
+				content:
+					'Yellow Heart is a delicious and refreshing bubble tea! The mango flavor is sweet and prominent, but the matcha adds a nice earthy depth. The chewy mango bits are a fun textural element.  A great choice for anyone who enjoys a tropical twist on a classic matcha drink.',
+				stars: 4.5,
+			},
+			{
+				name: 'Yellow Heart',
+				author: 'William R.',
+				content:
+					'Yellow Heart is a good drink, but a bit too sweet for me. The mango flavor overpowered the matcha a bit. The mango bits were a nice touch, but overall the drink felt a bit one-dimensional.  Maybe a less sweet mango milk or a stronger matcha base would create a more balanced flavor profile.',
+				stars: 3.5,
+			},
+		],
 	},
 	//
 	{
 		id: 14,
-		name: '',
-		description: '',
+		name: 'Flower Boy',
+		description:
+			'"Flower Boy" is a visual and taste treat! Layered lavender lemonade offers a floral and refreshing base, while plump lychee jelly adds bursts of sweetness and a delightful texture. This unique boba is perfect for those seeking a beautiful and flavorful drink.',
 		store: 'Drip Tea',
-		img: Images.Abloh,
-		tags: ['Cold', 'Fruity', 'Refreshing', 'Lactose-free'],
+		img: Images.Flower,
+		tags: ['Cold', 'Fruity', 'Herbal', 'Lactose-free'],
 		cost: '$7.25',
 		stars: 5,
-		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
-		reviews: [],
+		popularToppings: ['Boba', 'Rainbow Jelly', 'Pudding', 'Ice-Cream', 'Mango Bits'],
+		reviews: [
+			{
+				name: 'Flower Boy',
+				author: 'Lexie L.',
+				content:
+					"Flower Boy is a delightful surprise! The lavender lemonade is floral and refreshing, with a subtle sweetness that perfectly complements the chewy lychee jelly. It's visually stunning with the layered effect, and the lychee jelly adds a fun textural contrast.  Absolutely loved this unique and refreshing boba!",
+				stars: 5,
+			},
+			{
+				name: 'Flower Boy',
+				author: 'Miku H.',
+				content:
+					'Flower Boy is a beautiful drink and really pleasent. 9/10 I would have preferred a more balanced taste between the lavender and the lemonade. The lychee jelly was delicious, though! Overall, a unique and visually appealing boba, but maybe with a less prominent lavender presence.',
+				stars: 4.5,
+			},
+		],
 	},
 	//
 	{
 		id: 15,
-		name: '',
+		name: 'Lover Boy',
 		description: '',
 		store: 'Drip Tea',
-		img: Images.Abloh,
-		tags: ['Cold', 'Fruity', 'Refreshing', 'Lactose-Free'],
+		img: Images.Lover,
+		tags: ['Cold', 'Herbal', 'Refreshing', 'Fruity', 'Lactose-Free'],
 		cost: '$7.25',
 		stars: 5,
 		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
