@@ -1,54 +1,79 @@
 import { IBoba } from '@/interfaces/interfaces';
+import { getStorage } from '@/lib/storage';
+import api from '@/services/axiosConfig';
+import { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { StarRatingDisplay } from 'react-native-star-rating-widget';
-import { useEffect, useState } from 'react';
-import Unfavorited from './icons/Unfavorited';
-import api from '@/services/axiosConfig';
-import { getStorage } from '@/lib/storage';
 import Favorited from './icons/Favorited';
+import Unfavorited from './icons/Unfavorited';
+import Loading from './Loading';
 
 const BobaProfile = ({ boba, noBorder }: { boba: IBoba | undefined; noBorder?: boolean }) => {
-    const [favorited, setFavorited] = useState(false);
+	const [favorited, setFavorited] = useState(false);
+    const [init, setInit] = useState(true);
 
     useEffect(() => {
-        const token = getStorage('token');
-        api.get(`/favorites?token=${token}`)
-        .then((resp) =>{
-            if (resp.data.favorites.includes(boba?.id)) {
-                setFavorited(true);
-            }
-        })
-        .catch((err) => {
-            console.log(err)
-        })
-    }, [])
+        setInit(true);
+    }, [boba])
 
-    const favorite = () => {
-        const token = getStorage('token');
-        api.post('/favorites', {
-            token,
-            favorite: boba?.id
-        })
-        .then((resp) =>{
+	useEffect(() => {
+		const token = getStorage('token');
+		api.get(`/favorites?token=${token}`)
+			.then((resp) => {
+				if (resp.data.favorites.includes(boba?.id)) {
+					setFavorited(true);
+				}
+                else {
+                    setFavorited(false);
+                }
+                setInit(false);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	}, [boba]);
+
+	const favorite = () => {
+		const token = getStorage('token');
+		api.post('/favorites', {
+			token,
+			favorite: boba?.id
+		})
+			.then((resp) => {
+				console.log(resp.data);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	};
+
+	const unfavorite = () => {
+		const token = getStorage('token');
+		api.delete('/favorites', {
+			data: {
+				token,
+				favorite: boba?.id
+			}
+		})
+        .then((resp) => {
             console.log(resp.data)
         })
         .catch((err) => {
             console.log(err)
         })
-    }
+	};
 
-    const unfavorite = () => {
+	const pressHandler = () => {
+		if (favorited) {
+			unfavorite();
+		} else {
+			favorite();
+		}
+		setFavorited(!favorited);
+	};
 
-    }
-
-    const pressHandler = () => {
-        if (favorited) {
-            unfavorite();
-        }
-        else {
-            favorite()
-        }
-        setFavorited(!favorited);
+    if (init) {
+        return <Loading/>
     }
 
 	if (boba) {
@@ -57,7 +82,7 @@ const BobaProfile = ({ boba, noBorder }: { boba: IBoba | undefined; noBorder?: b
 				<View>
 					<View style={styles.topRow}>
 						<Text style={styles.title}>{boba.name}</Text>
-						<TouchableOpacity style={{flex: 1, alignItems: 'flex-end'}} onPress={pressHandler}>
+						<TouchableOpacity style={{ flex: 1, alignItems: 'flex-end' }} onPress={pressHandler}>
 							{!favorited && <Unfavorited style={{ height: 25, width: 25 }} />}
 							{favorited && <Favorited style={{ height: 25, width: 25 }} />}
 						</TouchableOpacity>
@@ -138,14 +163,14 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
-        width: '100%',
+		width: '100%'
 	},
 	title: {
 		fontFamily: 'OverpassBold',
 		fontSize: 20,
 		color: '#6F5C63',
 		marginBottom: 5,
-        flex: 5
+		flex: 5
 	},
 	cost: {
 		fontSize: 18,

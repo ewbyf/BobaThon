@@ -12,7 +12,7 @@ const BobaBlock = ({ boba, favorites }: { boba: IBoba, favorites ?: boolean }) =
 			onPress={() =>
 				router.navigate({
 					pathname: '/bobaMatch',
-					params: { id: boba.id, back: favorites ? 'favorites' : '/matches' }
+					params: { id: boba.id, back: favorites ? '/favorites' : '/matches' }
 				})
 			}
 		>
