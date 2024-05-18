@@ -1,145 +1,102 @@
-import { View, Text, Image, StyleSheet } from "react-native";
-import React from "react";
-import { router } from "expo-router";
+import { IBoba } from '@/interfaces/interfaces';
+import { router } from 'expo-router';
+import React from 'react';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StarRatingDisplay } from 'react-native-star-rating-widget';
 
-type BobaBlockType = {
-  label: string;
-  rating: Number;
-  description: String;
-};
+const BobaBlock = ({ boba }: { boba: IBoba }) => {
+	return (
+		<TouchableOpacity
+			style={styles.post}
+			onPress={() =>
+				router.navigate({
+					pathname: '/bobaMatch',
+					params: { id: boba.id }
+				})
+			}
+		>
+			<View style={{ width: '45%', height: '100%', borderRadius: 25 }}>
+				<Image source={boba.img} resizeMode='cover' style={{ height: '100%', width: '100%', borderRadius: 25 }}></Image>
+			</View>
 
-const BobaBlock = (props: BobaBlockType) => {
-  return (
-    <View style={styles.blockBorder}>
-      <View style={styles.bobaImageFrame}>
-        <Image
-          source={require("../../assets/images/brownsugarboba.png")}
-          style={styles.bobaImage}
-        />
-      </View>
-      <View style={styles.bobaDescription}>
-        <Text style={styles.bobaName}>{props.label}</Text>
-        <View>
-          {props.rating == 0 && (
-            <Image
-              source={require("../../assets/images/ZeroStar.png")}
-              style={styles.rating}
-            />
-          )}
-          {props.rating == 1 && (
-            <Image
-              source={require("../../assets/images/OneStar.png")}
-              style={styles.rating}
-            />
-          )}
-          {props.rating == 2 && (
-            <Image
-              source={require("../../assets/images/TwoStar.png")}
-              style={styles.rating}
-            />
-          )}
-          {props.rating == 3 && (
-            <Image
-              source={require("../../assets/images/ThreeStar.png")}
-              style={styles.rating}
-            />
-          )}
-          {props.rating == 4 && (
-            <Image
-              source={require("../../assets/images/FourStar.png")}
-              style={styles.rating}
-            />
-          )}
-          {props.rating == 5 && (
-            <Image
-              source={require("../../assets/images/FiveStar.png")}
-              style={styles.rating}
-            />
-          )}
-          <Text style={styles.bobaInfo}>{props.description}</Text>
-        </View>
-        <View style={styles.positionInfo}>
-          <View style={styles.moreInfoButton}>
-            <Text
-              style={styles.infoButtonText}
-              onPress={() =>
-                router.push({
-                  pathname: "/bobaMatch",
-                  params: { boba: props.label },
-                })
-              }
-            >
-              MORE
-            </Text>
-          </View>
-        </View>
-      </View>
-    </View>
-  );
+			<View style={styles.postContent}>
+				<Text style={styles.title}>{boba.name}</Text>
+				<StarRatingDisplay rating={boba.stars} starStyle={{ marginHorizontal: 0, marginTop: 3, marginBottom: 8 }} starSize={20} color='#E9A898' />
+				<Text style={styles.description}>{boba.description}</Text>
+			</View>
+		</TouchableOpacity>
+	);
 };
 
 const styles = StyleSheet.create({
-  blockBorder: {
-    borderRadius: 15,
-    display: "flex",
-    gap: 10,
-    flexDirection: "row",
-    justifyContent: "center",
-    width: "90%",
-    padding: 10,
-    paddingLeft: 45,
-    backgroundColor: "white",
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 4,
-    },
-    shadowOpacity: 0.3,
-    shadowRadius: 4.65,
-    elevation: 8,
-  },
-  bobaImageFrame: {
-    backgroundColor: "#F8E3E5",
-    borderRadius: 15,
-    width: 100,
-    paddingTop: 10,
-    paddingBottom: 10,
-    alignItems: "center",
-  },
-  bobaImage: { height: 150, width: 60 },
-  bobaDescription: {
-    width: "80%",
-  },
-  bobaName: {
-    width: "100%",
-    fontSize: 20,
-    fontWeight: "600",
-    paddingBottom: 12,
-    color: "#6f5c63",
-    marginTop: 10,
-  },
-  rating: { marginBottom: 4, width: 100, height: 15 },
-  bobaInfo: {
-    color: "#6f5c63",
-    fontWeight: "400",
-    fontSize: 12,
-    lineHeight: 17,
-    width: 190,
-  },
-  positionInfo: { marginTop: 15, marginLeft: 95 },
-  moreInfoButton: {
-    borderColor: "#e88a84",
-    borderWidth: 2,
-    borderRadius: 10,
-    backgroundColor: "#e2a191",
-    padding: 8,
-    width: 80,
-    alignItems: "center",
-  },
-  infoButtonText: {
-    color: "white",
-    fontWeight: "700",
-  },
+	title: {
+		fontSize: 20,
+		fontFamily: 'OverpassBold',
+		textAlign: 'left',
+		width: '100%',
+		color: '#6F5C63'
+	},
+	post: {
+		width: 350,
+		height: 250,
+		shadowOffset: {
+			width: 0,
+			height: 3
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 5,
+		display: 'flex',
+		flexDirection: 'row',
+		backgroundColor: 'white',
+		borderRadius: 15,
+		alignItems: 'center',
+		gap: 10,
+		padding: 15
+	},
+	postContent: {
+		display: 'flex',
+		justifyContent: 'flex-start',
+		height: '100%',
+		flex: 1,
+		paddingTop: 10
+	},
+	name: {
+		fontSize: 16,
+		fontFamily: 'OverpassLight',
+		textAlign: 'left',
+		color: '#6F5C63',
+		marginLeft: 3
+	},
+	description: {
+		fontSize: 16,
+		fontFamily: 'OverpassLight',
+		color: '#6F5C63'
+	},
+	moreInfoButton: {
+		borderColor: '#e88a84',
+		borderWidth: 2,
+		borderRadius: 10,
+		backgroundColor: '#e2a191',
+		padding: 8,
+		width: 80,
+		alignItems: 'center',
+		marginTop: 'auto',
+		marginLeft: 'auto'
+	},
+	infoButtonText: {
+		color: 'white',
+		fontWeight: '700'
+	},
+	button: {
+		width: 100,
+		height: 40,
+		borderRadius: 15,
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		marginLeft: 'auto',
+		marginTop: 'auto'
+	}
 });
 
 export default BobaBlock;

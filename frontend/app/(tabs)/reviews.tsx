@@ -13,12 +13,23 @@ export default function ReviewsScreen() {
 			</View>
 			<Container title='Reviews' scroll>
 				<SearchBar />
-				{reviewList.map((review) => (
-					<Review review={review}></Review>
+                <View style={styles.separate}>
+				{reviewList.map((review, i) => (
+					<Review review={review} key={i}></Review>
 				))}
+                </View>
+
 			</Container>
 		</>
 	);
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+    separate: {
+		display: 'flex',
+		gap: 20,
+		width: '100%',
+		alignItems: 'center',
+        paddingBottom: 50,
+	},
+});

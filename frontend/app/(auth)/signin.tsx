@@ -1,7 +1,7 @@
 import BackArrow from '@/components/BackArrow';
 import CustomButton from '@/components/CustomButton';
 import FormField from '@/components/FormField';
-import SignInBackground from '@/components/SignInBackground';
+import SignInBackground from '@/components/backgrounds/SignInBackground';
 import api from '@/services/axiosConfig';
 import { router } from 'expo-router';
 

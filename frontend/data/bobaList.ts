@@ -36,7 +36,13 @@ export const bobaList: IBoba[] = [
 		cost: 'UNKNOWN',
 		stars: 5,
 		popularToppings: ['tapioca', 'nutmeg', 'cinnamon'],
-		reviews: [],
+		reviews: [    {
+            name: 'Taro with Milk',
+            author: 'Eric Wong',
+            content: 'Very delicious boba! Easily my favorite!',
+            stars: 5,
+            img: Images.TarowithMilk
+        },],
 	},
 	{
 		id: 3,
