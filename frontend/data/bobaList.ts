@@ -181,18 +181,49 @@ export const bobaList: IBoba[] = [
 		cost: '$7.50',
 		stars: 5,
 		popularToppings: ['Chewy Sago', 'Grass Jelly', 'Tapioca'],
-		reviews: [],
+		reviews: [
+			{
+				name: 'Sweet Taro Sago Latte',
+				author: 'Mei L.',
+				content:
+					"This taro sago latte is like a warm hug in a cup! The creamy milk is infused with the sweet and nutty flavor of taro, and the chewy sago pearls add a fun textural element. It's incredibly comforting and delicious, especially on a chilly day.  Highly recommend!",
+				stars: 5,
+			},
+			{
+				name: 'Sweet Taro Sago Latte',
+				author: 'Olivia D.',
+				content:
+					'I always struggle to find drinks that are flavorful but not overly sweet. This taro sago latte hits the perfect spot! The taro flavor is prominent but not artificial-tasting, and the sweetness level is just right. The sago pearls are a delightful addition, adding a fun chewiness.  New favorite for sure!',
+				stars: 5,
+			},
+		],
 	},
 	{
 		id: 7,
 		name: 'Taro with Milk',
-		description: 'PUT SOME DESCRIPTION HERE',
+		description:
+			'Taro with Milk is made with real, mashed taro, cream and organic milk. The Taro series also includes a version of this drink with green tea.',
 		store: 'Yifang Taiwan Fruit Tea',
 		img: Images.SweetTaroSagoLatte,
-		tags: ['cold or hot', 'creamy'],
-		cost: 'UNKNOWN',
+		tags: ['Cold', 'Hot', 'Creamy'],
+		cost: '$7.00',
 		stars: 5,
-		popularToppings: ['coconut jelly', 'tapioca', 'popping boba'],
-		reviews: [],
+		popularToppings: ['Coconut Jelly', 'Tapioca', 'Popping Boba', 'Green Tea'],
+		reviews: [
+			{
+				name: 'Taro with Milk',
+				author: 'Sarah C',
+				content:
+					"This simple drink is a classic for a reason! The creamy milk perfectly complements the earthy sweetness of taro. It's a delicious and versatile beverage you can enjoy hot or cold.  Great on its own or perfect for adding a splash of flavor to coffee or tea.",
+				stars: 5,
+			},
+			{
+				name: 'Taro with Milk',
+				author: 'Linda M.',
+				content:
+					'Good, but a bit too milky for me. I prefer a stronger taro flavor.  Maybe a stronger taro base or the option to adjust the milk-to-taro ratio would be nice.  Still a good drink overall, just a touch unbalanced for my taste.',
+				stars: 4,
+			},
+		],
 	},
 ];
