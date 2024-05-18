@@ -40,6 +40,7 @@ def signup():
     body['preferences'] = {}
     body['matches'] = []
     body['reviews'] = []
+    body['favorites'] = []
     body['hasSetPreferences'] = False
 
     users_collection.insert_one(body)
@@ -157,7 +158,34 @@ def add_review():
     }
     return jsonify(response_data)
 
-# TODO: check match, add match, get reviews
+@app.route("/favorites", methods=["GET"]) 
+def get_favorites():
+    token = request.args.get('token')
+
+    user = users_collection.find_one({'token': token})
+        
+    response_data = {
+        "favorites": user['favorites']
+    }
+    return jsonify(response_data)
+
+
+@app.route("/favorites", methods=["POST"]) 
+def add_favorite():
+    favorite = request.json.get('favorite', None)
+    token = request.json.get('token', None)
+
+    if favorite is None:
+        return jsonify({"msg": "Invalid favorite"}), 400
+
+    users_collection.update_one({'token': token}, {"$push": {'favorites': favorite}})
+
+    response_data = {
+        "favorite": favorite
+    }
+    return jsonify(response_data)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
