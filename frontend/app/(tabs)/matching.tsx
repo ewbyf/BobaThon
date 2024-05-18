@@ -18,6 +18,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import Loading from '@/components/Loading';
 import BeforePref from '@/components/BeforePref';
+import MatchButton from '@/components/MatchButton';
 
 export default function MatchingScreen() {
 	const [bobas, setBobas] = useState<IBoba[]>([]);
@@ -30,7 +31,7 @@ export default function MatchingScreen() {
 	const [hasSetPreferences, setHasSetPreferences] = useState(false);
 	const [preferences, setPreferences] = useState<IPreferences>();
 	const [match, setMatch] = useState(false);
-    const [lastMatch, setLastMatch] = useState<ImageSourcePropType>();
+	const [lastMatch, setLastMatch] = useState<ImageSourcePropType>();
 
 	useAnimatedReaction(
 		() => activeIndex.value,
@@ -130,7 +131,7 @@ export default function MatchingScreen() {
 							match: bobas[Math.floor(activeIndex.value)].id,
 						})
 							.then((resp) => {
-                                setLastMatch(bobas[Math.floor(activeIndex.value)].img);
+								setLastMatch(bobas[Math.floor(activeIndex.value)].img);
 								setMatch(true);
 							})
 							.catch((err) => {
@@ -160,7 +161,7 @@ export default function MatchingScreen() {
 	}, []);
 
 	if (init) {
-		return <Loading/>;
+		return <Loading />;
 	}
 
 	if (!hasSetPreferences) {
@@ -224,16 +225,52 @@ export default function MatchingScreen() {
 
 	if (bobas.length == 0 || index == bobas.length) {
 		return (
-			<Container title="Find Your Match">
-				<ScrollView
-					refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
-					showsVerticalScrollIndicator={false}
-					style={[styles.scrollView, { display: 'flex' }]}
-					contentContainerStyle={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
-				>
-					<Text>No bobas left! Consider increasing your radius</Text>
-				</ScrollView>
-			</Container>
+			<>
+				<Container title={'Matches'}>
+					<View style={styles.box}>
+						<Text style={styles.header}>No Bobas Left!</Text>
+						<MatchButton />
+
+						<View style={styles.textCont}>
+							<Text style={styles.header}>Consider Changing Preferences</Text>
+							<Text style={[styles.header, { marginTop: 5, marginBottom: 8 }]}>and</Text>
+							<Text style={styles.header}>And Come Back for more!</Text>
+						</View>
+						<TouchableOpacity
+							onPress={() =>
+								router.navigate({
+									pathname: '/preferences',
+								})
+							}
+							style={styles.btnPref}
+						>
+							<LinearGradient
+								colors={['#EAC5A9', '#E88984']}
+								start={{ x: 0, y: 0 }}
+								end={{ x: 1, y: 0 }}
+								style={{ padding: 2, width: '100%', height: '100%', borderRadius: 15 }}
+							>
+								<LinearGradient
+									colors={['#E98C86', '#E0A694']}
+									start={{ x: 0, y: 0 }}
+									end={{ x: 1, y: 0 }}
+									style={{
+										backgroundColor: 'white',
+										width: '100%',
+										height: '100%',
+										borderRadius: 13,
+										display: 'flex',
+										justifyContent: 'center',
+										alignItems: 'center',
+									}}
+								>
+									<Text style={{ fontFamily: 'OverpassBold', fontSize: 29, color: 'white' }}>Preferences</Text>
+								</LinearGradient>
+							</LinearGradient>
+						</TouchableOpacity>
+					</View>
+				</Container>
+			</>
 		);
 	}
 
@@ -303,6 +340,16 @@ const styles = StyleSheet.create({
 	textCont: {},
 	btn: {
 		width: 150,
+		height: 60,
+		backgroundColor: 'white',
+		borderRadius: 15,
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+
+	btnPref: {
+		width: 200,
 		height: 60,
 		backgroundColor: 'white',
 		borderRadius: 15,
