@@ -464,17 +464,4 @@ export const bobaList: IBoba[] = [
 			},
 		],
 	},
-
-	{
-		id: 16,
-		name: '',
-		description: '',
-		store: 'Drip Tea',
-		img: Images.Abloh,
-		tags: ['Cold', 'Fruity', 'Refreshing', 'Lactose-free'],
-		cost: '$7.25',
-		stars: 5,
-		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
-		reviews: [],
-	},
 ];
