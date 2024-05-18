@@ -1,4 +1,5 @@
 import Container from '@/components/Container';
+import NoMatchesYet from '@/components/NoMatchesYet';
 import Review from '@/components/Review';
 import SearchBar from '@/components/SearchBar';
 import ExploreBackground from '@/components/backgrounds/ExploreBackground';
@@ -36,7 +37,7 @@ export default function HomeScreen() {
 				<ExploreBackground></ExploreBackground>
 			</View>
 
-			<Container title='Explore Boba' scroll>
+			<Container title="Explore Boba" scroll>
 				<SearchBar />
 				<Carousel
 					loop
@@ -56,22 +57,22 @@ export default function HomeScreen() {
 								alignItems: 'center',
 								marginHorizontal: 15,
 								borderRadius: 25,
-								height: 200
+								height: 200,
 							}}
 						>
-							<Image source={item} style={{ width: '100%', height: '100%', borderRadius: 25 }} resizeMode='cover'></Image>
+							<Image source={item} style={{ width: '100%', height: '100%', borderRadius: 25 }} resizeMode="cover"></Image>
 						</View>
 					)}
 				/>
 				<Text style={styles.title}>Your Latest Matches</Text>
-				{latestMatches.length === 0 && <Text>No matches yet!</Text>}
+				{latestMatches.length === 0 && <NoMatchesYet />}
 				<View>
 					<Text style={[styles.title, { paddingLeft: 20 }]}>Popular Posts</Text>
 					<ScrollView
 						horizontal
 						snapToInterval={370}
-						snapToAlignment='start'
-						decelerationRate='fast'
+						snapToAlignment="start"
+						decelerationRate="fast"
 						style={{ display: 'flex', paddingVertical: 20, paddingHorizontal: 20, width: width }}
 						contentContainerStyle={{ gap: 20, paddingRight: 40 }}
 					>
@@ -81,7 +82,7 @@ export default function HomeScreen() {
 					</ScrollView>
 				</View>
 
-				<Button onPress={() => router.navigate('/main')} title='aa'></Button>
+				<Button onPress={() => router.navigate('/main')} title="aa"></Button>
 			</Container>
 		</>
 	);
@@ -93,21 +94,21 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-		width: '100%'
+		width: '100%',
 	},
 	title: {
 		fontSize: 20,
 		fontFamily: 'OverpassBold',
 		textAlign: 'left',
 		width: '100%',
-		color: '#6F5C63'
+		color: '#6F5C63',
 	},
 	post: {
 		width: 350,
 		height: 250,
 		shadowOffset: {
 			width: 0,
-			height: 3
+			height: 3,
 		},
 		shadowOpacity: 0.25,
 		shadowRadius: 5,
@@ -117,25 +118,25 @@ const styles = StyleSheet.create({
 		borderRadius: 15,
 		alignItems: 'center',
 		gap: 10,
-		padding: 15
+		padding: 15,
 	},
 	postContent: {
 		display: 'flex',
 		justifyContent: 'flex-start',
 		height: '100%',
 		flex: 1,
-		paddingVertical: 10
+		paddingVertical: 10,
 	},
 	name: {
 		fontSize: 16,
 		fontFamily: 'OverpassLight',
 		textAlign: 'left',
 		color: '#6F5C63',
-		marginLeft: 3
+		marginLeft: 3,
 	},
 	description: {
 		fontSize: 16,
 		fontFamily: 'OverpassLight',
-		color: '#6F5C63'
-	}
+		color: '#6F5C63',
+	},
 });
