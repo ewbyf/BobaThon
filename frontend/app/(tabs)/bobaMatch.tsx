@@ -1,9 +1,9 @@
 import BackArrow from "@/components/BackArrow";
 import CustomButton from "@/components/CustomButton";
 import FormField from "@/components/FormField";
-import SignInBackground from "@/components/SignInBackground";
 import api from "@/services/axiosConfig";
 import { router } from "expo-router";
+import SignInBackground from "@/components/SignInBackground";
 
 import Container from "@/components/Container";
 import { useEffect, useState } from "react";
@@ -73,58 +73,67 @@ function BobaMatch() {
   useEffect(() => getContent(), []);
 
   return (
-    <BobaMatchContainer title="Matches">
-      <View style={styles.bobaImage}>
-        <Text style={styles.bobaName}>{item.boba}</Text>
-        <Image
-          resizeMode="cover"
-          style={styles.image}
-          source={bobaImage}
-        ></Image>
+    <>
+      <View style={{ position: "absolute", top: 0, left: 0, zIndex: -1 }}>
+        <SignInBackground></SignInBackground>
       </View>
-      <View style={styles.buttons}>
-        <TouchableOpacity
-          id="originButton"
-          style={[styles.button, { backgroundColor: originColor }]}
-          onPress={changeOriginColor}
-        >
-          <Text style={styles.buttonText}>ORIGIN</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          id="ingredientsButton"
-          style={[styles.button, { backgroundColor: ingredientsColor }]}
-          onPress={changeIngredientColor}
-        >
-          <Text style={styles.buttonText}>INGREDIENTS</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          id="reviewsButton"
-          style={[styles.button, { backgroundColor: reviewColor }]}
-          onPress={changeReviewColor}
-        >
-          <Text style={styles.buttonText}>REVIEWS</Text>
-        </TouchableOpacity>
-      </View>
-      {originColor != "#eac9af" && (
-        <View style={styles.display}>
-          <Text style={[styles.displayText, styles.info]}>{originContent}</Text>
+      <BobaMatchContainer title="Matches">
+        <View style={styles.bobaImage}>
+          <Text style={styles.bobaName}>{item.boba}</Text>
+          <Image
+            resizeMode="cover"
+            style={styles.image}
+            source={bobaImage}
+          ></Image>
         </View>
-      )}
-      {ingredientsColor != "#eac9af" && (
-        <View style={styles.display}>
-          <View style={styles.displayText}>
-            {ingredientsContent.map((ingredient) => (
-              <Text style={styles.info}>- {ingredient}</Text>
-            ))}
+        <View style={styles.buttons}>
+          <TouchableOpacity
+            id="originButton"
+            style={[styles.button, { backgroundColor: originColor }]}
+            onPress={changeOriginColor}
+          >
+            <Text style={styles.buttonText}>ORIGIN</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            id="ingredientsButton"
+            style={[styles.button, { backgroundColor: ingredientsColor }]}
+            onPress={changeIngredientColor}
+          >
+            <Text style={styles.buttonText}>INGREDIENTS</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            id="reviewsButton"
+            style={[styles.button, { backgroundColor: reviewColor }]}
+            onPress={changeReviewColor}
+          >
+            <Text style={styles.buttonText}>REVIEWS</Text>
+          </TouchableOpacity>
+        </View>
+        {originColor != "#eac9af" && (
+          <View style={styles.display}>
+            <Text style={[styles.displayText, styles.info]}>
+              {originContent}
+            </Text>
           </View>
-        </View>
-      )}
-      {reviewColor != "#eac9af" && (
-        <View style={styles.display}>
-          <Text style={styles.displayText}>somehow display reviews</Text>
-        </View>
-      )}
-    </BobaMatchContainer>
+        )}
+        {ingredientsColor != "#eac9af" && (
+          <View style={styles.display}>
+            <View style={styles.displayText}>
+              {ingredientsContent.map((ingredient, i) => (
+                <Text style={styles.info} key={i}>
+                  - {ingredient}
+                </Text>
+              ))}
+            </View>
+          </View>
+        )}
+        {reviewColor != "#eac9af" && (
+          <View style={styles.display}>
+            <Text style={styles.displayText}>somehow display reviews</Text>
+          </View>
+        )}
+      </BobaMatchContainer>
+    </>
   );
 }
 

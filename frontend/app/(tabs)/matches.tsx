@@ -13,6 +13,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import Container from "@/components/Container";
 import BobaBlock from "@/components/matches/BobaBlock";
 import api from "@/services/axiosConfig";
+import DefaultBackground from "@/components/backgrounds/DefaultBackground";
 import * as SecureStore from "expo-secure-store";
 
 type Boba = {
@@ -92,28 +93,33 @@ export default function MatchesScreen() {
   // setInterval(getMatches, 10000);
 
   return (
-    <Container title="Matches" scroll>
-      {/*add a bobablock per each match */}
-      <View style={styles.searchbar}>
-        <Ionicons name="search" size={30} color="#a38f93" />
-        <TextInput
-          placeholder="Search for Boba"
-          placeholderTextColor="#a38f93"
-          style={styles.searchInput}
-        ></TextInput>
+    <>
+      <View style={{ position: "absolute", top: 0, left: 0, zIndex: 0 }}>
+        <DefaultBackground></DefaultBackground>
       </View>
-      <View style={styles.separateMatches}>
-        {matches.map((match: Boba, i) => (
-          <BobaBlock
-            id={match.id}
-            label={match.name}
-            rating={3}
-            description={match.description}
-            key={i}
-          />
-        ))}
-      </View>
-    </Container>
+      <Container title="Matches" scroll>
+        {/*add a bobablock per each match */}
+        <View style={styles.searchbar}>
+          <Ionicons name="search" size={30} color="#a38f93" />
+          <TextInput
+            placeholder="Search for Boba"
+            placeholderTextColor="#a38f93"
+            style={styles.searchInput}
+          ></TextInput>
+        </View>
+        <View style={styles.separateMatches}>
+          {matches.map((match: Boba, i) => (
+            <BobaBlock
+              id={match.id}
+              label={match.name}
+              rating={3}
+              description={match.description}
+              key={i}
+            />
+          ))}
+        </View>
+      </Container>
+    </>
   );
 }
 
