@@ -35,7 +35,7 @@ function SignUp() {
       Toast.show({
         type: "error",
         text1: "Registration Failed",
-        text2: "Make sure all input fields are filled out",
+        text2: "Make sure all input fields are filled out correctly",
       });
       console.log(error);
     }
