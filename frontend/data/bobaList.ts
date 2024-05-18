@@ -68,16 +68,6 @@ export const bobaList: IBoba[] = [
 		tags: ['Cold', 'Hot', 'Creamy', 'Caffeine-Free'],
 		cost: '$6.50',
 		stars: 5,
-<<<<<<< Updated upstream
-		popularToppings: ['tapioca', 'nutmeg', 'cinnamon'],
-		reviews: [    {
-            name: 'Taro with Milk',
-            author: 'Eric Wong',
-            content: 'Very delicious boba! Easily my favorite!',
-            stars: 5,
-            img: Images.TarowithMilk
-        },],
-=======
 		popularToppings: ['Tapioca', 'Nutmeg', 'Cinnamon', 'Soy Milk'],
 		reviews: [
 			{
@@ -95,7 +85,6 @@ export const bobaList: IBoba[] = [
 				stars: 3,
 			},
 		],
->>>>>>> Stashed changes
 	},
 	{
 		id: 3,
