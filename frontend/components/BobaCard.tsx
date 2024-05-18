@@ -1,10 +1,11 @@
 import { IBoba } from '@/interfaces/interfaces';
 import { Image } from 'expo-image';
-import React, { useEffect } from 'react';
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { Dimensions, Pressable, ScrollView, StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import Animated, { SharedValue, interpolate, runOnJS, useAnimatedStyle, useSharedValue, withSpring } from 'react-native-reanimated';
 import { StarRatingDisplay } from 'react-native-star-rating-widget';
+import BobaProfile from './BobaProfile';
 
 const screenWidth = Dimensions.get('screen').width;
 export const tinderCardWidth = screenWidth * 0.86;
@@ -15,38 +16,39 @@ interface BobaType {
 	index: number;
 	activeIndex: SharedValue<number>;
 	onResponse: (a: boolean) => void;
-    swipe: string;
+	swipe: string;
 }
 
 const BobaCard = ({ boba, numOfBobas, index, activeIndex, onResponse, swipe }: BobaType) => {
-    useEffect(() => {
-        if (Number(swipe[0]) === index) {
-            if (swipe[1] == 'a') {
-                translationX.value = withSpring(500, {
+	const [showInfo, setShowInfo] = useState(false);
+
+	useEffect(() => {
+		if (Number(swipe[0]) === index) {
+			if (swipe[1] == 'a') {
+				translationX.value = withSpring(500, {
 					velocity: 1000
 				});
 				activeIndex.value = withSpring(index + 1);
-            }
-            else if (swipe[1] == 'r') {
-                translationX.value = withSpring(-500, {
+			} else if (swipe[1] == 'r') {
+				translationX.value = withSpring(-500, {
 					velocity: -1000
 				});
 				activeIndex.value = withSpring(index + 1);
-            }
-        }
-    }, [swipe])
+			}
+		}
+	}, [swipe]);
 
 	const translationX = useSharedValue(0);
 
 	const animatedCard = useAnimatedStyle(() => ({
 		opacity: interpolate(activeIndex.value, [index - 1, index, index + 1], [1 - 1 / 5, 1, 1]),
 		transform: [
-			{
-				scale: interpolate(activeIndex.value, [index - 1, index, index + 1], [0.95, 1, 1])
-			},
-			{
-				translateY: interpolate(activeIndex.value, [index - 1, index, index + 1], [-25, 0, 0])
-			},
+			// {
+			// 	scale: interpolate(activeIndex.value, [index - 1, index, index + 1], [0.95, 1, 1])
+			// },
+			// {
+			// 	translateY: interpolate(activeIndex.value, [index - 1, index, index + 1], [-25, 0, 0])
+			// },
 			{
 				translateX: translationX.value * 1.5
 			},
@@ -86,16 +88,40 @@ const BobaCard = ({ boba, numOfBobas, index, activeIndex, onResponse, swipe }: B
 					}
 				]}
 			>
-				<Image style={styles.image} source={boba.img} />
-				{/* <LinearGradient
-					colors={['transparent', 'rgba(0,0,0,0.8)']}
-					style={[StyleSheet.absoluteFillObject, styles.overlay]}
-				/> */}
-				<View style={styles.footer}>
-					<Text style={styles.name} numberOfLines={1}>{boba.name}</Text>
-					<StarRatingDisplay rating={boba.stars} starStyle={{ marginHorizontal: 0, marginBottom: 6 }} starSize={20} color='#E9A898' />
-					<Text style={styles.description} numberOfLines={2}>{boba.description}</Text>
-				</View>
+				<TouchableWithoutFeedback style={{ flex: 1, gap: 10 }} onPress={() => setShowInfo(true)}>
+					<View style={{ flex: 1, gap: 10 }}>
+						{!showInfo && (
+							<>
+								<Image style={styles.image} source={boba.img} />
+								<View style={styles.footer}>
+									<Text style={styles.name} numberOfLines={1}>
+										{boba.name}
+									</Text>
+									<StarRatingDisplay
+										rating={boba.stars}
+										starStyle={{ marginHorizontal: 0, marginBottom: 6 }}
+										starSize={20}
+										color='#E9A898'
+									/>
+									<Text style={styles.description} numberOfLines={2}>
+										{boba.description}
+									</Text>
+								</View>
+							</>
+						)}
+						{showInfo && (
+							<View style={{flex: 1, paddingTop: 15}}>
+								<ScrollView style={{ flex: 1 }}>
+									<View onStartShouldSetResponder={() => true}>
+										<Pressable onPress={() => setShowInfo(false)}>
+											<BobaProfile noBorder boba={boba}></BobaProfile>
+										</Pressable>
+									</View>
+								</ScrollView>
+							</View>
+						)}
+					</View>
+				</TouchableWithoutFeedback>
 			</Animated.View>
 		</GestureDetector>
 	);

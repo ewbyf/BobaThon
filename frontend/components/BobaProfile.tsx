@@ -1,12 +1,12 @@
 import { IBoba } from '@/interfaces/interfaces';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { StarRatingDisplay } from 'react-native-star-rating-widget';
 import Review from './Review';
 
-const BobaProfile = ({ boba }: { boba: IBoba | undefined }) => {
+const BobaProfile = ({ boba, noBorder }: { boba: IBoba | undefined, noBorder ?: boolean }) => {
 	if (boba) {
 		return (
-			<View style={styles.container}>
+			<View style={[styles.container, {borderRadius: noBorder ? 0 : 15, paddingTop: noBorder ? 10 : 30}]}>
 				<View>
 					<Text style={styles.title}>{boba.name}</Text>
 					<StarRatingDisplay rating={boba.stars} starStyle={{ marginHorizontal: 0, marginBottom: 10 }} starSize={20} color='#E9A898' />
@@ -64,7 +64,6 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 20,
 		paddingVertical: 30,
 		backgroundColor: 'white',
-		borderRadius: 15,
 		width: '100%',
 		shadowOffset: {
 			width: 0,
@@ -72,7 +71,7 @@ const styles = StyleSheet.create({
 		},
 		shadowOpacity: 0.25,
 		shadowRadius: 6,
-		gap: 30
+		gap: 30,
 	},
 	title: {
 		fontFamily: 'OverpassBold',
