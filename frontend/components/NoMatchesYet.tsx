@@ -1,8 +1,6 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
-import { View, Text } from 'react-native';
-import {} from 'expo-router';
+import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
-import { LinearGradient } from 'react-native-svg';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const NoMatchesYet = () => (
 	<View style={styles.cont}>
@@ -11,11 +9,25 @@ const NoMatchesYet = () => (
 			style={styles.btn}
 			onPress={() =>
 				router.navigate({
-					pathname: '/preferences',
+					pathname: '/matching'
 				})
 			}
 		>
-			<Text style={styles.btnText}>Find a match!</Text>
+			<LinearGradient
+				colors={['#E88C86', '#EAC2A8']}
+				start={{ x: 0, y: 0.5 }}
+				style={{
+					width: '100%',
+					height: '100%',
+					borderRadius: 20,
+					alignItems: 'center',
+					justifyContent: 'center',
+					paddingHorizontal: 25,
+					paddingVertical: 12
+				}}
+			>
+				<Text style={styles.btnText}>Find a match!</Text>
+			</LinearGradient>
 		</TouchableOpacity>
 	</View>
 );
@@ -25,37 +37,36 @@ const styles = StyleSheet.create({
 		width: '100%',
 		flex: 1,
 		alignItems: 'center',
-		gap: 20,
+		gap: 10
 	},
 	btn: {
 		flex: 1,
 		alignItems: 'center',
 		justifyContent: 'center',
 		height: 45,
-		width: '45%',
 		backgroundColor: '#F7E2E6',
-		borderRadius: 27,
+		borderRadius: 20,
 		shadowColor: '#000',
 		shadowOffset: {
 			width: 0,
-			height: 1,
+			height: 2
 		},
-		shadowOpacity: 0.22,
-		shadowRadius: 2.22,
-
+		shadowOpacity: 0.25,
+		shadowRadius: 3,
 		elevation: 3,
+		marginBottom: 10
 	},
 	btnText: {
 		color: '#6F5C63',
 		fontFamily: 'OverpassBold',
-		fontSize: 18.4,
+		fontSize: 16
 	},
 	text: {
-		fontSize: 18,
+		fontSize: 16,
 		color: '#6F5C63',
 		fontFamily: 'Overpass',
-		width: '89%',
-	},
+		textAlign: 'center'
+	}
 });
 
 export default NoMatchesYet;

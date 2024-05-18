@@ -9,10 +9,10 @@ import { IBoba } from '@/interfaces/interfaces';
 import { Images } from '@/lib/images';
 import { getStorage } from '@/lib/storage';
 import api from '@/services/axiosConfig';
-import Ionicons from '@expo/vector-icons/Ionicons';
+import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Button, Dimensions, Image, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Carousel from 'react-native-reanimated-carousel';
 
@@ -37,7 +37,7 @@ export default function HomeScreen() {
 				<ExploreBackground></ExploreBackground>
 			</View>
 
-			<Container title="Explore Boba" scroll>
+			<Container title='BobaBliss' scroll>
 				<SearchBar />
 				<Carousel
 					loop
@@ -49,7 +49,7 @@ export default function HomeScreen() {
 					autoPlayInterval={5000}
 					renderItem={({ item }) => (
 						<View
-                            key={item}
+							key={item}
 							style={{
 								flex: 1,
 								display: 'flex',
@@ -57,32 +57,85 @@ export default function HomeScreen() {
 								alignItems: 'center',
 								marginHorizontal: 15,
 								borderRadius: 25,
-								height: 200,
+								height: 200
 							}}
 						>
-							<Image source={item} style={{ width: '100%', height: '100%', borderRadius: 25 }} resizeMode="cover"></Image>
+							<Image source={item} style={{ width: '100%', height: '100%', borderRadius: 25 }}></Image>
 						</View>
 					)}
 				/>
-				<Text style={styles.title}>Your Latest Matches</Text>
-				{latestMatches.length === 0 && <NoMatchesYet />}
+				<View style={{ flex: 1 }}>
+					<Text style={[styles.title, { paddingLeft: 20 }]}>Discover Boba</Text>
+					<ScrollView
+						horizontal
+						showsHorizontalScrollIndicator={false}
+						style={{ display: 'flex', paddingVertical: 20, paddingHorizontal: 20, width: width }}
+						contentContainerStyle={{ gap: 20, paddingRight: 40 }}
+					>
+						{bobaList.map((boba) => (
+							<TouchableOpacity
+								key={boba.id}
+								style={{ width: 100, height: 100, borderRadius: 15 }}
+								onPress={() =>
+									router.navigate({
+										pathname: '/bobaMatch',
+										params: { id: boba.id, back: '/home' }
+									})
+								}
+							>
+								<Image source={boba.img} style={{ height: '100%', width: '100%', borderRadius: 15 }}></Image>
+							</TouchableOpacity>
+						))}
+					</ScrollView>
+				</View>
+				{latestMatches.length === 5 && (
+					<>
+						<Text style={[styles.title]}>Your Latest Matches</Text>
+						<NoMatchesYet />
+					</>
+				)}
+				{latestMatches.length > 0 && (
+					<View style={{ flex: 1 }}>
+						<Text style={[styles.title, { paddingLeft: 20 }]}>Your Latest Matches</Text>
+						<ScrollView
+							horizontal
+							showsHorizontalScrollIndicator={false}
+							style={{ display: 'flex', paddingVertical: 20, paddingHorizontal: 20, width: width }}
+							contentContainerStyle={{ gap: 20, paddingRight: 40 }}
+						>
+							{latestMatches.map((match) => (
+								<TouchableOpacity
+									key={match.id}
+									style={{ width: 100, height: 100, borderRadius: 15 }}
+									onPress={() =>
+										router.navigate({
+											pathname: '/bobaMatch',
+											params: { id: match.id, back: '/home' }
+										})
+									}
+								>
+									<Image source={match.img} style={{ height: '100%', width: '100%', borderRadius: 15 }}></Image>
+								</TouchableOpacity>
+							))}
+						</ScrollView>
+					</View>
+				)}
 				<View>
 					<Text style={[styles.title, { paddingLeft: 20 }]}>Popular Posts</Text>
 					<ScrollView
 						horizontal
+						showsHorizontalScrollIndicator={false}
 						snapToInterval={370}
-						snapToAlignment="start"
-						decelerationRate="fast"
+						snapToAlignment='start'
+						decelerationRate='fast'
 						style={{ display: 'flex', paddingVertical: 20, paddingHorizontal: 20, width: width }}
 						contentContainerStyle={{ gap: 20, paddingRight: 40 }}
 					>
 						{reviewList.map((review) => (
-							<Review review={review} key={review.content}></Review>
+							<Review review={review} key={review.content} home></Review>
 						))}
 					</ScrollView>
 				</View>
-
-				<Button onPress={() => router.navigate('/main')} title="aa"></Button>
 			</Container>
 		</>
 	);
@@ -94,21 +147,21 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'space-between',
-		width: '100%',
+		width: '100%'
 	},
 	title: {
 		fontSize: 20,
 		fontFamily: 'OverpassBold',
 		textAlign: 'left',
 		width: '100%',
-		color: '#6F5C63',
+		color: '#6F5C63'
 	},
 	post: {
 		width: 350,
 		height: 250,
 		shadowOffset: {
 			width: 0,
-			height: 3,
+			height: 3
 		},
 		shadowOpacity: 0.25,
 		shadowRadius: 5,
@@ -118,25 +171,31 @@ const styles = StyleSheet.create({
 		borderRadius: 15,
 		alignItems: 'center',
 		gap: 10,
-		padding: 15,
+		padding: 15
 	},
 	postContent: {
 		display: 'flex',
 		justifyContent: 'flex-start',
 		height: '100%',
 		flex: 1,
-		paddingVertical: 10,
+		paddingVertical: 10
 	},
 	name: {
 		fontSize: 16,
 		fontFamily: 'OverpassLight',
 		textAlign: 'left',
 		color: '#6F5C63',
-		marginLeft: 3,
+		marginLeft: 3
 	},
 	description: {
 		fontSize: 16,
 		fontFamily: 'OverpassLight',
-		color: '#6F5C63',
+		color: '#6F5C63'
 	},
+	matchesRow: {
+		display: 'flex',
+		flexDirection: 'row',
+		width: '100%',
+		gap: 20
+	}
 });

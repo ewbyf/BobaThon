@@ -8,7 +8,7 @@ const BobaMatchHeader = ({ title, back }: { title: string, back: string }) => {
 	return (
 		<View style={styles.header}>
 			<TouchableOpacity
-				style={{width: 50, height: 50, display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+				style={{width: 30, height: 30, display: 'flex', justifyContent: 'center', alignItems: 'center'}}
 				onPress={() => {
 					router.navigate(back)
 				}}

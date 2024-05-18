@@ -4,12 +4,12 @@ import { StarRatingDisplay } from 'react-native-star-rating-widget';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 
-const Review = ({ review }: { review: IReview }) => {
+const Review = ({ review, home }: { review: IReview, home ?: boolean }) => {
 	return (
 		<TouchableOpacity style={styles.post} onPress={() =>
             router.navigate({
                 pathname: '/bobaMatch',
-                params: { id: review.id, back: '/reviews' }
+                params: { id: review.id, back: home ? '/home' : '/reviews' }
             })
         }>
 			{review.img && <View style={{ width: '45%', height: '100%', borderRadius: 25 }}>

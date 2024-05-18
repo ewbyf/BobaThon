@@ -27,7 +27,7 @@ function BobaMatch() {
 	}
 
 	return (
-		<BobaMatchContainer title='Matches' back={typeof back === "string" ? back : "/"}>
+		<BobaMatchContainer title='Boba Info' back={typeof back === "string" ? back : "/"}>
 			<Image source={currentImage} onLoadStart={() => setImageLoading(true)} onLoadEnd={() => setImageLoading(false)} style={[styles.bobaImage, {height: imageLoading ? 0 : 400}]}></Image>
             {imageLoading && <Text>LOADING</Text>}
             <BobaProfile boba={boba}/>
