@@ -86,10 +86,10 @@ const styles = StyleSheet.create({
 	matchingIcons: {
 		flex: 1,
 		flexDirection: 'row',
-
+		zIndex: 999,
 		justifyContent: 'space-between',
-		width: '95%',
+		width: '110%',
 
-		alignItems: 'center',
+		marginTop: '70%',
 	},
 });
