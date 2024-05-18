@@ -88,7 +88,7 @@ export default function HomeScreen() {
 						))}
 					</ScrollView>
 				</View>
-				{latestMatches.length === 5 && (
+				{latestMatches.length === 0 && (
 					<>
 						<Text style={[styles.title]}>Your Latest Matches</Text>
 						<NoMatchesYet />
