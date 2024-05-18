@@ -26,8 +26,14 @@ function SignUp() {
       save("token", response.data.token);
       Toast.show({
         type: "success",
-        text1: "Account created",
-        text2: "Welcome to BobaBliss",
+        text1: "Account Created",
+        text2: "Welcome to BobaBliss!",
+        text1Style: {
+            fontSize: 15
+        },
+        text2Style: {
+            fontSize: 14
+        }
       });
       router.navigate("/home");
     } catch (error) {
@@ -36,6 +42,12 @@ function SignUp() {
         type: "error",
         text1: "Registration Failed",
         text2: "Make sure all input fields are filled out correctly",
+        text1Style: {
+            fontSize: 15
+        },
+        text2Style: {
+            fontSize: 14
+        }
       });
       console.log(error);
     }

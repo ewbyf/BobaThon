@@ -3,13 +3,24 @@ import { Modal, Pressable, StyleSheet, Text, TouchableOpacity, View } from 'reac
 import ExitButton from './icons/ExitButton';
 import * as SecureStore from 'expo-secure-store';
 import { router } from 'expo-router';
-
+import Toast from 'react-native-toast-message';
 
 const MenuModal = ({ modalOpen, setModalOpen }: { modalOpen: boolean; setModalOpen: React.Dispatch<React.SetStateAction<boolean>> }) => {
     const logout = async() => {
         await SecureStore.deleteItemAsync('token');
         router.navigate('/main')
         setModalOpen(false);
+        Toast.show({
+            type: 'success',
+            text1: 'Logged Out',
+            text2: 'We already miss you :(',
+            text1Style: {
+                fontSize: 15
+            },
+            text2Style: {
+                fontSize: 14
+            }
+        });
     }
 
 	return (

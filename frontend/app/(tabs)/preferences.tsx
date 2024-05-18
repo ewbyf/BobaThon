@@ -20,6 +20,7 @@ import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import MapView, { Circle, Marker } from 'react-native-maps';
+import Toast from 'react-native-toast-message';
 
 export default function PreferenceScreen() {
 	const [page, setPage] = useState(1);
@@ -94,7 +95,19 @@ export default function PreferenceScreen() {
 			},
 			token
 		})
-			.then((resp) => {})
+			.then((resp) => {
+                Toast.show({
+                    type: 'success',
+                    text1: 'Preferences Saved',
+                    text2: "You're ready to start matching!",
+                    text1Style: {
+                        fontSize: 15
+                    },
+                    text2Style: {
+                        fontSize: 14
+                    }
+                });
+            })
 			.catch((err) => {
 				console.log(err);
 			});
@@ -126,6 +139,17 @@ export default function PreferenceScreen() {
 				router.navigate('/matching');
 				setHasSetPreferences(true);
 				setPage(1);
+                Toast.show({
+                    type: 'success',
+                    text1: 'Preferences Saved',
+                    text2: "You're ready to start matching!",
+                    text1Style: {
+                        fontSize: 15
+                    },
+                    text2Style: {
+                        fontSize: 14
+                    }
+                });
 			})
 			.catch((err) => {
 				console.log(err);
