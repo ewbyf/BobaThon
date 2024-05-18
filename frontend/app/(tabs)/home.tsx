@@ -146,7 +146,7 @@ export default function HomeScreen() {
 						// snapToAlignment='start'
 						// decelerationRate='fast'
 						style={{ display: 'flex', paddingVertical: 20, paddingHorizontal: 20, width: width }}
-						contentContainerStyle={{ gap: 20, paddingRight: 40, paddingBottom: 25 }}
+						contentContainerStyle={{ gap: 20, paddingBottom: 25, alignItems: 'center' }}
 					>
 						{reviewList.map((review) => (
 							<Review review={review} key={review.content} home></Review>
