@@ -11,4 +11,7 @@ export const Images = {
 	SweetTaroSagoLatte: require('../assets/images/SweetTaroSagoLatte.png'),
 	TarowithMilk: require('../assets/images/TarowithMilk.png'),
 	Abloh: require('../assets/images/Abloh.png'),
+	Nigo: require('../assets/images/Nigo.png'),
+	Takahashi: require('../assets/images/Takahashi.png'),
+	Monogram: require('../assets/images/Monogram.png'),
 };

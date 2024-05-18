@@ -258,44 +258,77 @@ export const bobaList: IBoba[] = [
 	//next
 	{
 		id: 9,
-		name: '',
-		description: '',
+		name: 'Nigo',
+		description:
+			'This refreshing tea bursts with juicy mango and sweet peach, balanced by calming notes. Chewy mango bits add a fun texture for a delightful summer drink.',
 		store: 'Drip Tea',
-		img: Images.Abloh,
+		img: Images.Nigo,
 		tags: ['Cold', 'Fruity', 'Refreshing', 'Lactose-Intolerance'],
 		cost: '$7.25',
 		stars: 5,
-		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
-		reviews: [],
+		popularToppings: ['Boba', 'Crystal Boba', 'Crema', 'Ice-Cream', 'Mango Bits'],
+		reviews: [
+			{
+				name: 'Nigo',
+				author: 'Karina M',
+				content:
+					"Nigo is a summer dream come true! The mango and peach flavors are perfectly balanced and juicy, and the green tea adds a lovely calming earthiness. The chewy mango bits are a delightful surprise in every sip. It's refreshing, delicious, and perfect for a hot day.  Highly recommend!",
+				stars: 5,
+			},
+			{
+				name: 'Nigo',
+				author: 'Alex P.',
+				content:
+					'I enjoyed Nigo, but the peach flavor was a bit more subtle than I would have liked. I prefer a more balanced taste between the mango and peach.  The green tea was a nice touch, and the chewy mango bits were fun.  Overall, a good drink, but could be a bit more impactful.',
+				stars: 4,
+			},
+		],
 	},
 
 	//next
 
 	{
 		id: 10,
-		name: '',
-		description: '',
+		name: 'Takahashi',
+		description:
+			'Takahashi is a vibrant and refreshing beverage that combines the sweetness of strawberries and peaches with the robust character of black tea. The result is a delightful explosion of flavor, perfect for those who enjoy a touch of complexity in their drink.',
 		store: 'Drip Tea',
-		img: Images.Abloh,
+		img: Images.Takahashi,
 		tags: ['Cold', 'Fruity', 'Refreshing', 'Lactose-Intolerance'],
 		cost: '$7.25',
-		stars: 5,
-		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
+		stars: 4,
+		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Jelly'],
 		reviews: [],
 	},
 
 	// nez
 	{
 		id: 11,
-		name: '',
-		description: '',
+		name: 'Monogram',
+		description:
+			'Monogram elevates bubble tea with its rich brown sugar tiger milk tea. Creamy and decadent, it boasts deep caramel notes and chewy boba pearls for a luxurious treat in every sip.',
 		store: 'Drip Tea',
-		img: Images.Abloh,
-		tags: ['Cold', 'Fruity', 'Refreshing', 'Lactose-Intolerance'],
+		img: Images.Monogram,
+		tags: ['Cold', 'Creamy', 'Lactose-Intolerance'],
 		cost: '$7.25',
 		stars: 5,
-		popularToppings: ['Boba', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Mango Bits'],
-		reviews: [],
+		popularToppings: ['Boba', 'Oat Milk', 'Crystal Boba', 'Pudding', 'Ice-Cream', 'Crema'],
+		reviews: [
+			{
+				name: 'Monogram',
+				author: 'Kristina P.',
+				content:
+					"Monogram is the ultimate brown sugar boba indulgence! The rich tiger milk tea is perfectly complemented by the deep, caramelized flavor of the premium brown sugar. It's like a dessert in a cup, and the two chewy boba pearls add the perfect textural contrast.  Absolutely obsessed!",
+				stars: 5,
+			},
+			{
+				name: 'Monogram',
+				author: 'Ren M.',
+				content:
+					'Monogram is a delicious treat, but the boba pearls were a bit hard for my taste. I prefer them softer and chewier.  The brown sugar flavor was fantastic, and the tiger milk tea was creamy and smooth.  Overall, a good drink, but the boba could be improved.',
+				stars: 4,
+			},
+		],
 	},
 
 	//
