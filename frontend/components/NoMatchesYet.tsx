@@ -11,7 +11,7 @@ const NoMatchesYet = () => (
 			style={styles.btn}
 			onPress={() =>
 				router.navigate({
-					pathname: '/matching',
+					pathname: '/preferences',
 				})
 			}
 		>
@@ -25,15 +25,30 @@ const styles = StyleSheet.create({
 		width: '100%',
 		flex: 1,
 		alignItems: 'center',
+		gap: 20,
 	},
 	btn: {
-		height: 20,
-		backgroundColor: 'green',
+		flex: 1,
+		alignItems: 'center',
+		justifyContent: 'center',
+		height: 45,
+		width: '45%',
+		backgroundColor: '#F7E2E6',
+		borderRadius: 27,
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 1,
+		},
+		shadowOpacity: 0.22,
+		shadowRadius: 2.22,
+
+		elevation: 3,
 	},
 	btnText: {
 		color: '#6F5C63',
 		fontFamily: 'OverpassBold',
-		fontSize: 16,
+		fontSize: 18.4,
 	},
 	text: {
 		fontSize: 18,
