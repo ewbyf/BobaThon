@@ -20,6 +20,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import { useLocalSearchParams } from "expo-router";
 import BobaMatchContainer from "@/components/BobaMatchContainer";
 import { bobaInfoList } from "@/data/bobaInfoList";
+import { bobaList } from "@/data/bobaList";
 
 import { save } from "@/lib/storage";
 
@@ -27,6 +28,7 @@ function BobaMatch() {
   const [originColor, setOriginColor] = useState("#eac9af");
   const [ingredientsColor, setIngredientsColor] = useState("#eac9af");
   const [reviewColor, setReviewColor] = useState("#eac9af");
+  const [bobaImage, setBobaImage] = useState();
   const [originContent, setOriginContent] = useState("");
   const [ingredientsContent, setIngredientsContent] = useState<string[]>([]);
 
@@ -61,6 +63,7 @@ function BobaMatch() {
     bobaInfoList.forEach((bobaInfo) => {
       if (bobaInfo.bobaId == parseInt(item.bobaId as string)) {
         console.log(bobaInfo);
+        setBobaImage(bobaList[bobaInfo.bobaId].img);
         setOriginContent(bobaInfo.origin);
         setIngredientsContent(bobaInfo.ingredients);
       }
@@ -74,7 +77,9 @@ function BobaMatch() {
       <View style={styles.bobaImage}>
         <Text style={styles.bobaName}>{item.boba}</Text>
         <Image
-          source={require("../../assets/images/brownsugarboba.png")}
+          resizeMode="cover"
+          style={styles.image}
+          source={bobaImage}
         ></Image>
       </View>
       <View style={styles.buttons}>
@@ -124,14 +129,7 @@ function BobaMatch() {
 }
 
 const styles = StyleSheet.create({
-  header: {
-    // position: "absolute",
-    position: "absolute",
-
-    // left: 200,
-    // top: 200,
-    // backgroundColor: "blue",
-  },
+  image: { width: "100%", height: "100%", borderRadius: 25 },
   bobaName: {
     fontSize: 20,
     fontWeight: "600",
@@ -141,10 +139,9 @@ const styles = StyleSheet.create({
   bobaImage: {
     width: "90%",
     height: 350,
-    borderRadius: 15,
-    backgroundColor: "#ede5dd",
     alignItems: "center",
     justifyContent: "center",
+    marginBottom: 20,
   },
   buttons: {
     display: "flex",

@@ -22,7 +22,7 @@ export interface IReview {
 }
 
 export interface IBobaInfo {
-  id: number;
+  bobaId: number;
   origin: string;
   ingredients: string[];
 }
