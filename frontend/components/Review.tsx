@@ -9,7 +9,7 @@ const Review = ({ review, home }: { review: IReview, home ?: boolean }) => {
 		<TouchableOpacity style={styles.post} onPress={() =>
             router.navigate({
                 pathname: '/bobaMatch',
-                params: { id: review.id, back: home ? '/home' : '/reviews' }
+                params: { id: review.id, back: home ? '/home' : '/favorites' }
             })
         }>
 			{review.img && <View style={{ width: '45%', height: '100%', borderRadius: 25 }}>
