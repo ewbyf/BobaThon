@@ -49,7 +49,7 @@ export default function HomeScreen() {
 					autoPlayInterval={5000}
 					renderItem={({ item }) => (
 						<View
-                            key={item}
+							key={item}
 							style={{
 								flex: 1,
 								display: 'flex',
@@ -66,6 +66,7 @@ export default function HomeScreen() {
 				/>
 				<Text style={styles.title}>Your Latest Matches</Text>
 				{latestMatches.length === 0 && <NoMatchesYet />}
+
 				<View>
 					<Text style={[styles.title, { paddingLeft: 20 }]}>Popular Posts</Text>
 					<ScrollView
