@@ -10,6 +10,7 @@ import { getStorage } from '@/lib/storage';
 import api from '@/services/axiosConfig';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { useIsFocused } from '@react-navigation/native';
+import Loading from '@/components/Loading';
 
 export default function MatchesScreen() {
 	const [matches, setMatches] = useState<IBoba[]>([]);
@@ -22,7 +23,15 @@ export default function MatchesScreen() {
 			if (token) {
 				api.get(`matches?token=${token}`)
 					.then((resp) => {
-						setMatches([...bobaList.filter((boba) => resp.data.matches.includes(boba.id))]);
+						let arr = [];
+						for (let i = 0; i < resp.data.matches.length; i++) {
+							let temp = bobaList.find((boba) => boba.id === resp.data.matches[i]);
+							if (temp) {
+								arr.push(temp);
+							}
+						}
+
+						setMatches([...arr]);
 						setInit(false);
 					})
 					.catch((err) => {
@@ -33,7 +42,7 @@ export default function MatchesScreen() {
 	}, [focused]);
 
 	if (init) {
-		return null; // replace loading
+		return <Loading/>;
 	}
 
 	return (

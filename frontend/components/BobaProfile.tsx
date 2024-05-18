@@ -9,10 +9,13 @@ const BobaProfile = ({ boba, noBorder }: { boba: IBoba | undefined, noBorder ?: 
 			<View style={[styles.container, {borderRadius: noBorder ? 0 : 15, paddingTop: noBorder ? 10 : 30}]}>
 				<View>
 					<Text style={styles.title}>{boba.name}</Text>
+                    <Text style={styles.cost} numberOfLines={1}>
+										{boba.cost}
+									</Text>
 					<StarRatingDisplay rating={boba.stars} starStyle={{ marginHorizontal: 0, marginBottom: 10 }} starSize={20} color='#E9A898' />
 					<Text style={styles.description}>{boba.description}</Text>
 				</View>
-				<View>
+				<View style={{gap: 3}}>
 					<Text style={styles.title}>Categories</Text>
 					<View style={styles.row}>
 						{boba.tags.map((tag) => (
@@ -22,7 +25,7 @@ const BobaProfile = ({ boba, noBorder }: { boba: IBoba | undefined, noBorder ?: 
 						))}
 					</View>
 				</View>
-				<View>
+				<View style={{gap: 3}}>
 					<Text style={styles.title}>Popular Toppings</Text>
 					<View style={styles.row}>
 						{boba.popularToppings.map((tag) => (
@@ -32,7 +35,7 @@ const BobaProfile = ({ boba, noBorder }: { boba: IBoba | undefined, noBorder ?: 
 						))}
 					</View>
 				</View>
-				<View>
+				<View  style={{gap: 3}}>
 					<Text style={styles.title}>Location</Text>
 					<View style={styles.row}>
 						<View style={styles.tagContainer}>
@@ -40,12 +43,11 @@ const BobaProfile = ({ boba, noBorder }: { boba: IBoba | undefined, noBorder ?: 
 						</View>
 					</View>
 				</View>
-                <View>
+                <View style={{gap: 3}}>
 					<Text style={styles.title}>What People Say</Text>
 					<View style={styles.row}>
 						{boba.reviews.map((review, i) => (
-							// <Review review={review} key={i}></Review>
-                            <View style={styles.review}>
+                            <View style={styles.review} key={i}>
                                 <Text style={styles.tagText}>{review.author}</Text>
                                 <StarRatingDisplay rating={review.stars} starStyle={{ marginHorizontal: 0, marginTop: 2, marginBottom: 7.5 }} starSize={20} color='#E9A898' />
                                 <Text style={styles.description}>{review.content}</Text>
@@ -71,14 +73,20 @@ const styles = StyleSheet.create({
 		},
 		shadowOpacity: 0.25,
 		shadowRadius: 6,
-		gap: 30,
+		gap: 25,
 	},
 	title: {
 		fontFamily: 'OverpassBold',
 		fontSize: 20,
 		color: '#6F5C63',
-		marginBottom: 10
+		marginBottom: 5
 	},
+    cost: {
+        fontSize: 18,
+		fontFamily: 'Overpass',
+		color: '#6F5C63',
+        marginBottom: 5
+    },
 	description: {
 		fontFamily: 'Overpass',
 		fontSize: 15,

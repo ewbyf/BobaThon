@@ -28,6 +28,7 @@
     "expo": "^51.0.8",
     "expo-constants": "~16.0.1",
     "expo-font": "~12.0.5",
+    "expo-image": "~1.12.9",
     "expo-linear-gradient": "~13.0.2",
     "expo-linking": "~6.3.1",
     "expo-router": "^3.5.14",
@@ -50,8 +51,7 @@
     "react-native-star-rating-widget": "^1.7.3",
     "react-native-svg": "^15.2.0",
     "react-native-vector-icons": "^10.1.0",
-    "react-native-web": "~0.19.10",
-    "expo-image": "~1.12.9"
+    "react-native-web": "~0.19.10"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

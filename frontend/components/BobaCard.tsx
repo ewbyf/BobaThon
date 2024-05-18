@@ -88,8 +88,8 @@ const BobaCard = ({ boba, numOfBobas, index, activeIndex, onResponse, swipe }: B
 					}
 				]}
 			>
-				<TouchableWithoutFeedback style={{ flex: 1, gap: 10 }} onPress={() => setShowInfo(true)}>
-					<View style={{ flex: 1, gap: 10 }}>
+				<TouchableWithoutFeedback style={{ flex: 1 }} onPress={() => setShowInfo(true)}>
+					<View style={{ flex: 1, gap: 3 }}>
 						{!showInfo && (
 							<>
 								<Image style={styles.image} source={boba.img} />
@@ -97,9 +97,12 @@ const BobaCard = ({ boba, numOfBobas, index, activeIndex, onResponse, swipe }: B
 									<Text style={styles.name} numberOfLines={1}>
 										{boba.name}
 									</Text>
+									<Text style={styles.cost} numberOfLines={1}>
+										{boba.cost}
+									</Text>
 									<StarRatingDisplay
 										rating={boba.stars}
-										starStyle={{ marginHorizontal: 0, marginBottom: 6 }}
+										starStyle={{ marginHorizontal: 0, marginBottom: 3 }}
 										starSize={20}
 										color='#E9A898'
 									/>
@@ -162,7 +165,7 @@ const styles = StyleSheet.create({
 	},
 	footer: {
 		flex: 1,
-		gap: 5,
+		gap: 3,
 		padding: 10,
 		paddingLeft: 20
 	},
@@ -174,7 +177,12 @@ const styles = StyleSheet.create({
 	description: {
 		fontFamily: 'Overpass',
 		color: '#6F5C63'
-	}
+	},
+    cost: {
+        fontSize: 18,
+		fontFamily: 'Overpass',
+		color: '#6F5C63'
+    }
 });
 
 export default BobaCard;

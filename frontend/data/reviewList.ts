@@ -38,4 +38,13 @@ export const reviewList: IReview[] = [
         stars: 5,
         id: 5
     },
+    {
+        id: 14,
+        name: 'Flower Boy',
+        author: 'Miku H.',
+        content:
+            'Flower Boy is a beautiful drink and really pleasent. 9/10 I would have preferred a more balanced taste between the lavender and the lemonade. The lychee jelly was delicious, though! Overall, a unique and visually appealing boba, but maybe with a less prominent lavender presence.',
+        stars: 4.5,
+        img: Images.Flower
+    },
 ]

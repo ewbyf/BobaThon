@@ -4,6 +4,7 @@ import Container from '@/components/Container';
 import EditButton from '@/components/EditButton';
 import EditIcon from '@/components/EditIcon';
 import GradientText from '@/components/GradientText';
+import Loading from '@/components/Loading';
 import MatchButton from '@/components/MatchButton';
 import DefaultBackground from '@/components/backgrounds/DefaultBackground';
 import PreferenceBackground from '@/components/backgrounds/PreferenceBackground';
@@ -132,7 +133,7 @@ export default function PreferenceScreen() {
 	};
 
 	if (init) {
-		return null; // add loading
+		return <Loading/>;
 	}
 
 	if (hasSetPreferences) {

@@ -6,7 +6,7 @@ import { bobaList } from '@/data/bobaList';
 import { IBoba, IPreferences } from '@/interfaces/interfaces';
 import { shuffle } from '@/lib/shuffle';
 import { useCallback, useEffect, useState } from 'react';
-import { RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ImageSourcePropType, RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { runOnJS, useAnimatedReaction, useSharedValue } from 'react-native-reanimated';
 import { useIsFocused } from '@react-navigation/native';
 import api from '@/services/axiosConfig';
@@ -16,6 +16,7 @@ import First from '@/components/icons/First';
 import Second from '@/components/icons/Second';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
+import Loading from '@/components/Loading';
 
 export default function MatchingScreen() {
 	const [bobas, setBobas] = useState<IBoba[]>([]);
@@ -28,6 +29,7 @@ export default function MatchingScreen() {
 	const [hasSetPreferences, setHasSetPreferences] = useState(false);
 	const [preferences, setPreferences] = useState<IPreferences>();
 	const [match, setMatch] = useState(false);
+    const [lastMatch, setLastMatch] = useState<ImageSourcePropType>();
 
 	useAnimatedReaction(
 		() => activeIndex.value,
@@ -127,6 +129,7 @@ export default function MatchingScreen() {
 							match: bobas[Math.floor(activeIndex.value)].id,
 						})
 							.then((resp) => {
+                                setLastMatch(bobas[Math.floor(activeIndex.value)].img);
 								setMatch(true);
 							})
 							.catch((err) => {
@@ -156,7 +159,7 @@ export default function MatchingScreen() {
 	}, []);
 
 	if (init) {
-		return null;
+		return <Loading/>;
 	}
 
 	if (!hasSetPreferences) {
@@ -207,12 +210,12 @@ export default function MatchingScreen() {
 	}
 
 	if (match) {
-		return <Match img={bobas[Math.floor(activeIndex.value)].img} setMatch={setMatch}></Match>;
+		return <Match img={lastMatch} setMatch={setMatch}></Match>;
 	}
 
 	if (bobas.length == 0 || index == bobas.length) {
 		return (
-			<Container title="Find a Boba!">
+			<Container title="Find Your Match">
 				<ScrollView
 					refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} />}
 					showsVerticalScrollIndicator={false}
@@ -226,7 +229,7 @@ export default function MatchingScreen() {
 	}
 
 	return (
-		<Container title="Find a Boba!">
+		<Container title="Find Your Match">
 			<View style={{ flex: 1, alignItems: 'center', width: '100%' }}>
 				{bobas.map((boba, i) => (
 					<BobaCard key={boba.id} boba={boba} numOfBobas={bobas.length} index={i} activeIndex={activeIndex} onResponse={onResponse} swipe={swipe} />

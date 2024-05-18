@@ -6,13 +6,13 @@ import { ImageSourcePropType, StyleSheet, Text, TouchableOpacity, View } from 'r
 import MatchBackground from './backgrounds/MatchBackground';
 import Heart from './icons/Heart';
 
-const Match = ({ img, setMatch }: { img: ImageSourcePropType; setMatch: React.Dispatch<React.SetStateAction<boolean>> }) => {
+const Match = ({ img, setMatch }: { img: ImageSourcePropType | undefined; setMatch: React.Dispatch<React.SetStateAction<boolean>> }) => {
 	return (
 		<>
 			<View style={{ position: 'absolute', top: 0, left: 0, zIndex: 0 }}>
 				<MatchBackground></MatchBackground>
 			</View>
-			<Container title='Find a Boba!' background={false}>
+			<Container title='Find Your Match' background={false}>
 				<Text style={styles.title}>IT'S A MATCH!</Text>
 				<Heart style={{ shadowRadius: 5, shadowOpacity: 0.25, shadowOffset: { width: 0, height: 2 } }} />
 				<View style={styles.shadow}>

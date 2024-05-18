@@ -1,4 +1,5 @@
 import Container from '@/components/Container';
+import Loading from '@/components/Loading';
 import NoMatchesYet from '@/components/NoMatchesYet';
 import Review from '@/components/Review';
 import SearchBar from '@/components/SearchBar';
@@ -9,27 +10,43 @@ import { IBoba } from '@/interfaces/interfaces';
 import { Images } from '@/lib/images';
 import { getStorage } from '@/lib/storage';
 import api from '@/services/axiosConfig';
+import { useIsFocused } from '@react-navigation/native';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import Carousel from 'react-native-reanimated-carousel';
 
 export default function HomeScreen() {
 	const width = Dimensions.get('window').width;
 	const [latestMatches, setLatestMatches] = useState<IBoba[]>([]);
+	const focused = useIsFocused();
+    const [init, setInit] = useState(true);
 
 	useEffect(() => {
 		const token = getStorage('token');
 		api.get(`/matches?token=${token}`)
 			.then((resp) => {
-				setLatestMatches([...bobaList.filter((boba) => resp.data.matches.includes(boba.id))]);
+				let arr = [];
+				for (let i = resp.data.matches.length - 1; i >= 0; i--) {
+					let temp = bobaList.find((boba) => boba.id === resp.data.matches[i]);
+					if (temp) {
+						arr.push(temp);
+					}
+				}
+
+				setLatestMatches([...arr]);
+                setInit(false);
 			})
 			.catch((err) => {
 				console.log(err);
 			});
-	}, []);
+	}, [focused]);
+
+    if (init) {
+        return <Loading />;
+    }
 
 	return (
 		<>
@@ -123,13 +140,13 @@ export default function HomeScreen() {
 				<View>
 					<Text style={[styles.title, { paddingLeft: 20 }]}>Popular Posts</Text>
 					<ScrollView
-						horizontal
-						showsHorizontalScrollIndicator={false}
-						snapToInterval={370}
-						snapToAlignment='start'
-						decelerationRate='fast'
+						showsVerticalScrollIndicator={false}
+						// showsHorizontalScrollIndicator={false}
+						// snapToInterval={370}
+						// snapToAlignment='start'
+						// decelerationRate='fast'
 						style={{ display: 'flex', paddingVertical: 20, paddingHorizontal: 20, width: width }}
-						contentContainerStyle={{ gap: 20, paddingRight: 40 }}
+						contentContainerStyle={{ gap: 20, paddingRight: 40, paddingBottom: 25 }}
 					>
 						{reviewList.map((review) => (
 							<Review review={review} key={review.content} home></Review>
