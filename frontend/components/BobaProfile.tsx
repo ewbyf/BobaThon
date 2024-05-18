@@ -40,7 +40,6 @@ const BobaProfile = ({ boba, noBorder }: { boba: IBoba | undefined; noBorder?: b
 			favorite: boba?.id
 		})
 			.then((resp) => {
-				console.log(resp.data);
 			})
 			.catch((err) => {
 				console.log(err);
@@ -56,7 +55,6 @@ const BobaProfile = ({ boba, noBorder }: { boba: IBoba | undefined; noBorder?: b
 			}
 		})
         .then((resp) => {
-            console.log(resp.data)
         })
         .catch((err) => {
             console.log(err)

@@ -1,7 +1,7 @@
 import Ionicons from '@expo/vector-icons/Ionicons';
 import { router } from 'expo-router';
 
-export function MenuButton() {
+export function MenuButton({ setModal } : {setModal : React.Dispatch<React.SetStateAction<boolean>>}) {
 	return (
 		<Ionicons
 			size={36}
@@ -9,7 +9,7 @@ export function MenuButton() {
 			style={[{ position: 'absolute', right: 0 }]}
 			name='menu-outline'
 			onPress={() => {
-				router.push('/');
+				setModal(true)
 			}}
 		/>
 	);

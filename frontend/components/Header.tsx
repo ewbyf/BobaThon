@@ -1,11 +1,11 @@
 import { StyleSheet, View, Text } from 'react-native';
 import { MenuButton } from './MenuButton';
 import Flower from './icons/Flower';
-const Header = ({ title }: { title: string }) => {
+const Header = ({ title, setModal }: { title: string, setModal: React.Dispatch<React.SetStateAction<boolean>> }) => {
 	return (
 		<View style={styles.header}>
             <Text style={styles.title}>{title}</Text>
-			<MenuButton></MenuButton>
+			<MenuButton setModal={setModal}></MenuButton>
 		</View>
 	);
 };

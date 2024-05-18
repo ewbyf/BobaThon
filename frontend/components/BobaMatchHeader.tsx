@@ -16,7 +16,6 @@ const BobaMatchHeader = ({ title, back }: { title: string, back: string }) => {
 				<Ionicons name='chevron-back-outline' size={30} color='#6f5c63' />
 			</TouchableOpacity>
 			<Text style={styles.title}>{title}</Text>
-			<MenuButton></MenuButton>
 		</View>
 	);
 };
